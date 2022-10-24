@@ -29,3 +29,5 @@ String frog_main2 =
 
 String frog_icon = "assets/frogicon.webp";
 String heart = "assets/heart.webp";
+
+final double drawerSizeIcon = 32;
