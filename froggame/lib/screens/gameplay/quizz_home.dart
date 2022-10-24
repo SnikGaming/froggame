@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
@@ -95,7 +97,7 @@ class QuizzHome extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(7),
+                    borderRadius: BorderRadius.circular(30),
                     image: DecorationImage(
                       image: AssetImage("assets/main.png"),
                       fit: BoxFit.cover,
@@ -113,6 +115,19 @@ class QuizzHome extends StatelessWidget {
             leading: FaIcon(
               FontAwesomeIcons.crown,
               color: yellow,
+              size: drawerSizeIcon,
+            ),
+          ),
+          ListTile(
+            onTap: () {},
+            title: normalText(
+              text: "Shop",
+              color: white,
+              size: 18,
+            ),
+            leading: FaIcon(
+              FontAwesomeIcons.shop,
+              color: Colors.blue.shade300,
               size: drawerSizeIcon,
             ),
           ),
@@ -154,7 +169,35 @@ class QuizzHome extends StatelessWidget {
               color: lightgrey,
               size: drawerSizeIcon,
             ),
-          )
+          ),
+          ListTile(
+            onTap: () {},
+            title: normalText(
+              text: "Sign up",
+              color: white,
+              size: 18,
+            ),
+            leading: FaIcon(
+              FontAwesomeIcons.signOut,
+              color: purple,
+              size: drawerSizeIcon,
+            ),
+          ),
+          ListTile(
+            onTap: () {
+              exit(0);
+            },
+            title: normalText(
+              text: "Quit",
+              color: white,
+              size: 18,
+            ),
+            leading: FaIcon(
+              FontAwesomeIcons.powerOff,
+              color: red,
+              size: drawerSizeIcon,
+            ),
+          ),
         ],
       ),
     );
