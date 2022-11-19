@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:froggame/screens/history/info.dart';
+import 'package:froggame/screens/history/play_history.dart';
 
 import 'screens/login/login_page.dart';
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SiginPage(),
+      home: const infomation_screen(),
       theme: ThemeData(fontFamily: "quick"),
     );
   }

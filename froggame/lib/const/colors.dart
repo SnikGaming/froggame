@@ -12,3 +12,13 @@ const purple = Colors.purple;
 
 const bg1 = Color.fromARGB(183, 122, 47, 214);
 const bg2 = Color.fromARGB(176, 54, 185, 233);
+
+var lsColor=[
+  Colors.red.shade300,
+  Colors.purple.shade300,
+  Colors.yellowAccent,
+  Colors.green.shade300,
+  Colors.pink.shade300,
+ 
+
+];
