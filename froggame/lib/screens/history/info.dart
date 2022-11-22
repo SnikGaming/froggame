@@ -61,10 +61,9 @@ class _infomation_screenState extends State<infomation_screen> {
                           child: Row(
                             children: [
                               Icon(Icons.info_outline_rounded),
-                              Text(
-                                'Thông tin',
-                                style: GoogleFonts.abel(textStyle: TextStyle(color: Colors.red))
-                              )
+                              Text('Thông tin',
+                                  style: GoogleFonts.abel(
+                                      textStyle: TextStyle(color: Colors.red)))
                             ],
                           ),
                         ),
@@ -119,11 +118,13 @@ class _infomation_screenState extends State<infomation_screen> {
                 padding: EdgeInsets.only(top: 10),
                 height: 700,
                 child: isClickEvent ? historyPlay(context) : rank(context)),
-        //   Container(
-        //   color: red,height: 100,
-        // ),
-        Flexible(child: Container(),flex: 1,)
-         
+            //   Container(
+            //   color: red,height: 100,
+            // ),
+            Flexible(
+              child: Container(),
+              flex: 1,
+            )
           ],
         ),
       ),
@@ -237,18 +238,19 @@ class _infomation_screenState extends State<infomation_screen> {
               scrollDirection: Axis.horizontal,
               itemCount: goi.length,
               itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.all(5),
-                  height: 150,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 61, 94, 238),
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Center(
-                    child: Text(
-                      '${goi[index]}',
-                      style: TextStyle(fontSize: 18),
-                    ),
-                  ),),
+                margin: EdgeInsets.all(5),
+                height: 150,
+                width: 100,
+                decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 61, 94, 238),
+                    borderRadius: BorderRadius.circular(15)),
+                child: Center(
+                  child: Text(
+                    '${goi[index]}',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(padding: EdgeInsets.only(bottom: 10)),
@@ -256,86 +258,109 @@ class _infomation_screenState extends State<infomation_screen> {
             height: 500,
             child: SingleChildScrollView(
               child: Column(
-                  children: List.generate(
-                    10,
-                    (index) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 50,
-                        width: 360,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Color.fromARGB(255, 76, 129, 241),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            
-                            Row(
-                              children: [
-                                const SizedBox(width: 30,),
-                                Text('${index + 1}.',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 18)),
-                                CircleAvatar(),
-                                Text('Phong',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 18,color: white))
-                              ],
-                            ),
-                           Row(
-                            children: [ Text('100',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 18,color: white),),
-                                const SizedBox(width: 30,),
-                            ],
-                           )
-                            
-                          ],
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                children: List.generate(
+                  10,
+                  (index) => Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 50,
+                      width: 360,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Color.fromARGB(255, 76, 129, 241),
                       ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              Text('${index + 1}.',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18)),
+                              CircleAvatar(),
+                              Text('Phong',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 18,
+                                      color: white))
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                '100',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    color: white),
+                              ),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     ),
                   ),
                 ),
+              ),
             ),
           ),
           Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: 80,
-                        width: 360,
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 80,
+              width: 360,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Color.fromARGB(255, 212, 86, 185),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('100+.',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+                  Row(
+                    children: [
+                      Container(
+                        height: 70,
+                        width: 60,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: Color.fromARGB(255, 212, 86, 185),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text('100+.',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 18)),                      
-                            Row(
-                              
-                              children: [
-                                
-                                Container(
-                                  height: 70,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 76, 129, 241),
-                                    borderRadius: BorderRadius.circular(30)
-                                  ),
-                                ),
-                                SizedBox(width: 5,),
-                                
-                              ],
-                            ),
-                           Row(
-                            children: [ Text('100',style: TextStyle(fontWeight:FontWeight.w500,fontSize: 18,color: white),),
-                                const SizedBox(width: 30,),
-                            ],
-                           )
-                            
-                          ],
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                            color: Color.fromARGB(255, 76, 129, 241),
+                            borderRadius: BorderRadius.circular(30)),
                       ),
-                    ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '100',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: white),
+                      ),
+                      const SizedBox(
+                        width: 30,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            ),
+          ),
         ],
       ),
     );
