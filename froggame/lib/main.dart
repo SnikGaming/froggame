@@ -3,6 +3,7 @@ import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screens/history/play_history.dart';
 
 import 'screens/login/login_page.dart';
+import 'screens/type_question.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const infomation_screen(),
+      home: const SiginPage(),
       theme: ThemeData(fontFamily: "quick"),
     );
   }

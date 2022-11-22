@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:froggame/const/next_screen.dart';
+import 'package:froggame/screens/login/login_page.dart';
 
 import '../../const/api_services.dart';
 import '../../const/images.dart';
@@ -23,6 +25,38 @@ class _QuizzScreenState extends State<QuizzScreen> {
     super.initState();
     quiz = getQuiz();
     startTimer();
+  }
+
+  _Loc50phantram() {
+    if (score >= 2) {
+      score = score - 2;
+      print("a");
+      setState(() {});
+    } else {
+      print("Khong du meney");
+    }
+  }
+
+  _Them15s() {
+    if (score >= 2) {
+      score = score - 2;
+
+      print("15s");
+      setState(() {});
+    } else {
+      print("Khong du meney");
+    }
+  }
+
+  _Nextquestione() {
+    if (score >= 4) {
+      score = score - 4;
+
+      print("NExt");
+      setState(() {});
+    } else {
+      print("Khong du meney");
+    }
   }
 
   int seconds = ValuesGame.seconds;
@@ -81,8 +115,8 @@ class _QuizzScreenState extends State<QuizzScreen> {
     return Scaffold(
         body: SafeArea(
       child: Container(
-          width: double.infinity,
-          height: double.infinity,
+          width: size.width,
+          height: size.height,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -196,6 +230,12 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                 data[currentQuestionIndex]["correct_answer"];
                             return GestureDetector(
                               onTap: () {
+                                if (currentQuestionIndex + 1 >= SL ||
+                                    (currentQuestionIndex + 1 >= SL &&
+                                        seconds <= 0)) {
+                                  timer!.cancel();
+                                  return nextScreen(context, SiginPage());
+                                }
                                 if (!isGameOver) {
                                   bool YN;
 
@@ -246,32 +286,29 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                     color: blue),
                               ),
                             );
-                          })
+                          }),
+
                       //tro giup
-                      ,
+                      SizedBox(
+                        height: 50,
+                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ButtonCustom(text: "50:50 (-2)"),
-                          ButtonCustom(text: "+15s (-2)"),
-                          ButtonCustom(text: "+15s (-2)"),
+                          ButtonCustom(
+                              text: "-2🪙\n50/50",
+                              img: "assets/images/50_50.png",
+                              ontap: _Loc50phantram),
+                          ButtonCustom(
+                              text: "-2🪙\n+15s",
+                              img: "assets/images/15s.png",
+                              ontap: _Them15s),
+                          ButtonCustom(
+                              text: "-4🪙\nĐổi câu hỏi",
+                              img: "assets/images/next.png",
+                              ontap: _Nextquestione),
                         ],
-                      ) //close
-                      ,
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all(color: lightgrey, width: 2)),
-                        child: IconButton(
-                          onPressed: () {
-                            exit(0);
-                          },
-                          icon: Icon(
-                            CupertinoIcons.heart,
-                            color: Colors.white,
-                            size: 28,
-                          ),
-                        ),
                       )
                     ],
                   ),
@@ -289,9 +326,24 @@ class _QuizzScreenState extends State<QuizzScreen> {
   }
 }
 
-Widget ButtonCustom({
-  text,
-}) {
-  return ElevatedButton(
-      onPressed: () {}, child: normalText(text: text, size: 18));
+Widget ButtonCustom({text, img, ontap}) {
+  return GestureDetector(
+    onTap: ontap,
+    child: Container(
+      height: 60,
+      padding: const EdgeInsets.all(6),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(offset: Offset(0, 2), blurRadius: 5, color: Colors.lightBlue)
+      ], color: Colors.lightBlue, borderRadius: BorderRadius.circular(16)),
+      child: Row(
+        children: [
+          Image.asset(
+            img,
+            height: 40,
+          ),
+          headingText(text: text, size: 18)
+        ],
+      ),
+    ),
+  );
 }

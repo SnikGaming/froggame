@@ -3,8 +3,10 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/const/colors.dart';
+import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/const/text_style.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/screens/history/info.dart';
 
 class TestDrawer extends StatefulWidget {
   const TestDrawer({super.key});
@@ -26,7 +28,8 @@ class _TestDrawerState extends State<TestDrawer> {
               child: Container(),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+              },
               title: normalText(
                 text: "BXH",
                 color: white,

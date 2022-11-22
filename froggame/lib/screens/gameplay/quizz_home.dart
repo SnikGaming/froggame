@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
+import 'package:froggame/screens/history/info.dart';
+import 'package:froggame/screens/type_question.dart';
 import '../../const/colors.dart';
 
 import '../../const/next_screen.dart';
@@ -16,7 +18,7 @@ class QuizzHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appbarWidget(),
-        endDrawer: drawerWidget(),
+        endDrawer: drawerWidget(context),
         body: Container(
           width: double.infinity,
           height: double.infinity,
@@ -73,7 +75,8 @@ class QuizzHome extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        nextScreen(context, QuizzScreen());
+                        //nextScreen(context, QuizzScreen());
+                        nextScreen(context, TypeQuestionPage());
                       },
                       child:
                           headingText(text: "Continue", size: 18, color: blue)),
@@ -84,7 +87,7 @@ class QuizzHome extends StatelessWidget {
         ));
   }
 
-  Drawer drawerWidget() {
+  Drawer drawerWidget(BuildContext ctx) {
     return Drawer(
       backgroundColor: bg1,
       child: ListView(
@@ -106,7 +109,7 @@ class QuizzHome extends StatelessWidget {
             ),
           ),
           ListTile(
-            onTap: () {},
+            onTap: () => nextScreen(ctx, infomation_screen()),
             title: normalText(
               text: "BXH",
               color: white,

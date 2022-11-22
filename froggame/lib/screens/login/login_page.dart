@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -17,6 +18,17 @@ class SiginPage extends StatefulWidget {
 class _SiginPageState extends State<SiginPage> {
   final RoundedLoadingButtonController googleController =
       RoundedLoadingButtonController();
+  final colorizeColors = [
+    Colors.purple,
+    Colors.blue,
+    Colors.yellow,
+    Colors.red,
+  ];
+
+  final colorizeTextStyle = TextStyle(
+    fontSize: 50.0,
+    fontFamily: 'Horizon',
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +45,26 @@ class _SiginPageState extends State<SiginPage> {
           children: [
             BOX(height: 120),
             Image.asset("assets/pngwing.png"),
-            headingText(text: "QUIZZ FROG", size: 42, color: white),
+            AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  'Chào mừng bạn',
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                ),
+                ColorizeAnimatedText(
+                  'đã đến với',
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                ),
+                ColorizeAnimatedText(
+                  'Frog Quiz',
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                ),
+              ],
+              isRepeatingAnimation: true,
+            ),
             Spacer(),
             RoundedLoadingButton(
                 controller: googleController,
