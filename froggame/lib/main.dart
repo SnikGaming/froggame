@@ -1,12 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:froggame/screens/history/info.dart';
-import 'package:froggame/screens/history/play_history.dart';
+import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/user_pre.dart';
 
-import 'screens/login/login_page.dart';
-import 'screens/type_question.dart';
+Future<void> main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-void main(List<String> args) {
-  runApp(const MyApp());
+  // await Firebase.initializeApp();
+  await UserSimplePreferences.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

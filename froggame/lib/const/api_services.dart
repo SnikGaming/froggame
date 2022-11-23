@@ -9,6 +9,10 @@ getQuiz() async {
   if (res.statusCode == 200) {
     var data = jsonDecode(res.body.toString());
     print("data is loaded");
+
     return data;
+  } else {
+    print(
+        "------------------------------------------ERROR--------------------------------------------");
   }
 }
