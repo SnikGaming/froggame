@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
+import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/type_question.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -16,12 +17,13 @@ class QuizzHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: appbarWidget(),
         endDrawer: drawerWidget(context),
         body: Container(
-          width: double.infinity,
-          height: double.infinity,
+          width: size.width,
+          height: size.height,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(gradient: background),
           child: Column(
@@ -108,6 +110,9 @@ class QuizzHome extends StatelessWidget {
               colorIcon: yellow,
               icon: FontAwesomeIcons.crown),
           StrOption.listView(
+              func: () {
+                nextScreen(ctx, const ShopScreen());
+              },
               str: StrOption.shop,
               colorIcon: Colors.blue.shade300,
               icon: FontAwesomeIcons.shop),

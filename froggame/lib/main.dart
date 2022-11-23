@@ -1,12 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
   runApp(MyApp());

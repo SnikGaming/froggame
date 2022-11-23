@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import '../const/colors.dart';
-import '../const/type_model.dart';
+import '../const/font_app.dart';
+import '../const/str_Type.dart';
 import 'gameplay/quizz_screen.dart';
 
 class TypeQuestionPage extends StatefulWidget {
@@ -14,8 +15,6 @@ class TypeQuestionPage extends StatefulWidget {
 }
 
 class _TypeQuestionPageState extends State<TypeQuestionPage> {
-
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -52,7 +51,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                       ),
                       Text(
                         UserSimplePreferences.getUsername(),
-                        style: popins.copyWith(
+                        style: F_popins.copyWith(
                             color: white,
                             fontWeight: FontWeight.bold,
                             fontSize: 18),
@@ -61,14 +60,14 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                   ),
                   Text(
                     "${UserSimplePreferences.getHeart()} ❤️",
-                    style: popins.copyWith(
+                    style: F_popins.copyWith(
                         color: white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
                   ),
                   Text(
                     "${UserSimplePreferences.getScore()} 🪙",
-                    style: popins.copyWith(
+                    style: F_popins.copyWith(
                         color: white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
@@ -120,7 +119,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                               top: 30,
                               child: Text(
                                 type.name,
-                                style: permanent.copyWith(
+                                style: F_permanent.copyWith(
                                     color: white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 30),
@@ -136,7 +135,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 decoration: BoxDecoration(
-                                  boxShadow:const [
+                                  boxShadow: const [
                                     BoxShadow(
                                         offset: Offset(1, 2),
                                         blurRadius: 10,
@@ -151,7 +150,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                 ),
                                 child: Text(
                                   "CHƠI",
-                                  style: popins.copyWith(
+                                  style: F_popins.copyWith(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18),
                                 ),

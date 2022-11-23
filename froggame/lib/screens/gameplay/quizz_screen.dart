@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
-
-import '../../const/api_services.dart';
+import '../../network/api_services.dart';
 import '../../const/images.dart';
 import '../../const/text_style.dart';
 import '../../const/values.dart';

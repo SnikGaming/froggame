@@ -23,10 +23,11 @@ class _SiginPageState extends State<SiginPage> {
       RoundedLoadingButtonController();
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: size.width,
+        height: size.height,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(gradient: background),
         child: Column(
@@ -95,7 +96,10 @@ class _SiginPageState extends State<SiginPage> {
                     normalText(text: StrLogin.btnName, size: 15, color: white),
                   ],
                 )),
-            const SizedBox(height: 30)
+            Flexible(
+              child: Container(),
+              flex: 1,
+            ),
           ],
         ),
       ),
