@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
+import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/type_question.dart';
 import 'package:froggame/view_data/login_method.dart';
@@ -125,6 +126,9 @@ class QuizzHome extends StatelessWidget {
               colorIcon: Colors.blue,
               icon: FontAwesomeIcons.circleInfo),
           StrOption.listView(
+              func: () {
+                nextScreen(ctx, const SettingScreen());
+              },
               str: StrOption.setting,
               colorIcon: lightgrey,
               icon: FontAwesomeIcons.wrench),
