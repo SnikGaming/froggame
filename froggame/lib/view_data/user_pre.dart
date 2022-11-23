@@ -1,3 +1,5 @@
+import 'package:froggame/screens/settings/setting_screen.dart';
+import 'package:froggame/view_data/setting_pref.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
@@ -59,5 +61,6 @@ class UserSimplePreferences {
     UserSimplePreferences.setUserId(id: "");
     await removeUserLogin();
     await removeUserScore();
+    await SettingSimplePreferences.removeAll();
   }
 }

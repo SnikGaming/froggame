@@ -9,6 +9,7 @@ import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../const/colors.dart';
 import '../../const/text_style.dart';
 import '../../screen_load/view.dart';
+import 'dart:math' as pi;
 
 class SiginPage extends StatefulWidget {
   const SiginPage({super.key});
@@ -37,9 +38,64 @@ class _SiginPageState extends State<SiginPage> {
               flex: 1,
             ),
             //! Image game
-            Image.asset(StrLogin.imageMain),
-            const SizedBox(
-              height: 10,
+            // Image.asset(StrLogin.imageMain),
+            Container(
+              height: size.height * .4,
+              width: size.width,
+              child: Stack(
+                children: [
+                  Positioned(
+                    bottom: 4,
+                    right: 4,
+                    child: Container(
+                      child: Image.asset(
+                        "assets/images/star4.webp",
+                        height: 200,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 4,
+                    right: 4,
+                    child: Container(
+                      child: Transform.rotate(
+                        angle: pi.pi / 25,
+                        child: Image.asset(
+                          "assets/images/latsach.webp",
+                          height: 100,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    child: Container(
+                      child: Image.asset("assets/images/star1.webp"),
+                    ),
+                  ),
+                  Positioned(
+                    child: Container(
+                      child: Image.asset("assets/images/star2.webp"),
+                    ),
+                  ),
+                  Positioned(
+                    child: Container(
+                      child: Image.asset("assets/images/star3.webp"),
+                    ),
+                  ),
+                  Positioned(
+                    child: Container(
+                      child: Image.asset(
+                        "assets/images/frogkimono.webp",
+                        height: size.height * .5,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Flexible(
+              child: Container(),
+              flex: 1,
             ),
             //TODO :Slider
             CarouselSlider(
