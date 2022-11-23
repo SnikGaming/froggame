@@ -65,6 +65,33 @@ class _SettingScreenState extends State<SettingScreen> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 50,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    child: Text(
+                      StrSetting.hieuung,
+                      style: F_lobster.copyWith(fontSize: 30, color: white),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: size.width * .55,
+                    child: SliderController(
+                      value: SettingSimplePreferences.getEffect() ?? 100,
+                      onChanged: (value) {
+                        SettingSimplePreferences.setEffect(val: value);
+                        print('slider value : $value');
+                      },
+                    ),
+                  ),
+                ],
+              ),
 
               //TODO : Run
               Flexible(

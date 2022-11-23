@@ -2,7 +2,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
-import 'package:froggame/view_data/user_pre.dart';
 import '../const/colors.dart';
 import '../const/font_app.dart';
 import '../const/str_Type.dart';
@@ -33,52 +32,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
               Flexible(
                 child: Container(),
                 flex: 1,
-              )
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 20),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Row(
-              //         children: [
-              //           Container(
-              //             height: 50,
-              //             child: CircleAvatar(
-              //               child: Image.network(
-              //                 UserSimplePreferences.getUserPic(),
-              //               ),
-              //             ),
-              //           ),
-              //           const SizedBox(
-              //             width: 10,
-              //           ),
-              //           Text(
-              //             UserSimplePreferences.getUsername(),
-              //             style: F_popins.copyWith(
-              //                 color: white,
-              //                 fontWeight: FontWeight.bold,
-              //                 fontSize: 18),
-              //           )
-              //         ],
-              //       ),
-              //       Text(
-              //         "${UserSimplePreferences.getHeart()} ❤️",
-              //         style: F_popins.copyWith(
-              //             color: white,
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 18),
-              //       ),
-              //       Text(
-              //         "${UserSimplePreferences.getScore()} 🪙",
-              //         style: F_popins.copyWith(
-              //             color: white,
-              //             fontWeight: FontWeight.bold,
-              //             fontSize: 18),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              ,
+              ),
               UserHeader(height: size.height * .1),
               Flexible(
                 child: Container(),
