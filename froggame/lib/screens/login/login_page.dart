@@ -6,7 +6,7 @@ import '../../const/colors.dart';
 import '../../const/next_screen.dart';
 import '../../const/text_style.dart';
 import '../../const/values.dart';
-import '../gameplay/quizz_home.dart';
+import '../gameplay/options_screen.dart';
 
 class SiginPage extends StatefulWidget {
   const SiginPage({super.key});
@@ -91,30 +91,30 @@ class _SiginPageState extends State<SiginPage> {
                   ],
                 )),
             BOX(height: 10),
-            RoundedLoadingButton(
-                controller: googleController,
-                successColor: Colors.blue,
-                width: MediaQuery.of(context).size.width * .8,
-                elevation: 0,
-                borderRadius: 25,
-                color: blue,
-                onPressed: () {
-                  nextScreen(context, QuizzHome());
-                },
-                child: Wrap(
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.facebook,
-                      size: 20,
-                      color: white,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    normalText(
-                        text: "Sign in with Facebook", size: 15, color: white),
-                  ],
-                )),
+            // RoundedLoadingButton(
+            //     controller: googleController,
+            //     successColor: Colors.blue,
+            //     width: MediaQuery.of(context).size.width * .8,
+            //     elevation: 0,
+            //     borderRadius: 25,
+            //     color: blue,
+            //     onPressed: () {
+            //       nextScreen(context, QuizzHome());
+            //     },
+            //     child: Wrap(
+            //       children: [
+            //         Icon(
+            //           FontAwesomeIcons.facebook,
+            //           size: 20,
+            //           color: white,
+            //         ),
+            //         SizedBox(
+            //           width: 15,
+            //         ),
+            //         normalText(
+            //             text: "Sign in with Facebook", size: 15, color: white),
+            //       ],
+            //     )),
             BOX(height: 20)
           ],
         ),

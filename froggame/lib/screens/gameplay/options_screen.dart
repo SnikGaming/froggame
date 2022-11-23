@@ -97,14 +97,20 @@ class QuizzHome extends StatelessWidget {
               onTap: () {
                 //Profile
               },
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(30),
-                    image: DecorationImage(
-                      image: AssetImage("assets/main.png"),
-                      fit: BoxFit.cover,
-                    )),
+              child: Column(
+                children: [
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: AssetImage("assets/main.png"),
+                          fit: BoxFit.cover,
+                        )),
+                  ),
+                  Spacer(),
+                  headingText(text: "Trần Thới Long", color: white, size: 20)
+                ],
               ),
             ),
           ),
