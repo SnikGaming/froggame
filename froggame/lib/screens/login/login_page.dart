@@ -45,6 +45,16 @@ class _SiginPageState extends State<SiginPage> {
               child: Stack(
                 children: [
                   Positioned(
+                    right: 4,
+                    top: 2,
+                    child: Transform.rotate(
+                      angle: 4,
+                      child: Container(
+                        child: Image.asset("assets/images/star2.webp"),
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     bottom: 4,
                     right: 4,
                     child: Container(
