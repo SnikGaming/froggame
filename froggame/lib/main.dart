@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,10 +24,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: UserSimplePreferences.getUserId() == null ||
+      routes: {
+        'welcome': (_) => const SiginPage(),
+        'welcome2': (_) => const QuizzHome()
+      },
+      initialRoute: UserSimplePreferences.getUserId() == null ||
               UserSimplePreferences.getUserId() == ""
-          ? const SiginPage()
-          : const QuizzHome(),
+          ? 'welcome'
+          : 'welcome2',
+      // home: UserSimplePreferences.getUserId() == null ||
+      //         UserSimplePreferences.getUserId() == ""
+      //     ? const SiginPage()
+      //     : const QuizzHome(),
       theme: ThemeData(fontFamily: "quick"),
     );
   }
