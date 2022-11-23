@@ -1,37 +1,26 @@
 import 'dart:io';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/const/str_login.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../const/colors.dart';
-import '../../const/next_screen.dart';
 import '../../const/text_style.dart';
-import '../../const/values.dart';
-import '../gameplay/options_screen.dart';
+import '../../screen_load/view.dart';
 
 class SiginPage extends StatefulWidget {
   const SiginPage({super.key});
-
   @override
   State<SiginPage> createState() => _SiginPageState();
 }
 
 class _SiginPageState extends State<SiginPage> {
+  CarouselController buttonCarouselController = CarouselController();
+
   final RoundedLoadingButtonController googleController =
       RoundedLoadingButtonController();
-  final colorizeColors = [
-    Colors.purple,
-    Colors.blue,
-    Colors.yellow,
-    Colors.red,
-  ];
-
-  final colorizeTextStyle = TextStyle(
-    fontSize: 50.0,
-    fontFamily: 'Horizon',
-  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,39 +28,48 @@ class _SiginPageState extends State<SiginPage> {
         width: double.infinity,
         height: double.infinity,
         padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [bg1, bg2])),
+        decoration: BoxDecoration(gradient: background),
         child: Column(
           children: [
-            BOX(height: 120),
-            Image.asset("assets/pngwing.png"),
+            Flexible(
+              child: Container(),
+              flex: 1,
+            ),
+            //! Image game
+            Image.asset(StrLogin.imageMain),
+            const SizedBox(
+              height: 10,
+            ),
+            //TODO :Slider
+            CarouselSlider(
+                items: const [View()],
+                options: CarouselOptions(
+                  //height: 150,
+                  aspectRatio: 16 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  autoPlay: true,
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.fastOutSlowIn,
+                  enlargeCenterPage: true,
+                  scrollDirection: Axis.horizontal,
+                )),
+            const SizedBox(
+              height: 40,
+            ),
+            //! Text game
             AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  'Chào mừng bạn',
-                  textStyle: colorizeTextStyle,
-                  colors: colorizeColors,
-                ),
-                ColorizeAnimatedText(
-                  'đã đến với',
-                  textStyle: colorizeTextStyle,
-                  colors: colorizeColors,
-                ),
-                ColorizeAnimatedText(
-                  'Frog Quiz',
-                  textStyle: colorizeTextStyle,
-                  colors: colorizeColors,
-                ),
-              ],
+              animatedTexts: StrLogin.TEXT,
               isRepeatingAnimation: true,
             ),
-            Spacer(),
+            const Spacer(),
+            //! Button
             RoundedLoadingButton(
                 controller: googleController,
-                successColor: Colors.red,
+                successColor: red,
                 width: MediaQuery.of(context).size.width * .8,
                 elevation: 0,
                 borderRadius: 25,
@@ -86,44 +84,18 @@ class _SiginPageState extends State<SiginPage> {
                 },
                 child: Wrap(
                   children: [
-                    Icon(
+                    const Icon(
                       FontAwesomeIcons.google,
                       size: 20,
                       color: white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
-                    normalText(
-                        text: "Sign in with google", size: 15, color: white),
+                    normalText(text: StrLogin.btnName, size: 15, color: white),
                   ],
                 )),
-            BOX(height: 10),
-            // RoundedLoadingButton(
-            //     controller: googleController,
-            //     successColor: Colors.blue,
-            //     width: MediaQuery.of(context).size.width * .8,
-            //     elevation: 0,
-            //     borderRadius: 25,
-            //     color: blue,
-            //     onPressed: () {
-            //       nextScreen(context, QuizzHome());
-            //     },
-            //     child: Wrap(
-            //       children: [
-            //         Icon(
-            //           FontAwesomeIcons.facebook,
-            //           size: 20,
-            //           color: white,
-            //         ),
-            //         SizedBox(
-            //           width: 15,
-            //         ),
-            //         normalText(
-            //             text: "Sign in with Facebook", size: 15, color: white),
-            //       ],
-            //     )),
-            BOX(height: 20)
+            const SizedBox(height: 30)
           ],
         ),
       ),

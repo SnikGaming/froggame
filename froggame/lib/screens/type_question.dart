@@ -1,11 +1,7 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/view_data/user_pre.dart';
-
 import '../const/colors.dart';
 import '../const/type_model.dart';
 import 'gameplay/quizz_screen.dart';
@@ -18,9 +14,7 @@ class TypeQuestionPage extends StatefulWidget {
 }
 
 class _TypeQuestionPageState extends State<TypeQuestionPage> {
-  // _maingame() {
-  //   nextScreen(context, ());
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +76,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               height: size.height * .9,
               child: ListView.builder(
@@ -142,7 +136,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20, vertical: 10),
                                 decoration: BoxDecoration(
-                                  boxShadow: [
+                                  boxShadow:const [
                                     BoxShadow(
                                         offset: Offset(1, 2),
                                         blurRadius: 10,

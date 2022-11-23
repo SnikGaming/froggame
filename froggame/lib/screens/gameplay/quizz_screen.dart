@@ -196,7 +196,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                           )
                         ],
                       ),
-                      BOX(height: 10),
+                       const    SizedBox(height: 10),
                       // Image.asset(
                       //   frog,
                       //   width: 200,
@@ -205,7 +205,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                         frog_sure,
                         width: 120,
                       ),
-                      BOX(height: 10),
+                  const    SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: normalText(
@@ -215,12 +215,12 @@ class _QuizzScreenState extends State<QuizzScreen> {
                             size: 18),
                       ),
                       //box
-                      BOX(height: 20),
+                    const  SizedBox(height: 20),
                       normalText(
                           text: data[currentQuestionIndex]["question"],
                           color: lightgrey,
                           size: 20),
-                      BOX(height: 20),
+                      const SizedBox(height: 20),
 
                       ListView.builder(
                           shrinkWrap: true,

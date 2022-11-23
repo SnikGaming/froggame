@@ -1,25 +1,17 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
 import '../models/user_model.dart';
 import 'firestore_user.dart';
 
 class AuthMethod {
   static GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   static GoogleSignInAccount? account;
-  // static String nameUser = "";
-  // static String phtoUser = "";
-  // static String idUser = "";
-
   String urlIMG = "https://media.giphy.com/media/CPO9ZmnEiDcdLXMrzv/giphy.gif",
       name = "No name";
   //! Dang nhap
@@ -44,26 +36,15 @@ class AuthMethod {
     UserSimplePreferences.setUserPic(pic: account!.photoUrl.toString());
     UserSimplePreferences.setUsername(
         username: account!.displayName.toString());
-    nextScreen(context, QuizzHome());
+    nextScreen(context, const QuizzHome());
   }
 
   static googleSignOutMethod(context) async {
     await googleSignIn.signOut().then((value) {
-      nextScreen(context, SiginPage());
+      nextScreen(context, const SiginPage());
       UserSimplePreferences.removeAll();
     });
   }
-
-  // bool IsData(UserCredential user) {
-  //   var documentStream = FirebaseFirestore.instance
-  //       .collection('users')
-  //       .doc(user.user!.uid)
-  //       .snapshots();
-  //   if (documentStream != null) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   void SaveUser(UserCredential user) async {
     final user_firebase = FirebaseFirestore.instance.collection('users');
