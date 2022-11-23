@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/view_data/login_method.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../const/colors.dart';
 import '../../const/next_screen.dart';
@@ -73,8 +76,13 @@ class _SiginPageState extends State<SiginPage> {
                 elevation: 0,
                 borderRadius: 25,
                 color: red,
-                onPressed: () {
-                  nextScreen(context, QuizzHome());
+                onPressed: () async {
+                  try {
+                    AuthMethod().googleSignInMethod(context);
+                  } catch (e) {
+                    // return;
+                    print("loi");
+                  }
                 },
                 child: Wrap(
                   children: [

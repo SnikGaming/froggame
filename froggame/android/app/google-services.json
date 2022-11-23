@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "123025533933",
+    "project_id": "doan-68498",
+    "storage_bucket": "doan-68498.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123025533933:android:fea39d43c360ed139515e4",
+        "android_client_info": {
+          "package_name": "com.example.froggame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "123025533933-d0543eauehan7ji77c1do0hsqhuhe1jl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.froggame",
+            "certificate_hash": "4d99b37c08a960f4197bdbc7f092ae9b5c80e319"
+          }
+        },
+        {
+          "client_id": "123025533933-jca8h8rdunmctpl7rqrnlirsbrqpfnrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-HBP7F5kV9MBqXqXldx9grYsDV0dKiGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "123025533933-jca8h8rdunmctpl7rqrnlirsbrqpfnrq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

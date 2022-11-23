@@ -31,5 +31,10 @@ final List<Color> list2 = const [
 LinearGradient linearGradient =
     LinearGradient(colors: [bg1, bg2], begin: Alignment.topLeft);
 
+LinearGradient background = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [bg1, bg2]);
+
 final popins = GoogleFonts.poppins();
 final permanent = GoogleFonts.permanentMarker();
