@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:froggame/const/next_screen.dart';
+import 'package:froggame/view_data/user_pre.dart';
 
 import '../const/colors.dart';
 import '../const/type_model.dart';
@@ -48,7 +49,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                         height: 50,
                         child: CircleAvatar(
                           child: Image.network(
-                            "https://media.giphy.com/media/CPO9ZmnEiDcdLXMrzv/giphy.gif",
+                            UserSimplePreferences.getUserPic(),
                           ),
                         ),
                       ),
@@ -56,7 +57,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                         width: 10,
                       ),
                       Text(
-                        "Long",
+                        UserSimplePreferences.getUsername(),
                         style: popins.copyWith(
                             color: white,
                             fontWeight: FontWeight.bold,
@@ -65,14 +66,14 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                     ],
                   ),
                   Text(
-                    "100 ❤️",
+                    "${UserSimplePreferences.getHeart()} ❤️",
                     style: popins.copyWith(
                         color: white,
                         fontWeight: FontWeight.bold,
                         fontSize: 18),
                   ),
                   Text(
-                    "100 🪙",
+                    "${UserSimplePreferences.getScore()} 🪙",
                     style: popins.copyWith(
                         color: white,
                         fontWeight: FontWeight.bold,

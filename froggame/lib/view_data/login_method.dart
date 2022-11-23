@@ -2,6 +2,11 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:froggame/const/next_screen.dart';
+import 'package:froggame/screens/gameplay/options_screen.dart';
+import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/user_pre.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../models/user_model.dart';
@@ -11,13 +16,14 @@ class AuthMethod {
   static GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   FirebaseAuth _auth = FirebaseAuth.instance;
   static GoogleSignInAccount? account;
-  static String nameUser = "";
-  static String phtoUser = "";
+  // static String nameUser = "";
+  // static String phtoUser = "";
+  // static String idUser = "";
 
   String urlIMG = "https://media.giphy.com/media/CPO9ZmnEiDcdLXMrzv/giphy.gif",
       name = "No name";
   //! Dang nhap
-  void googleSignInMethod() async {
+  void googleSignInMethod(context) async {
     account = await googleSignIn.signIn();
 
     GoogleSignInAuthentication googleSignInAuthentication =
@@ -30,12 +36,22 @@ class AuthMethod {
     await _auth
         .signInWithCredential(credential)
         .then((value) => SaveUser(value));
-    nameUser = account!.displayName.toString();
-    phtoUser = account!.photoUrl.toString();
+    // nameUser = account!.displayName.toString();
+    // phtoUser = account!.photoUrl.toString();
+    // idUser = account!.id.toString();
+    // print(idUser);
+    UserSimplePreferences.setUserId(id: account!.id);
+    UserSimplePreferences.setUserPic(pic: account!.photoUrl.toString());
+    UserSimplePreferences.setUsername(
+        username: account!.displayName.toString());
+    nextScreen(context, QuizzHome());
   }
 
-  static void googleSignOutMethod() async {
-    await googleSignIn.signOut().then((value) => exit(1));
+  static googleSignOutMethod(context) async {
+    await googleSignIn.signOut().then((value) {
+      nextScreen(context, SiginPage());
+      UserSimplePreferences.removeAll();
+    });
   }
 
   // bool IsData(UserCredential user) {
@@ -51,7 +67,8 @@ class AuthMethod {
 
   void SaveUser(UserCredential user) async {
     final user_firebase = FirebaseFirestore.instance.collection('users');
-    int score = 5;
+    int score = 0;
+    int heart = 5;
     // var data = IsData(user);
     // var usId = FirebaseFirestore.instance
     //     .collection('users')
@@ -70,6 +87,7 @@ class AuthMethod {
         .then(((value) {
       value.docs.forEach((element) {
         score = element.data()['score'];
+        heart = element.data()['heart'];
         print("=====>  ${element.data()['score']}");
         print("=====>  ${element.data()['name']}");
         print("=====>  ${element.data()['email']}");
@@ -80,6 +98,11 @@ class AuthMethod {
         email: user.user!.email!,
         name: user.user!.displayName! ?? name,
         pic: user.user!.photoURL! ?? urlIMG,
+        heart: heart,
         score: score));
+    UserSimplePreferences.setScore(score: score);
+    UserSimplePreferences.setUserId(id: user.user!.uid);
+    print("=============================${UserSimplePreferences.getUserId()}");
+    UserSimplePreferences.setHeart(heart: heart);
   }
 }

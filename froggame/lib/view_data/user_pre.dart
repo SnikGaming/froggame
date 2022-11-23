@@ -4,15 +4,18 @@ class UserSimplePreferences {
   static const _keyUsername = "username";
   static const _keyUserId = "userId";
   static const _keyUserPic = "userPic";
-  // static const _keyLogin = "statusUser";
+  static const _keyUserScore = "userScore";
+  static const _keyUserHeart = "userHeart";
+  static const _keyLogin = "statusUser";
 
   static SharedPreferences? preferences;
   static Future init() async =>
       preferences = await SharedPreferences.getInstance();
 // //! Login user
-//   static Future setLogin({required bool status}) async =>
-//       await preferences!.setBool(_keyLogin, status);
-//   static getUserLogin() => preferences!.getBool(_keyLogin);
+  static Future setLogin({required bool status}) async =>
+      await preferences!.setBool(_keyLogin, status);
+  static getUserLogin() => preferences!.getBool(_keyLogin);
+  static Future removeUserLogin() async => await preferences!.remove(_keyLogin);
 
 //! ID username
   static Future setUserId({required String id}) async =>
@@ -21,7 +24,7 @@ class UserSimplePreferences {
 
   static Future removeUserId() async => await preferences!.remove(_keyUserId);
 //! Username
-  static Future setUsername(String username) async =>
+  static Future setUsername({required String username}) async =>
       await preferences!.setString(_keyUsername, username);
   static getUsername() => preferences!.getString(_keyUsername);
   static Future removeUsername() async =>
@@ -33,11 +36,28 @@ class UserSimplePreferences {
   static getUserPic() => preferences!.getString(_keyUserPic);
   static Future removeUserPic() async => await preferences!.remove(_keyUserPic);
 
+//! Score username
+  static Future setScore({required int score}) async =>
+      await preferences!.setInt(_keyUserScore, score);
+  static getScore() => preferences!.getInt(_keyUserScore);
+  static Future removeUserScore() async =>
+      await preferences!.remove(_keyUserScore);
+
+  //! Heart username
+  static Future setHeart({required int heart}) async =>
+      await preferences!.setInt(_keyUserHeart, heart);
+  static getHeart() => preferences!.getInt(_keyUserHeart);
+  static Future removeUserHeart() async =>
+      await preferences!.remove(_keyUserHeart);
+
 //! removeAll
   static Future removeAll() async {
-    // await setLogin(status: false);
     await removeUsername();
     await removeUserId();
     await removeUserPic();
+    await removeUserHeart();
+    UserSimplePreferences.setUserId(id: "");
+    await removeUserLogin();
+    await removeUserScore();
   }
 }

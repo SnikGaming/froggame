@@ -1,12 +1,12 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:froggame/screens/gameplay/quizz_screen.dart';
+import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screens/type_question.dart';
+import 'package:froggame/view_data/login_method.dart';
+import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
-
 import '../../const/next_screen.dart';
 import '../../const/text_style.dart';
 import '../../const/values.dart';
@@ -23,39 +23,23 @@ class QuizzHome extends StatelessWidget {
           width: double.infinity,
           height: double.infinity,
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [bg1, bg2])),
+          decoration: BoxDecoration(gradient: background),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //Img
-
+              //!Img
               Image.asset(
-                "assets/giphy.webp",
+                StrOption.img,
               ),
-              // Image.network(
-              //   frog_main1,
-              // ),
-
-              // const SizedBox(
-              //   height: 10,
-              // )
-              //
-
-              normalText(
-                  text: "Welcome to our game!!! 🐸",
-                  color: lightgrey,
-                  size: 18),
+              normalText(text: StrOption.caption, color: lightgrey, size: 18),
               Row(
                 children: [
                   Image.asset(
                     frog_icon,
                     height: 60,
                   ),
-                  headingText(text: "FROG QUIZZ", size: 32, color: Colors.white)
+                  headingText(
+                      text: StrOption.namegame, size: 32, color: Colors.white)
                 ],
               ),
               normalText(text: ""), const Spacer(),
@@ -75,11 +59,10 @@ class QuizzHome extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
-                        //nextScreen(context, QuizzScreen());
                         nextScreen(context, TypeQuestionPage());
                       },
-                      child:
-                          headingText(text: "Continue", size: 18, color: blue)),
+                      child: headingText(
+                          text: StrOption.tieptuc, size: 18, color: blue)),
                 ),
               )
             ],
@@ -104,109 +87,60 @@ class QuizzHome extends StatelessWidget {
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
-                          image: AssetImage("assets/main.png"),
-                          fit: BoxFit.cover,
-                        )),
+                            image: NetworkImage(
+                                UserSimplePreferences.getUserPic()),
+                            fit: BoxFit.contain)),
                   ),
                   Spacer(),
-                  headingText(text: "Trần Thới Long", color: white, size: 20)
+                  headingText(
+                      text: UserSimplePreferences.getUsername(),
+                      color: white,
+                      size: 20)
                 ],
               ),
             ),
           ),
-          ListTile(
-            onTap: () => nextScreen(ctx, infomation_screen()),
-            title: normalText(
-              text: "BXH",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.crown,
-              color: yellow,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            title: normalText(
-              text: "Shop",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.shop,
-              color: Colors.blue.shade300,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            title: normalText(
-              text: "Pay to win",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.moneyBills,
-              color: green,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            title: normalText(
-              text: "About",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.circleInfo,
-              color: Colors.blue,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            title: normalText(
-              text: "Setting",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.wrench,
-              color: lightgrey,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {},
-            title: normalText(
-              text: "Sign up",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.signOut,
-              color: purple,
-              size: drawerSizeIcon,
-            ),
-          ),
-          ListTile(
-            onTap: () {
-              exit(0);
-            },
-            title: normalText(
-              text: "Quit",
-              color: white,
-              size: 18,
-            ),
-            leading: FaIcon(
-              FontAwesomeIcons.powerOff,
-              color: red,
-              size: drawerSizeIcon,
-            ),
-          ),
+          StrOption.listView(
+              str: StrOption.bxh,
+              func: () {
+                nextScreen(ctx, infomation_screen());
+              },
+              colorIcon: yellow,
+              icon: FontAwesomeIcons.crown),
+          StrOption.listView(
+              str: StrOption.shop,
+              colorIcon: Colors.blue.shade300,
+              icon: FontAwesomeIcons.shop),
+          StrOption.listView(
+              str: StrOption.card,
+              colorIcon: green,
+              icon: FontAwesomeIcons.moneyBills),
+          StrOption.listView(
+              str: StrOption.about,
+              colorIcon: Colors.blue,
+              icon: FontAwesomeIcons.circleInfo),
+          StrOption.listView(
+              str: StrOption.setting,
+              colorIcon: lightgrey,
+              icon: FontAwesomeIcons.wrench),
+          StrOption.listView(
+              func: () async {
+                try {
+                  AuthMethod.googleSignOutMethod(ctx);
+                } catch (e) {
+                  print("Loi $e");
+                }
+              },
+              str: StrOption.signout,
+              colorIcon: purple,
+              icon: FontAwesomeIcons.signOut),
+          StrOption.listView(
+              func: () {
+                exit(0);
+              },
+              str: StrOption.quit,
+              colorIcon: red,
+              icon: FontAwesomeIcons.powerOff),
         ],
       ),
     );
