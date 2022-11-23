@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
@@ -36,12 +37,14 @@ class AuthMethod {
     UserSimplePreferences.setUserPic(pic: account!.photoUrl.toString());
     UserSimplePreferences.setUsername(
         username: account!.displayName.toString());
-    nextScreen(context, const QuizzHome());
+    //nextScreen(context, const QuizzHome());
+    pushNamedRemove(context, 'welcome2');
   }
 
   static googleSignOutMethod(context) async {
     await googleSignIn.signOut().then((value) {
-      nextScreen(context, const SiginPage());
+      //nextScreen(context, const SiginPage());
+      pushNamedRemove(context, "welcome");
       UserSimplePreferences.removeAll();
     });
   }
@@ -77,8 +80,8 @@ class AuthMethod {
     await FureStoreUser().addUserToFireStore(UserModel(
         userId: user.user!.uid,
         email: user.user!.email!,
-        name: user.user!.displayName! ?? name,
-        pic: user.user!.photoURL! ?? urlIMG,
+        name: user.user!.displayName!,
+        pic: user.user!.photoURL!,
         heart: heart,
         score: score));
     UserSimplePreferences.setScore(score: score);
