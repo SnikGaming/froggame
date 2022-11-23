@@ -38,3 +38,10 @@ LinearGradient background = LinearGradient(
 
 final popins = GoogleFonts.poppins();
 final permanent = GoogleFonts.permanentMarker();
+
+final colorizeColors = [
+    Colors.purple,
+    Colors.blue,
+    Colors.yellow,
+    Colors.red,
+  ];

@@ -52,14 +52,14 @@ class QuizzHome extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         elevation: 8,
                         shadowColor: blue,
-                        minimumSize: Size(240, 40),
-                        side: BorderSide(width: 2, color: blue),
+                        minimumSize: const Size(240, 40),
+                        side: const BorderSide(width: 2, color: blue),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
                       ),
                       onPressed: () {
-                        nextScreen(context, TypeQuestionPage());
+                        nextScreen(context, const TypeQuestionPage());
                       },
                       child: headingText(
                           text: StrOption.tieptuc, size: 18, color: blue)),
@@ -91,7 +91,7 @@ class QuizzHome extends StatelessWidget {
                                 UserSimplePreferences.getUserPic()),
                             fit: BoxFit.contain)),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   headingText(
                       text: UserSimplePreferences.getUsername(),
                       color: white,
@@ -103,7 +103,7 @@ class QuizzHome extends StatelessWidget {
           StrOption.listView(
               str: StrOption.bxh,
               func: () {
-                nextScreen(ctx, infomation_screen());
+                nextScreen(ctx, const infomation_screen());
               },
               colorIcon: yellow,
               icon: FontAwesomeIcons.crown),
