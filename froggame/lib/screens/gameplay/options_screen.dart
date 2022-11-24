@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -158,6 +159,7 @@ class QuizzHome extends StatelessWidget {
               colorIcon: green,
               icon: FontAwesomeIcons.moneyBills),
           StrOption.listView(
+              func: () async {},
               str: StrOption.about,
               colorIcon: Colors.blue,
               icon: FontAwesomeIcons.circleInfo),
