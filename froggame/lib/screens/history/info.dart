@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:froggame/const/font_app.dart';
+import 'package:froggame/view_data/firestore_categories.dart';
+import 'package:froggame/view_data/firestore_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../const/colors.dart';
@@ -8,7 +12,13 @@ class infomation_screen extends StatefulWidget {
 
   @override
   State<infomation_screen> createState() => _infomation_screenState();
+  
 }
+  List<String>dt=[];
+
+
+  var selected = goi[0];
+
 
 List<String> goi = [
   'lịch sử',
@@ -21,12 +31,17 @@ List<String> goi = [
   'Đố mẹo'
 ];
 
+
+
 class _infomation_screenState extends State<infomation_screen> {
+  
   bool isClickEvent = true;
   bool isColor_history = true;
   bool isColor_rank = false;
+ 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -35,10 +50,11 @@ class _infomation_screenState extends State<infomation_screen> {
                 end: Alignment.bottomCenter,
                 colors: [bg1, bg2])),
         child: Column(
+
           children: [
             Container(
               width: 370,
-              height: 100,
+              height: size.height * 0.109,
               margin: EdgeInsets.only(top: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -59,19 +75,24 @@ class _infomation_screenState extends State<infomation_screen> {
                             children: [
                               Icon(Icons.info_outline_rounded),
                               Text('Thông tin',
-                                  style: GoogleFonts.abel(
-                                      textStyle: TextStyle(color: Colors.red)))
+                                  style: F_lobster.copyWith(
+                                      fontSize: 20, color: white))
                             ],
                           ),
                         ),
                         Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 105)),
-                        Container(
-                          child: Icon(
-                            Icons.close_rounded,
-                            color: red,
-                            size: 30,
+                        GestureDetector (
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            child: Icon(
+                              Icons.close_rounded,
+                              color: red,
+                              size: 30,
+                            ),
                           ),
                         )
                       ],
@@ -95,16 +116,17 @@ class _infomation_screenState extends State<infomation_screen> {
                               'Lịch sử',
                             )),
                         GestureDetector(
-                            onTap: () {
-                              setState(
-                                () {
-                                  isClickEvent = false;
-                                  isColor_history = false;
-                                  isColor_rank = true;
-                                },
-                              );
-                            },
-                            child: _btnInfo(context, isColor_rank, 'Xếp hạng')),
+                          onTap: () {
+                            setState(
+                              () {
+                                isClickEvent = false;
+                                isColor_history = false;
+                                isColor_rank = true;
+                              },
+                            );
+                          },
+                          child: _btnInfo(context, isColor_rank, 'Xếp hạng'),
+                        ),
                       ],
                     ),
                   ),
@@ -139,7 +161,7 @@ class _infomation_screenState extends State<infomation_screen> {
       child: Center(
         child: Text(
           chi_event,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+          style: F_permanent .copyWith(fontSize: 20),
         ),
       ),
     );
@@ -179,14 +201,14 @@ class _infomation_screenState extends State<infomation_screen> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            goi[index],
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
+                          Text(goi[index],
+                              style: F_pacifico .copyWith(
+                                  fontSize: 27,
+                                  color: white,
+                                  fontWeight: FontWeight.w500)),
                           Text(
                             '1p30',
-                            style: TextStyle(fontSize: 15),
+                            style: F_popins.copyWith(fontSize: 15),
                           )
                         ],
                       ),
@@ -234,17 +256,26 @@ class _infomation_screenState extends State<infomation_screen> {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: goi.length,
-              itemBuilder: (context, index) => Container(
-                margin: EdgeInsets.all(5),
-                height: 150,
-                width: 100,
-                decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 61, 94, 238),
-                    borderRadius: BorderRadius.circular(15)),
-                child: Center(
-                  child: Text(
-                    '${goi[index]}',
-                    style: TextStyle(fontSize: 18),
+              itemBuilder: (context, index) => GestureDetector(
+                onTap:() {
+                    selected = goi[index];
+
+                  setState(() {
+                    
+                  });
+                },
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  height: 150,
+                  width: 100,
+                  decoration: BoxDecoration(
+                      color: selected == goi[index] ? Colors.red : Colors.white,
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Center(
+                    child: Text(
+                      '${goi[index]}',
+                      style: F_lobster.copyWith(fontSize: 20)
+                    ),
                   ),
                 ),
               ),

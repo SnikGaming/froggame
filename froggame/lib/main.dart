@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -17,6 +18,7 @@ Future<void> main(List<String> args) async {
   await SettingSimplePreferences.init();
   await UserSimplePreferences.init();
   await Mp3Simple.init();
+  await FureStoreCategory.GetData();
   runApp(MyApp());
 }
 
