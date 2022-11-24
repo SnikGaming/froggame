@@ -50,8 +50,8 @@ class _ShopScreenState extends State<ShopScreen> {
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),
                         autoPlayAnimationDuration:
-                            const Duration(milliseconds: 800),
-                        autoPlayCurve: Curves.fastOutSlowIn,
+                            const Duration(milliseconds: 3000),
+                        autoPlayCurve: Curves.fastLinearToSlowEaseIn,
                         enlargeCenterPage: true,
                         scrollDirection: Axis.horizontal,
                       )),

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:froggame/screens/gameplay/options_screen.dart';
+import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         'welcome': (_) => const SiginPage(),
-        'welcome2': (_) => const QuizzHome()
+        'welcome2': (_) => const QuizzHome(),
+        'gameplay': (_) => const QuizzScreen(),
       },
       initialRoute: UserSimplePreferences.getUserId() == null ||
               UserSimplePreferences.getUserId() == ""

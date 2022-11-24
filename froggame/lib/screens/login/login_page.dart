@@ -45,10 +45,29 @@ class _SiginPageState extends State<SiginPage> {
               child: Stack(
                 children: [
                   Positioned(
+                    bottom: 20,
+                    left: -40,
+                    child: Container(
+                      child: Image.asset(
+                        "assets/images/buicay.webp",
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     right: 4,
                     top: 2,
                     child: Transform.rotate(
                       angle: 4,
+                      child: Container(
+                        child: Image.asset("assets/images/star2.webp"),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 40,
+                    top: 0,
+                    child: Transform.rotate(
+                      angle: 2,
                       child: Container(
                         child: Image.asset("assets/images/star2.webp"),
                       ),
@@ -65,7 +84,17 @@ class _SiginPageState extends State<SiginPage> {
                     ),
                   ),
                   Positioned(
-                    bottom: 4,
+                    top: 4,
+                    left: 4,
+                    child: Container(
+                      child: Image.asset(
+                        "assets/images/star4.webp",
+                        height: 200,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 45,
                     right: 4,
                     child: Container(
                       child: Transform.rotate(
@@ -83,11 +112,23 @@ class _SiginPageState extends State<SiginPage> {
                     ),
                   ),
                   Positioned(
+                    right: 0,
+                    child: Container(
+                      child: Image.asset("assets/images/star1.webp"),
+                    ),
+                  ),
+                  Positioned(
                     child: Container(
                       child: Image.asset("assets/images/star2.webp"),
                     ),
                   ),
                   Positioned(
+                    child: Container(
+                      child: Image.asset("assets/images/star3.webp"),
+                    ),
+                  ),
+                  Positioned(
+                    right: 0,
                     child: Container(
                       child: Image.asset("assets/images/star3.webp"),
                     ),
@@ -99,6 +140,15 @@ class _SiginPageState extends State<SiginPage> {
                         height: size.height * .5,
                       ),
                     ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      child: Image.asset(
+                        "assets/images/grass.gif",
+                        width: size.width,
+                      ),
+                    ),
                   )
                 ],
               ),
@@ -107,23 +157,23 @@ class _SiginPageState extends State<SiginPage> {
               child: Container(),
               flex: 1,
             ),
-            //TODO :Slider
-            CarouselSlider(
-                items: const [View()],
-                options: CarouselOptions(
-                  //height: 150,
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 0.8,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 3),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
-                  scrollDirection: Axis.horizontal,
-                )),
+            // //TODO :Slider
+            // CarouselSlider(
+            //     items: const [View()],
+            //     options: CarouselOptions(
+            //       //height: 150,
+            //       aspectRatio: 16 / 9,
+            //       viewportFraction: 0.8,
+            //       initialPage: 0,
+            //       enableInfiniteScroll: true,
+            //       reverse: false,
+            //       autoPlay: true,
+            //       autoPlayInterval: const Duration(seconds: 3),
+            //       autoPlayAnimationDuration: const Duration(milliseconds: 800),
+            //       autoPlayCurve: Curves.fastOutSlowIn,
+            //       enlargeCenterPage: true,
+            //       scrollDirection: Axis.horizontal,
+            //     )),
             const SizedBox(
               height: 40,
             ),

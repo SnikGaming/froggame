@@ -8,14 +8,8 @@ class TypeModel {
     TypeModel(name: "Khoa học", image: khoahoc1),
     TypeModel(name: "IT", image: it2),
     TypeModel(name: "Toán", image: math2),
-    TypeModel(name: "Khoa học", image: khoahoc1),
-    TypeModel(name: "IT", image: it2),
-    TypeModel(name: "Toán", image: math2),
-    TypeModel(name: "Khoa học", image: khoahoc1),
-    TypeModel(name: "IT", image: it2),
-    TypeModel(name: "Toán", image: math2),
-    TypeModel(name: "Khoa học", image: khoahoc1),
-    TypeModel(name: "IT", image: it2),
-    TypeModel(name: "Toán", image: math2),
+    TypeModel(name: "Địa lí", image: diali),
+    TypeModel(name: "Lịch sử", image: lichsu),
+
   ];
 }
