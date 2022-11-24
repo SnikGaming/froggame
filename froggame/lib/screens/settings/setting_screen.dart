@@ -57,12 +57,12 @@ class _SettingScreenState extends State<SettingScreen> {
                   Container(
                     width: size.width * .55,
                     child: SliderController(
-                      value: SettingSimplePreferences.getSound() ?? 1.0,
+                      value: SettingSimplePreferences.getSound() ?? 100,
                       onChanged: (value) {
-                        SettingSimplePreferences.setSound(val: value / 100);
+                        SettingSimplePreferences.setSound(val: value);
                         Mp3Simple.VolumeMP3();
                         print(
-                            'slider value : ${SettingSimplePreferences.getSound()}');
+                            'slider value : ${SettingSimplePreferences.getSound() / 100}');
                       },
                     ),
                   ),
@@ -86,7 +86,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Container(
                     width: size.width * .55,
                     child: SliderController(
-                      value: SettingSimplePreferences.getEffect() ?? 1.0,
+                      value: SettingSimplePreferences.getEffect() ?? 100,
                       onChanged: (value) {
                         SettingSimplePreferences.setEffect(val: value);
                         print('slider value : ${value / 10}');
