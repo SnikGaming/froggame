@@ -61,7 +61,7 @@ class _ShopScreenState extends State<ShopScreen> {
                 SingleChildScrollView(
                   //scrollDirection: Axis.horizontal,
                   child: Container(
-                    height: size.height * .1,
+                    height: size.height * .09,
                     child: Row(
                       children: List.generate(
                           StrShop.categories.length,

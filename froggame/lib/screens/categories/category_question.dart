@@ -42,7 +42,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                 flex: 1,
               ),
               Container(
-                height: size.height * .87,
+                height: size.height * .82,
                 child: StreamBuilder<QuerySnapshot>(
                   stream: FureStoreCategory.StreamCategories,
                   builder: (context, snapshot) {
