@@ -28,3 +28,6 @@ final it2 = "assets/images/it2.webp";
 
 final math1 = "assets/images/math1.webp";
 final math2 = "assets/images/math2.webp";
+
+final diali = "assets/images/dialy.webp";
+final lichsu = "assets/images/lichsu.webp";

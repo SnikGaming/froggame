@@ -13,6 +13,10 @@ class AuthMethod {
   static GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   static GoogleSignInAccount? account;
+  // isLogin() async {
+  //   return _auth.currentUser;
+  // }
+
   String urlIMG = "https://media.giphy.com/media/CPO9ZmnEiDcdLXMrzv/giphy.gif",
       name = "No name";
   //! Dang nhap

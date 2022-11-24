@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
+import 'package:froggame/screen_load/view.dart';
 import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
-import 'package:froggame/screens/type_question.dart';
+import 'package:froggame/screens/categories/category_question.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
@@ -25,7 +28,7 @@ class QuizzHome extends StatelessWidget {
         body: Container(
           width: size.width,
           height: size.height,
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           decoration: BoxDecoration(gradient: background),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,18 +48,50 @@ class QuizzHome extends StatelessWidget {
                       text: StrOption.namegame, size: 32, color: Colors.white)
                 ],
               ),
-              normalText(text: ""), const Spacer(),
 
+              // //TODO :Slider
+              CarouselSlider(
+                  items: [
+                    ViewData(
+                      txt: "Hãy đến đây với chúng tôi...",
+                    ),
+                    ViewData(
+                      txt: "Hãy vừa học vừa chơi...",
+                    ),
+                    ViewData(
+                      txt: "Tiếp thu các kiến thức...",
+                    )
+                  ],
+                  options: CarouselOptions(
+                    //height: 150,
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 0.8,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 3),
+                    autoPlayAnimationDuration:
+                        const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                    scrollDirection: Axis.horizontal,
+                  )),
+              const SizedBox(
+                height: 30,
+              ),
               Align(
                 alignment: Alignment.center,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        elevation: 8,
-                        shadowColor: blue,
+                        maximumSize: Size(size.width, 45),
+                        elevation: 9,
+                        shadowColor: Colors.orange,
+                        primary: Colors.orange,
                         minimumSize: const Size(240, 40),
-                        side: const BorderSide(width: 2, color: blue),
+                        //  side: const BorderSide(width: 2, color: blue),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
@@ -64,8 +99,11 @@ class QuizzHome extends StatelessWidget {
                       onPressed: () {
                         nextScreen(context, const TypeQuestionPage());
                       },
-                      child: headingText(
-                          text: StrOption.tieptuc, size: 18, color: blue)),
+                      child: Text(
+                        StrOption.tieptuc,
+                        style: F_lobster.copyWith(
+                            fontSize: 20, fontWeight: FontWeight.w500),
+                      )),
                 ),
               )
             ],
@@ -111,9 +149,7 @@ class QuizzHome extends StatelessWidget {
               colorIcon: yellow,
               icon: FontAwesomeIcons.crown),
           StrOption.listView(
-              func: () {
-                nextScreen(ctx, const ShopScreen());
-              },
+              func: () => nextScreen(ctx, const ShopScreen()),
               str: StrOption.shop,
               colorIcon: Colors.blue.shade300,
               icon: FontAwesomeIcons.shop),
@@ -126,9 +162,7 @@ class QuizzHome extends StatelessWidget {
               colorIcon: Colors.blue,
               icon: FontAwesomeIcons.circleInfo),
           StrOption.listView(
-              func: () {
-                nextScreen(ctx, const SettingScreen());
-              },
+              func: () => nextScreen(ctx, const SettingScreen()),
               str: StrOption.setting,
               colorIcon: lightgrey,
               icon: FontAwesomeIcons.wrench),
@@ -144,9 +178,7 @@ class QuizzHome extends StatelessWidget {
               colorIcon: purple,
               icon: FontAwesomeIcons.signOut),
           StrOption.listView(
-              func: () {
-                exit(0);
-              },
+              func: () => exit(0),
               str: StrOption.quit,
               colorIcon: red,
               icon: FontAwesomeIcons.powerOff),
