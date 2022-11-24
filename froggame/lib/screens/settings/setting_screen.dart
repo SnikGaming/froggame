@@ -5,6 +5,7 @@ import 'package:flutter_balloon_slider/flutter_balloon_slider.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_setting.dart';
+import 'package:froggame/view_data/mp3SimplePre.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:slider_controller/slider_controller.dart';
 
@@ -56,10 +57,12 @@ class _SettingScreenState extends State<SettingScreen> {
                   Container(
                     width: size.width * .55,
                     child: SliderController(
-                      value: SettingSimplePreferences.getSound() ?? 100,
+                      value: SettingSimplePreferences.getSound() ?? 1.0,
                       onChanged: (value) {
-                        SettingSimplePreferences.setSound(val: value);
-                        print('slider value : $value');
+                        SettingSimplePreferences.setSound(val: value / 100);
+                        Mp3Simple.VolumeMP3();
+                        print(
+                            'slider value : ${SettingSimplePreferences.getSound()}');
                       },
                     ),
                   ),
@@ -83,10 +86,10 @@ class _SettingScreenState extends State<SettingScreen> {
                   Container(
                     width: size.width * .55,
                     child: SliderController(
-                      value: SettingSimplePreferences.getEffect() ?? 100,
+                      value: SettingSimplePreferences.getEffect() ?? 1.0,
                       onChanged: (value) {
                         SettingSimplePreferences.setEffect(val: value);
-                        print('slider value : $value');
+                        print('slider value : ${value / 10}');
                       },
                     ),
                   ),
