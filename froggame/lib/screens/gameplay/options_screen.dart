@@ -43,7 +43,7 @@ class QuizzHome extends StatelessWidget {
                 children: [
                   Image.asset(
                     frog_icon,
-                    height: 60,
+                    height: 45,
                   ),
                   headingText(
                       text: StrOption.namegame, size: 32, color: Colors.white)

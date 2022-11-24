@@ -36,10 +36,6 @@ class MyApp extends StatelessWidget {
               UserSimplePreferences.getUserId() == ""
           ? 'welcome'
           : 'welcome2',
-      // home: UserSimplePreferences.getUserId() == null ||
-      //         UserSimplePreferences.getUserId() == ""
-      //     ? const SiginPage()
-      //     : const QuizzHome(),
       theme: ThemeData(fontFamily: "quick"),
     );
   }
