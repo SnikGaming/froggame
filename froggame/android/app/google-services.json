@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "123025533933-5guqv0jpq4lqoifpb8ggc4qjkr5he9el.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.froggame",
+            "certificate_hash": "e3a7bd54268083bf230e858f66534ac1494af8c5"
+          }
+        },
+        {
+          "client_id": "123025533933-9f849rvqpfc018cmdo2lu0pcgvnto4dp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.froggame",
+            "certificate_hash": "2abc9b85ecd8a7cda4ee7a3fc6c2c875965eb53c"
+          }
+        },
+        {
           "client_id": "123025533933-e6i3p5rc1k1v43kln9pic7v2teqitoaa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
