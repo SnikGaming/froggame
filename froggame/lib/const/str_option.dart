@@ -11,7 +11,7 @@ class StrOption {
   static final bxh = "BXH";
   static final shop = "Shop";
   static final card = "Pay to win";
-  static final about = "About";
+  static final support = "Support";
   static final setting = "Setting";
   static final signout = "Sign out";
   static final quit = "Quit";
