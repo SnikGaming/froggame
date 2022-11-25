@@ -6,6 +6,7 @@ import 'package:froggame/view_data/firestore_user.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../const/colors.dart';
+import '../../const/str_Type.dart';
 
 class infomation_screen extends StatefulWidget {
   const infomation_screen({super.key});
@@ -16,20 +17,7 @@ class infomation_screen extends StatefulWidget {
 }
   List<String>dt=[];
 
-
-  var selected = goi[0];
-
-
-List<String> goi = [
-  'lịch sử',
-  'Khoa học',
-  'Địa lí',
-  'Toán học',
-  'Văn học',
-  'Khoa học',
-  'Vật lí',
-  'Đố mẹo'
-];
+var selected = FureStoreCategory.lst[0];
 
 
 
@@ -41,7 +29,7 @@ class _infomation_screenState extends State<infomation_screen> {
  
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size *0.105;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -54,7 +42,7 @@ class _infomation_screenState extends State<infomation_screen> {
           children: [
             Container(
               width: 370,
-              height: size.height * 0.109,
+              height: size.height ,
               margin: EdgeInsets.only(top: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -172,7 +160,7 @@ class _infomation_screenState extends State<infomation_screen> {
     return SingleChildScrollView(
       child: Column(
         children: List.generate(
-          goi.length,
+          FureStoreCategory.lst.length,
           (index) => Card(
             color: bg2,
             child: Container(
@@ -191,17 +179,14 @@ class _infomation_screenState extends State<infomation_screen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Center(
-                          child: Icon(
-                            Icons.history_toggle_off_rounded,
-                            color: Colors.white,
-                          ),
+                          child: Image.asset(TypeModel.listType[index].image)
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(10)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(goi[index],
+                          Text(FureStoreCategory.lst[index],
                               style: F_pacifico .copyWith(
                                   fontSize: 27,
                                   color: white,
@@ -255,10 +240,10 @@ class _infomation_screenState extends State<infomation_screen> {
             height: 60,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: goi.length,
+              itemCount: FureStoreCategory.lst.length,
               itemBuilder: (context, index) => GestureDetector(
                 onTap:() {
-                    selected = goi[index];
+                  selected = FureStoreCategory.lst[index];
 
                   setState(() {
                     
@@ -269,11 +254,11 @@ class _infomation_screenState extends State<infomation_screen> {
                   height: 150,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: selected == goi[index] ? Colors.red : Colors.white,
+                      color: selected == FureStoreCategory.lst[index] ? Colors.red : Colors.white,
                       borderRadius: BorderRadius.circular(15)),
                   child: Center(
                     child: Text(
-                      '${goi[index]}',
+                      FureStoreCategory.lst[index],
                       style: F_lobster.copyWith(fontSize: 20)
                     ),
                   ),

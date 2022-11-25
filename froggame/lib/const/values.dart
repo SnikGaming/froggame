@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class ValuesGame {
   static int seconds = 15;
-  static int heart = 100;
+  static int heart = 2;
   static int delay = 800; //miniseconds
 }
 
