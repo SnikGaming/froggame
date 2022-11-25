@@ -9,4 +9,5 @@ class FureStoreUser {
   Future<void> addUserToFireStore(UserModel userModel) async {
     return await _userCollection.doc(userModel.userId).set(userModel.toJson());
   }
+  
 }
