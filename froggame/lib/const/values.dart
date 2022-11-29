@@ -6,7 +6,7 @@ class ValuesGame {
   static int delay = 800; //miniseconds
 }
 
-final mp3 = "assets/baga.mp3";
+final mp3 = "assets/a2.mp3";
 final url_img =
     "https://cdn.imgbin.com/18/5/17/imgbin-the-finger-fuck-decal-youtube-youtube-AQcjgw650Z8b3gkSh7td6YtxY.jpg";
 final music_game = "assets/cccc.mp3";
