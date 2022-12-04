@@ -12,6 +12,7 @@ class FureStoreUser {
   }
 
   static Future addDataUser({required heart, required score}) async {
+    
     UserSimplePreferences.setHeart(heart: heart);
     UserSimplePreferences.setScore(score: score);
 

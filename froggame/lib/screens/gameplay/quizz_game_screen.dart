@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/screen_load/view.dart';
 import 'package:froggame/screens/winner/winner_screen.dart';
+import 'package:froggame/view_data/package_method.dart';
 
 import '../../const/colors.dart';
 import '../../view_data/firestore_user.dart';
@@ -59,7 +60,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   int score = UserSimplePreferences.getScore();
   var img = UserSimplePreferences.getUserPic();
 //TODO: Question
-  var currenIndex = 0;
+  int currenIndex = UserSimplePreferences.getSL();
   int number = 0;
   int val = -1;
 
@@ -107,6 +108,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
             }
             if (sec < 0) {
               currenIndex++;
+              PackageMethod.UpatePackage(
+                  currentIndex: currenIndex, index: idlv);
 
               heart--;
               sec = 15;
@@ -304,6 +307,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 
                                                 startTimer();
                                                 currenIndex++;
+                                                PackageMethod.UpatePackage(
+                                                    currentIndex: currenIndex,
+                                                    index: idlv);
+
                                                 lsAnswer = [];
                                                 isLoadAnswer = false;
                                                 resetColor();
