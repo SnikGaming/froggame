@@ -37,7 +37,7 @@ class AuthMethod {
     // phtoUser = account!.photoUrl.toString();
     // idUser = account!.id.toString();
     // print(idUser);
-    UserSimplePreferences.setUserId(id: account!.id);
+    //UserSimplePreferences.setUserId(id: account!.id);
     UserSimplePreferences.setUserPic(pic: account!.photoUrl.toString());
     UserSimplePreferences.setUsername(
         username: account!.displayName.toString());
@@ -57,6 +57,7 @@ class AuthMethod {
     final user_firebase = FirebaseFirestore.instance.collection('users');
     int score = 0;
     int heart = 5;
+    bool isId = false;
     // var data = IsData(user);
     // var usId = FirebaseFirestore.instance
     //     .collection('users')
@@ -76,7 +77,9 @@ class AuthMethod {
       value.docs.forEach((element) {
         score = element.data()['score'];
         heart = element.data()['heart'];
-        print("=====>  ${element.data()['score']}");
+        UserSimplePreferences.setUserId(id: element.data()['userId']);
+        isId = true;
+        print("==1111111111111111===>  ${element.data()['score']}");
         print("=====>  ${element.data()['name']}");
         print("=====>  ${element.data()['email']}");
       });
@@ -88,9 +91,15 @@ class AuthMethod {
         pic: user.user!.photoURL!,
         heart: heart,
         score: score));
+    if (!isId) {
+      UserSimplePreferences.setUserId(id: user.user!.uid);
+    }
     UserSimplePreferences.setScore(score: score);
-    UserSimplePreferences.setUserId(id: user.user!.uid);
+    UserSimplePreferences.setUserEmail(email: user.user!.email!);
     print("=============================${UserSimplePreferences.getUserId()}");
+    print(
+        "=============================${UserSimplePreferences.getUserEmail()}");
+
     UserSimplePreferences.setHeart(heart: heart);
   }
 }

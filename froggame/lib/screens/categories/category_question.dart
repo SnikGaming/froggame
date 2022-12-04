@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
+import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import '../../const/colors.dart';
 import '../../const/font_app.dart';
@@ -105,7 +106,13 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                     left: 20,
                                     child: GestureDetector(
                                       onTap: () {
-                                        pushNamedRemove(context, "gameplay");
+                                        nextScreen(
+                                            context,
+                                            QuizzGameScreen(
+                                              idlv: index + 1,
+                                            ));
+
+                                        //pushNamedRemove(context, "gameplay");
                                       },
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
