@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:alert_notification/alert_notification.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -100,6 +101,7 @@ class QuizzHome extends StatelessWidget {
                         ),
                       ),
                       onPressed: () {
+                        
                         nextScreen(context, const TypeQuestionPage());
                       },
                       child: Text(

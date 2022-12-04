@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.9"
+  alert_notification:
+    dependency: "direct main"
+    description:
+      name: alert_notification
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   animated_text_kit:
     dependency: "direct main"
     description:
@@ -394,6 +401,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  rflutter_alert:
+    dependency: "direct main"
+    description:
+      name: rflutter_alert
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.4"
   rounded_loading_button:
     dependency: "direct main"
     description:

@@ -10,9 +10,21 @@ class UserSimplePreferences {
   static const _keyUserHeart = "userHeart";
   static const _keyLogin = "statusUser";
   static const _keyEmail = "userEmail";
+
+  static const _keySLQues = "SL";
+
   static SharedPreferences? preferences;
   static Future init() async =>
       preferences = await SharedPreferences.getInstance();
+
+  //?:
+  // //! Login user
+  static Future setSL({required int index}) async =>
+      await preferences!.setInt(_keySLQues, index);
+  static getSL() => preferences!.getInt(_keySLQues);
+  static Future removeSL() async => await preferences!.remove(_keySLQues);
+  //?:
+
 // //! Login user
   static Future setLogin({required bool status}) async =>
       await preferences!.setBool(_keyLogin, status);
@@ -70,5 +82,6 @@ class UserSimplePreferences {
     await removeUserLogin();
     await removeUserScore();
     await SettingSimplePreferences.removeAll();
+    await removeSL();
   }
 }

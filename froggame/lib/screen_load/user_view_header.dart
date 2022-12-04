@@ -44,6 +44,16 @@ UserHeader({required double height}) {
         //! HEART && SCORE
         Row(
           children: [
+            //?SCORE
+            Container(
+              child: Text(
+                "${UserSimplePreferences.getScore()} 🪙",
+                style: F_permanent.copyWith(fontSize: 20),
+              ),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
             //?HEART
             Container(
               child: Text(
@@ -54,16 +64,6 @@ UserHeader({required double height}) {
             const SizedBox(
               width: 20,
             ),
-            //?SCORE
-            Container(
-              child: Text(
-                "${UserSimplePreferences.getScore()} 🪙",
-                style: F_permanent.copyWith(fontSize: 20),
-              ),
-            ),
-            const SizedBox(
-              width: 20,
-            )
           ],
         ),
       ],
