@@ -50,6 +50,7 @@ dependencies:
   flutter_balloon_slider: ^0.1.1
   slider_controller: ^0.0.4
   assets_audio_player: ^3.0.6
+  circular_countdown_timer: ^0.2.3
   
 dev_dependencies:
   flutter_test:

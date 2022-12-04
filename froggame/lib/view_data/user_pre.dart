@@ -9,7 +9,7 @@ class UserSimplePreferences {
   static const _keyUserScore = "userScore";
   static const _keyUserHeart = "userHeart";
   static const _keyLogin = "statusUser";
-
+  static const _keyEmail = "userEmail";
   static SharedPreferences? preferences;
   static Future init() async =>
       preferences = await SharedPreferences.getInstance();
@@ -25,6 +25,13 @@ class UserSimplePreferences {
   static getUserId() => preferences!.getString(_keyUserId);
 
   static Future removeUserId() async => await preferences!.remove(_keyUserId);
+
+  //! ID user Email
+  static Future setUserEmail({required String email}) async =>
+      await preferences!.setString(_keyEmail, email);
+  static getUserEmail() => preferences!.getString(_keyEmail);
+
+  static Future removeUserEmail() async => await preferences!.remove(_keyEmail);
 //! Username
   static Future setUsername({required String username}) async =>
       await preferences!.setString(_keyUsername, username);
@@ -58,6 +65,7 @@ class UserSimplePreferences {
     await removeUserId();
     await removeUserPic();
     await removeUserHeart();
+    await removeUserEmail();
     UserSimplePreferences.setUserId(id: "");
     await removeUserLogin();
     await removeUserScore();
