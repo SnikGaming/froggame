@@ -53,6 +53,8 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   alert_notification: ^0.0.5
   rflutter_alert: ^2.0.4
+  riverpod_messages: ^1.0.2
+  quickalert: ^1.0.1
   
 dev_dependencies:
   flutter_test:

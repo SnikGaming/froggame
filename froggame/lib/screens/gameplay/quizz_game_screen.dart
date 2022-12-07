@@ -13,6 +13,7 @@ import 'package:froggame/screen_load/view.dart';
 // ignore: unused_import
 import 'package:froggame/screens/winner/winner_screen.dart';
 import 'package:froggame/view_data/package_method.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../const/colors.dart';
 import '../../view_data/firestore_user.dart';
@@ -31,6 +32,7 @@ class QuizzGameScreen extends StatefulWidget {
 class _QuizzGameScreenState extends State<QuizzGameScreen> {
   int idlv;
   late Future questions;
+  int defTimer = 30;
   _QuizzGameScreenState({required this.idlv});
 
   // ignore: todo
@@ -51,9 +53,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 // ignore: todo
 //TODO: Dap an
   var lsAnswer = [];
+  var lsGoiY = [];
   // ignore: todo
   //TODO: Colors answer
-  static Color answerCls = Colors.yellowAccent;
+  static Color answerCls = const Color.fromARGB(255, 45, 25, 21);
   List<Color> lsColors = [
     answerCls,
     answerCls,
@@ -88,26 +91,29 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
     if (score >= 2 && isHd) {
       score = score - 2;
       sec += 15;
-
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Đã thêm 15s thành công...!")));
       isHd = false;
       UpdateHeart();
     } else {
       // ignore: avoid_print
-      print("Khong du xu");
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Bạn không đủ 2 xu để thực hiện thao tác này...")));
     }
   }
 
 //Timestamp
   // ignore: non_constant_identifier_names
   void _HoiKhanGia() {
-    //List<String> lsGoiY = [];
-    // lsGoiY.add(lsAnswer[0]);
-    // lsGoiY.add(lsAnswer[0]);
-    // lsGoiY.add(lsAnswer[1]);
-    // lsGoiY.add(lsAnswer[2]);
 //${lsGoiY[new Random().nextInt(4)]}
 
-    //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("")));
+    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //     content: Text("${lsGoiY[new Random().nextInt(lsGoiY.length)]}")));
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.info,
+      text: "${lsGoiY[Random().nextInt(lsGoiY.length)]}",
+    );
   }
 
   // ignore: non_constant_identifier_names
@@ -119,6 +125,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       score = score - 4;
       if (currenIndex + 1 < number) {
         currenIndex++;
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Bạn đã được chuyển sang câu mới...")));
       } else {
         showDialog(
             context: context,
@@ -147,7 +155,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       isHd = false;
     } else {
       // ignore: avoid_print
-      print("Khong du xu");
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("Bạn không đủ 4 xu để thực hiện thao tác này...")));
     }
   }
 
@@ -161,7 +170,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   }
 
   startTimer() {
-    sec = 15;
+    sec = defTimer;
     if (heart > 0) {
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (!isGameOver) {
@@ -193,7 +202,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
               }
 
               heart--;
-              sec = 15;
+              sec = defTimer;
               setState(() {});
             }
           });
@@ -233,6 +242,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
         lsAnswer.add(data[currenIndex]['b']);
         lsAnswer.add(data[currenIndex]['c']);
         lsAnswer.add(data[currenIndex]['d']);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+
+        lsGoiY = lsAnswer;
         lsAnswer.shuffle();
         isLoadAnswer = true;
       }
@@ -282,10 +295,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 
                           Navigator.of(context).pop();
                         },
-                        child: Container(
+                        child: const SizedBox(
                           height: 60,
                           width: 60,
-                          child: const Icon(
+                          child: Icon(
                             Icons.logout,
                             color: Colors.white,
                             size: 30,
@@ -308,7 +321,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                         child: Align(
                             alignment: Alignment.center,
                             child: Text("$sec",
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontFamily: "DS-DIGITAL",
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
@@ -356,18 +369,19 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                     // ignore: unnecessary_brace_in_string_interps
                                     "Câu hỏi : ${currenIndex + 1}/${number}",
                                     style: F_pacifico.copyWith(
-                                        color: blue,
+                                        color: white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
                                 ),
                               ),
                               Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
                                 height: size.height * .2,
                                 width: size.width,
                                 decoration: BoxDecoration(
-                                  color:
-                                      const Color.fromARGB(155, 130, 50, 221),
+                                  color: const Color.fromARGB(155, 104, 106, 103),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Align(
@@ -375,7 +389,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                   child: Text(
                                     "${data[currenIndex]['name']}",
                                     style: F_pacifico.copyWith(
-                                        color: blue,
+                                        color: white,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
                                   ),
@@ -401,13 +415,13 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 data[currenIndex]['a']) {
                                               lsColors[index] = Colors.green;
                                               // ignore: avoid_print
-                                              print("dung");
+                                             // print("dung");
 
                                               score++;
                                               UpdateHeart();
                                             } else {
                                               // ignore: avoid_print
-                                              print("Sai");
+                                             // print("Sai");
                                               lsColors[index] = Colors.red;
 
                                               heart--;
@@ -435,8 +449,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                             } else {
                                               isGameOver = true;
                                               // ignore: avoid_print
-                                              print(
-                                                  "---------------------------------->Hoan thanh");
+                                             // print(
+                                              //    "---------------------------------->Hoan thanh");
 
                                               // Navigator.of(context).push(
                                               //     MaterialPageRoute(
@@ -476,12 +490,22 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
+                                              vertical: 5),
                                           child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            height: size.height * .09,
+                                            padding: const EdgeInsets.all(13),
+                                            height: size.height * .1,
                                             width: size.width,
                                             decoration: BoxDecoration(
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                    offset: Offset(3, 6),
+                                                    color: Colors.black,
+                                                    blurRadius: 16)
+                                              ],
+                                              border: Border.all(
+                                                width: 2,
+                                                color: white,
+                                              ),
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               color: lsColors[index],
@@ -491,8 +515,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                               child: Text(
                                                 "${lsAnswer[index]}",
                                                 style: F_pacifico.copyWith(
-                                                    color: Colors.purple,
-                                                    fontSize: 20),
+                                                    color: white, fontSize: 20),
                                               ),
                                             ),
                                           ),
@@ -557,8 +580,10 @@ btnHelps({required Size size, required String txt}) {
       height: 60,
       width: size.width * .3,
       decoration: BoxDecoration(
-          color: Colors.yellow,
+          color: const Color.fromARGB(255, 219, 59, 255),
           borderRadius: BorderRadius.circular(30),
+          border:
+              Border.all(color: const Color.fromARGB(255, 228, 132, 15), width: 2),
           boxShadow: const [
             BoxShadow(
               offset: Offset(5, 13),
@@ -567,7 +592,9 @@ btnHelps({required Size size, required String txt}) {
             )
           ]),
       child: Align(
-        child: Text(txt),
+        child: Text(txt,
+            style: F_popins.copyWith(
+                color: Colors.white, fontWeight: FontWeight.w600)),
       ),
     ),
   );
