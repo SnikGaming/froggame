@@ -91,8 +91,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
     if (score >= 2 && isHd) {
       score = score - 2;
       sec += 15;
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Đã thêm 15s thành công...!")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Đã thêm 15s thành công...!")));
       isHd = false;
       UpdateHeart();
     } else {
@@ -125,8 +125,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       score = score - 4;
       if (currenIndex + 1 < number) {
         currenIndex++;
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text("Bạn đã được chuyển sang câu mới...")));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Bạn đã được chuyển sang câu mới...")));
       } else {
         showDialog(
             context: context,
@@ -242,12 +242,17 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
         lsAnswer.add(data[currenIndex]['b']);
         lsAnswer.add(data[currenIndex]['c']);
         lsAnswer.add(data[currenIndex]['d']);
-        lsGoiY.add(lsAnswer[0]);
-        lsGoiY.add(lsAnswer[0]);
 
-        lsGoiY = lsAnswer;
         lsAnswer.shuffle();
         isLoadAnswer = true;
+
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY.add(lsAnswer[0]);
+        lsGoiY = lsAnswer;
       }
     }
   }
@@ -381,7 +386,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                 height: size.height * .2,
                                 width: size.width,
                                 decoration: BoxDecoration(
-                                  color: const Color.fromARGB(155, 104, 106, 103),
+                                  color:
+                                      const Color.fromARGB(155, 104, 106, 103),
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 child: Align(
@@ -415,13 +421,13 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 data[currenIndex]['a']) {
                                               lsColors[index] = Colors.green;
                                               // ignore: avoid_print
-                                             // print("dung");
+                                              // print("dung");
 
                                               score++;
                                               UpdateHeart();
                                             } else {
                                               // ignore: avoid_print
-                                             // print("Sai");
+                                              // print("Sai");
                                               lsColors[index] = Colors.red;
 
                                               heart--;
@@ -449,7 +455,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                             } else {
                                               isGameOver = true;
                                               // ignore: avoid_print
-                                             // print(
+                                              // print(
                                               //    "---------------------------------->Hoan thanh");
 
                                               // Navigator.of(context).push(
@@ -582,8 +588,8 @@ btnHelps({required Size size, required String txt}) {
       decoration: BoxDecoration(
           color: const Color.fromARGB(255, 219, 59, 255),
           borderRadius: BorderRadius.circular(30),
-          border:
-              Border.all(color: const Color.fromARGB(255, 228, 132, 15), width: 2),
+          border: Border.all(
+              color: const Color.fromARGB(255, 228, 132, 15), width: 2),
           boxShadow: const [
             BoxShadow(
               offset: Offset(5, 13),

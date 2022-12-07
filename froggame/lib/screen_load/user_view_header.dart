@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
+import '../const/colors.dart';
 import '../const/font_app.dart';
 
 // ignore: non_constant_identifier_names
@@ -36,7 +37,8 @@ UserHeader({required double height}) {
             //? NAME
             Text(
               UserSimplePreferences.getUsername(),
-              style: F_lobster.copyWith(fontSize: 20),
+              style: F_lobster.copyWith(
+                  fontSize: 24, color: const Color.fromARGB(255, 102, 17, 205)),
             )
           ],
         ),
@@ -47,7 +49,7 @@ UserHeader({required double height}) {
             //?SCORE
             Text(
               "${UserSimplePreferences.getScore()} 🪙",
-              style: F_permanent.copyWith(fontSize: 20),
+              style: F_lobster.copyWith(fontSize: 20, color: white),
             ),
             const SizedBox(
               width: 20,
@@ -55,7 +57,7 @@ UserHeader({required double height}) {
             //?HEART
             Text(
               "${UserSimplePreferences.getHeart()} ❤️",
-              style: F_permanent.copyWith(fontSize: 20),
+              style: F_lobster.copyWith(fontSize: 20, color: white),
             ),
             const SizedBox(
               width: 20,
