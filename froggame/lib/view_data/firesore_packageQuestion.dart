@@ -1,5 +1,3 @@
-
-
 // ignore_for_file: file_names, avoid_print, duplicate_ignore
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,9 +13,7 @@ class FureStorePackageQuestions {
   }
 
   static Future update({required int index}) async {
-    
     // ignore: non_constant_identifier_names, prefer_typing_uninitialized_variables
-    var IDdoc;
     // ignore: no_leading_underscores_for_local_identifiers
     var _table = FirebaseFirestore.instance.collection("packageQuestions");
     await _table
@@ -27,14 +23,15 @@ class FureStorePackageQuestions {
         // ignore: duplicate_ignore, duplicate_ignore
         .then(((value) {
       // ignore: avoid_print, unnecessary_brace_in_string_interps
-      print("================================ID Doc ====${IDdoc}");
+      //print("================================ID Doc ====${IDdoc}");
+      // ignore: unused_local_variable
       for (var element in value.docs) {
         // ignore: avoid_print
-        print("${element.data()['idch']}");
+        // print("${element.data()['idch']}");
         // ignore: avoid_print
-        print("${element.data()['idlv']}");
-        print("${element.data()['timer']}");
-        print("${element.data()['idgoi']}");
+        //print("${element.data()['idlv']}");
+        //print("${element.data()['timer']}");
+        //print("${element.data()['idgoi']}");
 
         // score = element.data()['score'];
         // heart = element.data()['heart'];

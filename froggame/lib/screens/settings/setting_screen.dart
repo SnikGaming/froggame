@@ -62,8 +62,8 @@ class _SettingScreenState extends State<SettingScreen> {
                         SettingSimplePreferences.setSound(val: value);
                         Mp3Simple.VolumeMP3();
                         // ignore: avoid_print
-                        print(
-                            'slider value : ${SettingSimplePreferences.getSound() / 100}');
+                        //print(
+                            //'slider value : ${SettingSimplePreferences.getSound() / 100}');
                       },
                     ),
                   ),
@@ -90,7 +90,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       onChanged: (value) {
                         SettingSimplePreferences.setEffect(val: value);
                         // ignore: avoid_print
-                        print('slider value : ${value / 10}');
+                        //print('slider value : ${value / 10}');
                       },
                     ),
                   ),
