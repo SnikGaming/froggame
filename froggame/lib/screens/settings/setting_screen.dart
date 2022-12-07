@@ -1,7 +1,7 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_balloon_slider/flutter_balloon_slider.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_setting.dart';
@@ -29,9 +29,11 @@ class _SettingScreenState extends State<SettingScreen> {
           child: Column(
             children: [
               Flexible(
+                // ignore: sort_child_properties_last
                 child: Container(),
                 flex: 1,
               ),
+              // ignore: todo
               //TODO : Am luong
               // BalloonSlider(
               //     value: 0.5,
@@ -45,22 +47,21 @@ class _SettingScreenState extends State<SettingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    child: Text(
-                      StrSetting.amluong,
-                      style: F_lobster.copyWith(fontSize: 30, color: white),
-                    ),
+                  Text(
+                    StrSetting.amluong,
+                    style: F_lobster.copyWith(fontSize: 30, color: white),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     width: size.width * .55,
                     child: SliderController(
                       value: SettingSimplePreferences.getSound() ?? 100,
                       onChanged: (value) {
                         SettingSimplePreferences.setSound(val: value);
                         Mp3Simple.VolumeMP3();
+                        // ignore: avoid_print
                         print(
                             'slider value : ${SettingSimplePreferences.getSound() / 100}');
                       },
@@ -74,21 +75,21 @@ class _SettingScreenState extends State<SettingScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    child: Text(
-                      StrSetting.hieuung,
-                      style: F_lobster.copyWith(fontSize: 30, color: white),
-                    ),
+                  Text(
+                    StrSetting.hieuung,
+                    style: F_lobster.copyWith(fontSize: 30, color: white),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
+                  // ignore: sized_box_for_whitespace
                   Container(
                     width: size.width * .55,
                     child: SliderController(
                       value: SettingSimplePreferences.getEffect() ?? 100,
                       onChanged: (value) {
                         SettingSimplePreferences.setEffect(val: value);
+                        // ignore: avoid_print
                         print('slider value : ${value / 10}');
                       },
                     ),
@@ -96,10 +97,44 @@ class _SettingScreenState extends State<SettingScreen> {
                 ],
               ),
 
+              // ignore: todo
               //TODO : Run
               Flexible(
+                // ignore: sort_child_properties_last
                 child: Container(),
                 flex: 1,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  int id = 1;
+                  String name =
+                      "Đang làm gì? Nâng em lên/Đặt em xuống/Dạng chân ra/Tha hồ mà bóp";
+                  String a = "Thất Tình";
+                  String b = "Suy Tình";
+                  String c = "Bảy Tình";
+                  String d = "Tài Tình";
+//!:
+                  int idlv = 3;
+                  String table = "questions";
+                  final data = FirebaseFirestore.instance
+                      .collection(table)
+                      .doc("${id}${idlv}");
+
+                  await data.set({
+                    "id": id,
+                    "idlv": idlv,
+                    "name": name,
+                    "a": a,
+                    "b": b,
+                    "c": c,
+                    "d": d
+                  });
+                },
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.red,
+                ),
               ),
             ],
           ),

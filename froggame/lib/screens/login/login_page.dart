@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,6 @@ import 'package:froggame/view_data/login_method.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import '../../const/colors.dart';
 import '../../const/text_style.dart';
-import '../../screen_load/view.dart';
-import 'dart:math' as pi;
 
 class SiginPage extends StatefulWidget {
   const SiginPage({super.key});
@@ -34,6 +31,7 @@ class _SiginPageState extends State<SiginPage> {
         child: Column(
           children: [
             Flexible(
+              // ignore: sort_child_properties_last
               child: Container(),
               flex: 1,
             ),
@@ -41,9 +39,11 @@ class _SiginPageState extends State<SiginPage> {
             // Image.asset(StrLogin.imageMain),
             Image.asset("assets/images/giphy1.webp"),
             Flexible(
+              // ignore: sort_child_properties_last
               child: Container(),
               flex: 1,
             ),
+            // ignore: todo
             // //TODO :Slider
             // CarouselSlider(
             //     items: const [View()],
@@ -83,7 +83,6 @@ class _SiginPageState extends State<SiginPage> {
                     AuthMethod().googleSignInMethod(context);
                   } catch (e) {
                     // return;
-                    print("loi");
                   }
                 },
                 child: Wrap(
@@ -100,6 +99,7 @@ class _SiginPageState extends State<SiginPage> {
                   ],
                 )),
             Flexible(
+              // ignore: sort_child_properties_last
               child: Container(),
               flex: 1,
             ),

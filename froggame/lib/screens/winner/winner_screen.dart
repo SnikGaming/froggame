@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// ignore: implementation_imports, unnecessary_import
 import 'package:flutter/src/widgets/container.dart';
+// ignore: implementation_imports, unnecessary_import
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:froggame/const/font_app.dart';
 
@@ -25,6 +27,7 @@ class _WinScreenState extends State<WinScreen> {
             child: Column(
               children: [
                 //!:Titile
+                // ignore: sized_box_for_whitespace
                 Container(
                   width: size.width,
                   height: size.height * .15,
@@ -49,12 +52,14 @@ class _WinScreenState extends State<WinScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        // ignore: avoid_unnecessary_containers
                         Container(
                           child: Text(
                               "Chúc mừng bạn đã hoàn thành 1/1 của lĩnh vực xxxx",
                               style: F_pacifico.copyWith(
                                   fontWeight: FontWeight.w400, fontSize: 24)),
                         ),
+                        // ignore: avoid_unnecessary_containers
                         Container(
                           child: Text(
                               "Chúc mừng bạn đã hoàn thành 1/1 của lĩnh vực xxxx",

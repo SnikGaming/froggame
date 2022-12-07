@@ -16,6 +16,7 @@ class FureStoreUser {
     UserSimplePreferences.setHeart(heart: heart);
     UserSimplePreferences.setScore(score: score);
 
+    // ignore: avoid_print
     print("ID -------------------->${UserSimplePreferences.getUserId()}");
     _userCollection.doc(UserSimplePreferences.getUserId()).update({
       "userId": UserSimplePreferences.getUserId(),

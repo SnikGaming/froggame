@@ -11,11 +11,15 @@ class PackageQuestionModel {
 
   toJson() {
     return {
-      'idUser': this.idUser,
-      'idch': this.idch,
-      'idlv': this.idlv,
-      'timer': this.timer,
-      'idgoi': this.idgoi
+      // ignore: unnecessary_this
+      'idUser': idUser,
+      // ignore: unnecessary_this
+      'idch': idch,
+      // ignore: unnecessary_this
+      'idlv': idlv,
+      // ignore: unnecessary_this
+      'timer': timer,
+      'idgoi': idgoi
     };
   }
 

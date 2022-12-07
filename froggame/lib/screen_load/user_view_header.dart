@@ -3,7 +3,9 @@ import 'package:froggame/view_data/user_pre.dart';
 
 import '../const/font_app.dart';
 
+// ignore: non_constant_identifier_names
 UserHeader({required double height}) {
+  // ignore: sized_box_for_whitespace
   return Container(
     height: height,
     child: Row(
@@ -32,11 +34,9 @@ UserHeader({required double height}) {
               width: 10,
             ),
             //? NAME
-            Container(
-              child: Text(
-                UserSimplePreferences.getUsername(),
-                style: F_lobster.copyWith(fontSize: 20),
-              ),
+            Text(
+              UserSimplePreferences.getUsername(),
+              style: F_lobster.copyWith(fontSize: 20),
             )
           ],
         ),
@@ -45,21 +45,17 @@ UserHeader({required double height}) {
         Row(
           children: [
             //?SCORE
-            Container(
-              child: Text(
-                "${UserSimplePreferences.getScore()} 🪙",
-                style: F_permanent.copyWith(fontSize: 20),
-              ),
+            Text(
+              "${UserSimplePreferences.getScore()} 🪙",
+              style: F_permanent.copyWith(fontSize: 20),
             ),
             const SizedBox(
               width: 20,
             ),
             //?HEART
-            Container(
-              child: Text(
-                "${UserSimplePreferences.getHeart()} ❤️",
-                style: F_permanent.copyWith(fontSize: 20),
-              ),
+            Text(
+              "${UserSimplePreferences.getHeart()} ❤️",
+              style: F_permanent.copyWith(fontSize: 20),
             ),
             const SizedBox(
               width: 20,

@@ -1,4 +1,4 @@
 class StrSetting {
-  static final amluong = "Âm lượng :";
-  static final hieuung = "Hiệu ứng :";
+  static const amluong = "Âm lượng :";
+  static const hieuung = "Hiệu ứng :";
 }

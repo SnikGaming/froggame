@@ -7,8 +7,10 @@ class StrShop {
     "Gói VIP",
   ];
 
-  static final NoClcik = Colors.purple;
-  static final Clcik = Color.fromARGB(255, 138, 33, 243);
+  // ignore: constant_identifier_names
+  static const NoClcik = Colors.purple;
+  // ignore: constant_identifier_names
+  static const Clcik = Color.fromARGB(255, 138, 33, 243);
   static final lsColor = [
     Colors.red.shade300,
     Colors.purple.shade300,
@@ -27,20 +29,23 @@ class StrShop {
     ItemData(img: "", name: ""),
   ];
 
+  // ignore: non_constant_identifier_names
   static Item() {
-    return Container(
-      child: Column(
-        children: [
-          //TODO :
-          //TODO :
-        ],
-      ),
+    return Column(
+      children: const [
+        // ignore: todo
+        //TODO :
+        // ignore: todo
+        //TODO :
+      ],
     );
   }
 }
 
 class ItemData {
+  // ignore: prefer_typing_uninitialized_variables
   final img;
+  // ignore: prefer_typing_uninitialized_variables
   final name;
 
   ItemData({required this.img, required this.name});

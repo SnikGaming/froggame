@@ -1,30 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/const/colors.dart';
-import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/const/text_style.dart';
 import 'package:froggame/const/values.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 class StrOption {
-  static final bxh = "BXH";
-  static final shop = "Shop";
-  static final card = "Pay to win";
-  static final support = "Support";
-  static final setting = "Setting";
-  static final signout = "Sign out";
-  static final quit = "Quit";
+  static const bxh = "BXH";
+  static const shop = "Shop";
+  static const card = "Pay to win";
+  static const support = "Support";
+  static const setting = "Setting";
+  static const signout = "Sign out";
+  static const quit = "Quit";
 
-  static final tieptuc = "TIẾP TỤC";
+  static const tieptuc = "TIẾP TỤC";
   // static final tieptuc = "Continue";
 
   static final caption =
       "Chào mừng ${UserSimplePreferences.getUsername()}\nđã đến với chúng tôi...!!! 🐸";
 
   // static final caption = "Welcome to our game!!! 🐸";
-  static final namegame = "FROG QUIZZ";
-  static final img = "assets/giphy.webp";
+  static const namegame = "FROG QUIZZ";
+  static const img = "assets/giphy.webp";
 
   static listView(
       {func,

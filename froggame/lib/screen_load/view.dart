@@ -1,13 +1,12 @@
 import 'dart:math';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+// ignore: unnecessary_import
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 
+// ignore: must_be_immutable
 class ViewData extends StatelessWidget {
   String? txt;
   ViewData({super.key, this.txt});
@@ -19,46 +18,45 @@ class ViewData extends StatelessWidget {
       height: size.height,
       width: size.width,
       decoration: BoxDecoration(
-        color: lstColor[new Random().nextInt(lstColor.length)],
+        color: lstColor[Random().nextInt(lstColor.length)],
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Container(
-        child: Stack(
-          children: [
-            Positioned(
-              child: Image.asset(
-                assetEff[new Random().nextInt(assetEff.length)],
-                height: size.height * .2,
-              ),
+      child: Stack(
+        children: [
+          Positioned(
+            child: Image.asset(
+              assetEff[Random().nextInt(assetEff.length)],
+              height: size.height * .2,
             ),
-            Positioned(
-              right: 10,
-              child: Image.asset(
-                assetEff[new Random().nextInt(assetEff.length)],
-                height: size.height * .2,
-              ),
+          ),
+          Positioned(
+            right: 10,
+            child: Image.asset(
+              // ignore: unnecessary_new
+              assetEff[new Random().nextInt(assetEff.length)],
+              height: size.height * .2,
             ),
-            Positioned(
-              child: Image.asset(
-                assetImg[new Random().nextInt(assetImg.length)],
-                height: size.height * .15,
-              ),
+          ),
+          Positioned(
+            child: Image.asset(
+              assetImg[Random().nextInt(assetImg.length)],
+              height: size.height * .15,
             ),
-            Positioned(
-                bottom: 30,
-                left: 20,
-                child: DefaultTextStyle(
-                  style: F_pacifico.copyWith(
-                      fontSize: 20, fontWeight: FontWeight.w500),
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      WavyAnimatedText(txt!),
-                    ],
-                    isRepeatingAnimation: true,
-                  ),
-                )),
-          ],
-        ),
+          ),
+          Positioned(
+              bottom: 30,
+              left: 20,
+              child: DefaultTextStyle(
+                style: F_pacifico.copyWith(
+                    fontSize: 20, fontWeight: FontWeight.w500),
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    WavyAnimatedText(txt!),
+                  ],
+                  isRepeatingAnimation: true,
+                ),
+              )),
+        ],
       ),
     );
   }
@@ -67,13 +65,13 @@ class ViewData extends StatelessWidget {
 class Data {}
 
 final lstColor = [
-  Color.fromARGB(146, 202, 165, 54),
-  Color.fromARGB(135, 41, 173, 129),
-  Color.fromARGB(133, 33, 149, 243),
-  Color.fromARGB(129, 55, 187, 127),
-  Color.fromARGB(131, 69, 55, 179),
-  Color.fromARGB(121, 186, 43, 177),
-  Color.fromARGB(129, 134, 56, 230)
+  const Color.fromARGB(146, 202, 165, 54),
+  const Color.fromARGB(135, 41, 173, 129),
+  const Color.fromARGB(133, 33, 149, 243),
+  const Color.fromARGB(129, 55, 187, 127),
+  const Color.fromARGB(131, 69, 55, 179),
+  const Color.fromARGB(121, 186, 43, 177),
+  const Color.fromARGB(129, 134, 56, 230)
 ];
 final assetImg = [
   "assets/images/naoan.webp",
@@ -97,7 +95,7 @@ class View extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: lstColor[new Random().nextInt(lstColor.length)],
+        color: lstColor[Random().nextInt(lstColor.length)],
         border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(17),
       ),

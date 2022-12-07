@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 const blue = Color.fromARGB(255, 32, 67, 224);
 const darkBlue = Color(0xff3442af);
@@ -21,7 +20,7 @@ var lsColor = [
   Colors.green.shade300,
   Colors.pink.shade300,
 ];
-final List<Color> list2 = const [
+const List<Color> list2 = [
   Color.fromARGB(255, 232, 162, 154),
   Color.fromARGB(255, 61, 76, 175),
   Color.fromARGB(255, 37, 16, 141),
@@ -29,14 +28,16 @@ final List<Color> list2 = const [
   Color.fromARGB(255, 251, 195, 74)
 ];
 LinearGradient linearGradient =
-    LinearGradient(colors: [bg1, bg2], begin: Alignment.topLeft);
+    const LinearGradient(colors: [bg1, bg2], begin: Alignment.topLeft);
 
+// ignore: todo
 //TODO : Color Main
-LinearGradient background = LinearGradient(
+LinearGradient background = const LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [bg1, bg2]);
 
+// ignore: todo
 //TODO : Color Text AnimatedText
 final colorizeColors = [
   Colors.purple,

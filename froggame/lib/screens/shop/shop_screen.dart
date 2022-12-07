@@ -1,9 +1,11 @@
+// ignore_for_file: unused_import
+
 import 'dart:math';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// ignore: implementation_imports
+// ignore: implementation_imports
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_shop.dart';
@@ -29,37 +31,41 @@ class _ShopScreenState extends State<ShopScreen> {
           height: size.height,
           width: size.height,
           decoration: BoxDecoration(gradient: background),
+          // ignore: sized_box_for_whitespace
           child: Container(
             height: size.height,
             width: size.width,
             child: Column(
               children: [
+                // ignore: todo
                 //TODO : USER
                 UserHeader(height: size.height * .1),
+                // ignore: todo
                 //TODO : EVEN OR CARD
-                Container(
-                  child: CarouselSlider(
-                      items: const [View()],
-                      options: CarouselOptions(
-                        height: size.height * .25,
-                        aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 3000),
-                        autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
-                      )),
-                ),
 
+                CarouselSlider(
+                    items: const [View()],
+                    options: CarouselOptions(
+                      height: size.height * .25,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 3000),
+                      autoPlayCurve: Curves.fastLinearToSlowEaseIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    )),
+
+                // ignore: todo
                 //TODO : CATEGORIEs LIST
                 SingleChildScrollView(
                   //scrollDirection: Axis.horizontal,
+                  // ignore: sized_box_for_whitespace
                   child: Container(
                     height: size.height * .09,
                     child: Row(
@@ -82,16 +88,16 @@ class _ShopScreenState extends State<ShopScreen> {
                                       borderRadius: BorderRadius.circular(16),
                                       boxShadow: [
                                         StrShop.categories[index] == _index
-                                            ? BoxShadow(
+                                            ? const BoxShadow(
                                                 color: StrShop.Clcik,
                                                 spreadRadius: 1,
                                                 blurRadius: 15,
-                                                offset: const Offset(0, 6))
-                                            : BoxShadow(
+                                                offset: Offset(0, 6))
+                                            : const BoxShadow(
                                                 color: StrShop.NoClcik,
                                                 spreadRadius: 1,
                                                 blurRadius: 15,
-                                                offset: const Offset(0, 6))
+                                                offset: Offset(0, 6))
                                       ],
                                     ),
                                     child: Text(
@@ -111,12 +117,14 @@ class _ShopScreenState extends State<ShopScreen> {
                   ),
                 ),
 
+                // ignore: todo
                 //TODO : ITEMS LIST
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 20),
                   height: size.height * .52,
                   child: GridView.builder(
                       itemCount: StrShop.lstData.length,
+                      // ignore: prefer_const_constructors
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
@@ -126,6 +134,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: StrShop.lsColor[
+                                // ignore: unnecessary_new
                                 new Random().nextInt(StrShop.lsColor.length)],
                           ),
                         );

@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:alert_notification/alert_notification.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -53,6 +51,7 @@ class QuizzHome extends StatelessWidget {
                 ],
               ),
 
+              // ignore: todo
               // //TODO :Slider
               CarouselSlider(
                   items: [
@@ -93,6 +92,7 @@ class QuizzHome extends StatelessWidget {
                         maximumSize: Size(size.width, 45),
                         elevation: 9,
                         shadowColor: Colors.orange,
+                        // ignore: deprecated_member_use
                         primary: Colors.orange,
                         minimumSize: const Size(240, 40),
                         //  side: const BorderSide(width: 2, color: blue),
@@ -180,11 +180,13 @@ class QuizzHome extends StatelessWidget {
                 try {
                   AuthMethod.googleSignOutMethod(ctx);
                 } catch (e) {
+                  // ignore: avoid_print
                   print("Loi $e");
                 }
               },
               str: StrOption.signout,
               colorIcon: purple,
+              // ignore: deprecated_member_use
               icon: FontAwesomeIcons.signOut),
           StrOption.listView(
               func: () => exit(0),
