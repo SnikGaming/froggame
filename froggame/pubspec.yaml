@@ -105,6 +105,9 @@ flutter:
     - family: quick_semi
       fonts:
         - asset: assets/fonts/quick_semi.ttf
+    - family: DS-DIGITAL
+      fonts:
+        - asset: assets/fonts/DS-DIGI.TTF
   # fonts:
   #   - family: Schyler
   #     fonts:
