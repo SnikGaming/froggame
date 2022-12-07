@@ -37,7 +37,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
               Flexible(
                 // ignore: sort_child_properties_last
                 child: Container(),
-            
+
                 flex: 1,
               ),
               UserHeader(height: size.height * .1),
@@ -135,21 +135,56 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                               .then((value) => {
                                                     ScaffoldMessenger.of(
                                                             context)
-                                                        .showSnackBar(const SnackBar(
-                                                            duration: Duration(
+                                                        .showSnackBar(
+                                                            const SnackBar(
+                                                                duration:
+                                                                    Duration(
+                                                                        seconds:
+                                                                            10),
+                                                                content: Text(
+                                                                    "Vui lòng đợi.."))),
+                                                    if (PackageMethod.idch < 30)
+                                                      {
+                                                        Future.delayed(
+                                                            const Duration(
                                                                 seconds: 10),
-                                                            content: Text(
-                                                                "Vui long doi.."))),
-                                                    Future.delayed(
-                                                        const Duration(seconds: 10),
-                                                        () {
-                                                      Navigator.of(context).push(
-                                                          MaterialPageRoute(
-                                                              builder: (_) =>
-                                                                  QuizzGameScreen(
-                                                                      idlv: index +
-                                                                          1)));
-                                                    })
+                                                            () {
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                  builder: (_) =>
+                                                                      QuizzGameScreen(
+                                                                          idlv: index +
+                                                                              1)));
+                                                        })
+                                                      }
+                                                    else
+                                                      {
+                                                        showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                ((context) =>
+                                                                    AlertDialog(
+                                                                      backgroundColor: const Color
+                                                                              .fromARGB(
+                                                                          255,
+                                                                          167,
+                                                                          79,
+                                                                          225),
+                                                                      title: const Text(
+                                                                          "Thông báo"),
+                                                                      content: Text(
+                                                                          "${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực ${lsCategories[index]} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                                                                      actions: [
+                                                                        TextButton(
+                                                                            onPressed:
+                                                                                () {
+                                                                              Navigator.of(context).pop();
+                                                                            },
+                                                                            child:
+                                                                                const Text("Ok"))
+                                                                      ],
+                                                                    )))
+                                                      }
                                                   });
                                         }
 
@@ -190,7 +225,6 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                       return const CupertinoActivityIndicator(
                         color: Colors.orange,
                       );
-                      
                     }
                   },
                 ),
@@ -202,4 +236,3 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
     );
   }
 }
-

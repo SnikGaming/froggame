@@ -63,7 +63,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 
 //!: Values
   Timer? timer;
-  int sec = 30;
+  int sec = 0;
 
   var isLoadAnswer = false;
 // ignore: todo
@@ -76,7 +76,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   var img = UserSimplePreferences.getUserPic();
 // ignore: todo
 //TODO: Question
-  int currenIndex = UserSimplePreferences.getSL();
+  int currenIndex = UserSimplePreferences.getSL() ?? 0;
   int number = 0;
   int val = -1;
 
@@ -88,6 +88,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
     if (score >= 2 && isHd) {
       score = score - 2;
       sec += 15;
+
       isHd = false;
       UpdateHeart();
     } else {
@@ -110,16 +111,39 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   }
 
   // ignore: non_constant_identifier_names
-  void _Nextquestione() {
+  _Nextquestione() {
     bool isHd = true;
-
     if (score >= 4 && isHd) {
+      timer!.cancel();
+
       score = score - 4;
-      if (currenIndex < number) {
+      if (currenIndex + 1 < number) {
         currenIndex++;
+      } else {
+        showDialog(
+            context: context,
+            builder: ((context) => AlertDialog(
+                  backgroundColor: const Color.fromARGB(255, 167, 79, 225),
+                  title: const Text("Thông báo"),
+                  content: Text(
+                      "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                  actions: [
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, 'welcome2', (route) => false);
+                        },
+                        child: const Text("Ok"))
+                  ],
+                )));
       }
       PackageMethod.UpatePackage(currentIndex: currenIndex, index: idlv);
+      sec = 15;
+      lsAnswer = [];
+      isLoadAnswer = false;
+      startTimer();
       UpdateHeart();
+      setState(() {});
       isHd = false;
     } else {
       // ignore: avoid_print
@@ -141,31 +165,32 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
     if (heart > 0) {
       timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         if (!isGameOver) {
-          if (currenIndex + 1 >= number && sec < 0) {
-            timer.cancel();
-            showDialog(
-                context: context,
-                builder: ((context) => AlertDialog(
-                      backgroundColor: const Color.fromARGB(255, 167, 79, 225),
-                      title: const Text("Thông báo"),
-                      content: Text(
-                          "Chúc mừng ${UserSimplePreferences.getUsername()} đã giành chiến thắng !!!\nNhấn Ok để hoàn thành các thử thách khác."),
-                      actions: [
-                        TextButton(
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, 'welcome2', (route) => false);
-                            },
-                            child: const Text("Ok"))
-                      ],
-                    )));
-          }
           setState(() {
             sec--;
             if (sec < 0) {
               currenIndex++;
               PackageMethod.UpatePackage(
                   currentIndex: currenIndex, index: idlv);
+              if (currenIndex >= 30) {
+                timer.cancel();
+                showDialog(
+                    context: context,
+                    builder: ((context) => AlertDialog(
+                          backgroundColor:
+                              const Color.fromARGB(255, 167, 79, 225),
+                          title: const Text("Thông báo"),
+                          content: Text(
+                              "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực này !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, 'welcome2', (route) => false);
+                                },
+                                child: const Text("Ok"))
+                          ],
+                        )));
+              }
 
               heart--;
               sec = 15;
@@ -185,7 +210,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                 title: const Text("Thông báo"),
                 content: Text(
-                    "Chúc mừng ${UserSimplePreferences.getUsername()} đã giành chiến thắng !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                    "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/number !!!\nNhấn Ok để hoàn thành các thử thách khác."),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -211,7 +236,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
         lsAnswer.shuffle();
         isLoadAnswer = true;
       }
-    } else {}
+    }
   }
 
   resetColor() {
@@ -222,10 +247,6 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       answerCls,
     ];
   }
-
-  updateScore() {}
-
-  updateHeart() {}
 
   @override
   Widget build(BuildContext context) {
@@ -249,25 +270,53 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       //!: User Img
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(image: NetworkImage(img))),
+                      GestureDetector(
+                        onTap: () {
+                          timer!.cancel();
+                          currenIndex++;
+                          heart--;
+                          PackageMethod.UpatePackage(
+                              currentIndex: currenIndex, index: idlv);
+                          UpdateHeart();
+                          isGameOver = true;
+
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          height: 60,
+                          width: 60,
+                          child: const Icon(
+                            Icons.logout,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
                       ),
                       //!: Timer,
                       Container(
-                        height: 80,
-                        width: 80,
+                        height: 50,
+                        width: 50,
                         decoration: const BoxDecoration(
-                            color: Colors.red, shape: BoxShape.circle),
+                            color: Color.fromARGB(157, 155, 39, 176),
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(3, 6),
+                                  blurRadius: 10,
+                                  color: Color.fromARGB(255, 134, 76, 205))
+                            ]),
                         child: Align(
-                            alignment: Alignment.center, child: Text("$sec")),
+                            alignment: Alignment.center,
+                            child: Text("$sec",
+                                style: TextStyle(
+                                    fontFamily: "DS-DIGITAL",
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                    fontSize: 20))),
                       ),
                       //!: Score and heart
                       SizedBox(
-                        width: 100,
+                        width: 130,
                         child: Text(
                           "${score} 🪙\t\t${heart} ❤️",
                           style: F_pacifico.copyWith(
@@ -408,7 +457,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                         title: const Text(
                                                             "Thông báo"),
                                                         content: Text(
-                                                            "Chúc mừng ${UserSimplePreferences.getUsername()} đã giành chiến thắng !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                                                            "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
                                                         actions: [
                                                           TextButton(
                                                               onPressed: () {
@@ -487,7 +536,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                     // ignore: todo
                     //TODO: 50/50
                     GestureDetector(
-                      onTap: _Nextquestione,
+                      onTap: () => _Nextquestione(),
                       child: btnHelps(size: size, txt: "NextQuestion"),
                     ),
                   ],
