@@ -24,34 +24,43 @@ class _QuizzScreenState extends State<QuizzScreen> {
     startTimer();
   }
 
+  // ignore: non_constant_identifier_names
   _Loc50phantram() {
     if (score >= 2) {
       score = score - 2;
+      // ignore: avoid_print
       print("a");
       setState(() {});
     } else {
+      // ignore: avoid_print
       print("Khong du meney");
     }
   }
 
+  // ignore: non_constant_identifier_names
   _Them15s() {
     if (score >= 2) {
       score = score - 2;
 
+      // ignore: avoid_print
       print("15s");
       setState(() {});
     } else {
+      // ignore: avoid_print
       print("Khong du meney");
     }
   }
 
+  // ignore: non_constant_identifier_names
   _Nextquestione() {
     if (score >= 4) {
       score = score - 4;
 
+      // ignore: avoid_print
       print("NExt");
       setState(() {});
     } else {
+      // ignore: avoid_print
       print("Khong du meney");
     }
   }
@@ -60,6 +69,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
   Timer? timer;
   var currentQuestionIndex = 0;
   late Future quiz;
+  // ignore: non_constant_identifier_names
   int SL = 0;
   var isLoaded = false;
   int score = 0;
@@ -67,18 +77,18 @@ class _QuizzScreenState extends State<QuizzScreen> {
   var optionsList = [];
   resetColor() {
     optionsColors = [
-      Color.fromARGB(158, 228, 235, 125),
-      Color.fromARGB(179, 155, 244, 54),
-      Color.fromARGB(166, 54, 244, 127),
-      Color.fromARGB(174, 54, 244, 171)
+      const Color.fromARGB(158, 228, 235, 125),
+      const Color.fromARGB(179, 155, 244, 54),
+      const Color.fromARGB(166, 54, 244, 127),
+      const Color.fromARGB(174, 54, 244, 171)
     ];
   }
 
   var optionsColors = [
-    Color.fromARGB(158, 228, 235, 125),
-    Color.fromARGB(179, 155, 244, 54),
-    Color.fromARGB(166, 54, 244, 127),
-    Color.fromARGB(174, 54, 244, 171)
+    const Color.fromARGB(158, 228, 235, 125),
+    const Color.fromARGB(179, 155, 244, 54),
+    const Color.fromARGB(166, 54, 244, 127),
+    const Color.fromARGB(174, 54, 244, 171)
   ];
   @override
   void dispose() {
@@ -88,7 +98,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
 
   bool isGameOver = false;
   startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         seconds--;
         if (seconds < 0 && heart > 0) {
@@ -115,7 +125,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
           width: size.width,
           height: size.height,
           padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -193,7 +203,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                           )
                         ],
                       ),
-                       const    SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       // Image.asset(
                       //   frog,
                       //   width: 200,
@@ -202,7 +212,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                         frog_sure,
                         width: 120,
                       ),
-                  const    SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: normalText(
@@ -212,7 +222,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                             size: 18),
                       ),
                       //box
-                    const  SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       normalText(
                           text: data[currentQuestionIndex]["question"],
                           color: lightgrey,
@@ -231,9 +241,11 @@ class _QuizzScreenState extends State<QuizzScreen> {
                                     (currentQuestionIndex + 1 >= SL &&
                                         seconds <= 0)) {
                                   timer!.cancel();
+                                  // ignore: prefer_const_constructors, void_checks
                                   return nextScreen(context, SiginPage());
                                 }
                                 if (!isGameOver) {
+                                  // ignore: non_constant_identifier_names
                                   bool YN;
 
                                   if (answer.toString() ==
@@ -286,7 +298,7 @@ class _QuizzScreenState extends State<QuizzScreen> {
                           }),
 
                       //tro giup
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
 
@@ -323,13 +335,14 @@ class _QuizzScreenState extends State<QuizzScreen> {
   }
 }
 
+// ignore: non_constant_identifier_names
 Widget ButtonCustom({text, img, ontap}) {
   return GestureDetector(
     onTap: ontap,
     child: Container(
       height: 60,
       padding: const EdgeInsets.all(6),
-      decoration: BoxDecoration(boxShadow: [
+      decoration: BoxDecoration(boxShadow: const [
         BoxShadow(offset: Offset(0, 2), blurRadius: 5, color: Colors.lightBlue)
       ], color: Colors.lightBlue, borderRadius: BorderRadius.circular(16)),
       child: Row(

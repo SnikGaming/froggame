@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/const/text_style.dart';
+// ignore: unused_import
 import 'package:froggame/screens/gameplay/options_screen.dart';
 import '../../const/colors.dart';
 
@@ -101,7 +102,7 @@ class _PaytoWinState extends State<PaytoWin> {
 
 AppBar appbarWidget() {
   return AppBar(
-    title: Text('Hỗ trợ'),
+    title: const Text('Hỗ trợ'),
     elevation: 0,
     backgroundColor: bg1,
   );

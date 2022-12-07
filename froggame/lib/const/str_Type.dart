@@ -1,3 +1,6 @@
+
+// ignore_for_file: file_names
+
 import 'const_image.dart';
 
 class TypeModel {

@@ -1,3 +1,4 @@
+// ignore: unused_import
 import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:shared_preferences/shared_preferences.dart';

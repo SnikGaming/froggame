@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: non_constant_identifier_names
 void show_ModalBottomSheet(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -17,21 +18,21 @@ void show_ModalBottomSheet(BuildContext context) {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.close),
               title: Text('Gửi phản hồi cho chúng tôi'),
             ),
-            Text(
+            const Text(
               'Hãy mô tả vẫn đề của bạn.',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             Container(
-              margin: EdgeInsets.all(12),
+              margin: const EdgeInsets.all(12),
               height: 5 * 24.0,
               child: TextField(
                 maxLines: 5,
                 decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                   hintText:
                       'Hãy cho chúng tôi biết chúng tôi có thể làm gì để cải thiện sản phẩm của mình',
                   fillColor: Colors.grey[300],

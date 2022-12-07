@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// ignore: unused_import
 import 'package:flutter/cupertino.dart';
 import 'package:froggame/const/next_screen.dart';
+// ignore: unused_import
 import 'package:froggame/screens/gameplay/options_screen.dart';
+// ignore: unused_import
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -53,37 +56,33 @@ class AuthMethod {
     });
   }
 
+  // ignore: non_constant_identifier_names
   void SaveUser(UserCredential user) async {
+    // ignore: non_constant_identifier_names
     final user_firebase = FirebaseFirestore.instance.collection('users');
     int score = 0;
     int heart = 5;
     bool isId = false;
-    // var data = IsData(user);
-    // var usId = FirebaseFirestore.instance
-    //     .collection('users')
-    //     .where("userId", isEqualTo: "B5xHd34qE4TrcloKFZXSA48U7mz2")
-    //     .get();
-    // print("\n\n\n======>${usId}======");
-    // var data = FirebaseFirestore.instance
-    //     .collection("users")
-    //     .where("userId", isEqualTo: "B5xHd34qE4TrcloKFZXSA48U7mz2")
-    //     .snapshots()
-    //     .map((event) =>
-    //         event.docs.map((e) => UserModel.fromJson(e.data())).toList());
+    // ignore: todo
+    //TODO: Thực hiện truy vấn lấy User theo uiser ID = UID
     await user_firebase
         .where("userId", isEqualTo: user.user!.uid)
         .get()
         .then(((value) {
+      // ignore: avoid_function_literals_in_foreach_calls
       value.docs.forEach((element) {
+        // ignore: todo
+        //TODO: Lấy các giá trị của User X { Score Heart  }
         score = element.data()['score'];
         heart = element.data()['heart'];
         UserSimplePreferences.setUserId(id: element.data()['userId']);
+        //!: Tồn tại trả về true
+        //!: Không tồn tại giữ nguyên false
         isId = true;
-        print("==1111111111111111===>  ${element.data()['score']}");
-        print("=====>  ${element.data()['name']}");
-        print("=====>  ${element.data()['email']}");
       });
     }));
+    // ignore: todo
+    //TODO: Sau khi lấy ra nếu có thì sẽ Add
     await FureStoreUser().addUserToFireStore(UserModel(
         userId: user.user!.uid,
         email: user.user!.email!,
@@ -91,15 +90,12 @@ class AuthMethod {
         pic: user.user!.photoURL!,
         heart: heart,
         score: score));
+    //!: S
     if (!isId) {
       UserSimplePreferences.setUserId(id: user.user!.uid);
     }
     UserSimplePreferences.setScore(score: score);
     UserSimplePreferences.setUserEmail(email: user.user!.email!);
-    print("=============================${UserSimplePreferences.getUserId()}");
-    print(
-        "=============================${UserSimplePreferences.getUserEmail()}");
-
     UserSimplePreferences.setHeart(heart: heart);
   }
 }

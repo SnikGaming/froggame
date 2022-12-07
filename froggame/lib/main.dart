@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,7 +19,7 @@ Future<void> main(List<String> args) async {
   await UserSimplePreferences.init();
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
