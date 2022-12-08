@@ -21,7 +21,7 @@ class PackageMethod {
     await docPakage
         // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
         .where('idgoi', isEqualTo: _idgoi + "${index}")
-        .where('idlv', isEqualTo: index)
+
         .get()
         .then(((value) {
       // ignore: avoid_function_literals_in_foreach_calls
