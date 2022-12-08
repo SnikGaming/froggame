@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
@@ -105,15 +106,14 @@ class _SettingScreenState extends State<SettingScreen> {
               ),
 //               GestureDetector(
 //                 onTap: () async {
-//                   int id = 1;
-//                   String name =
-//                       "Đang làm gì? Nâng em lên/Đặt em xuống/Dạng chân ra/Tha hồ mà bóp";
-//                   String a = "Thất Tình";
-//                   String b = "Suy Tình";
-//                   String c = "Bảy Tình";
-//                   String d = "Tài Tình";
+//                   int id = 30;
+//                   String name = "Hoàng Sa - Trường Sa của nước nào?";
+//                   String a = "Việt Nam";
+//                   String b = "Việt Nam";
+//                   String c = "Việt Nam";
+//                   String d = "Việt Nam";
 // //!:
-//                   int idlv = 3;
+//                   int idlv = 4;
 //                   String table = "questions";
 //                   final data = FirebaseFirestore.instance
 //                       .collection(table)
