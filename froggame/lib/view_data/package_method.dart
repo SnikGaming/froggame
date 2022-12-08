@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:froggame/view_data/firesore_packageQuestion.dart';
 import 'package:froggame/view_data/user_pre.dart';
+
+import '../screens/gameplay/quizz_game_screen.dart';
 
 class PackageMethod {
   // ignore: prefer_final_fields
@@ -12,7 +15,8 @@ class PackageMethod {
   static bool isData = true;
   static var docPakage =
       FirebaseFirestore.instance.collection("packageQuestions");
-  static Future createPackage({required index}) async {
+  static bool isLoad = false;
+  static Future createPackage({required index, context}) async {
     await docPakage
         // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
         .where('idgoi', isEqualTo: _idgoi + "${index}")
@@ -32,6 +36,7 @@ class PackageMethod {
         UserSimplePreferences.setSL(index: idch);
 
         isData = false;
+        isLoad = true;
       });
     }));
     // ignore: todo
@@ -50,6 +55,7 @@ class PackageMethod {
         'idlv': index,
         'idUser': _idgoi
       });
+      isLoad = true;
     }
   }
 
