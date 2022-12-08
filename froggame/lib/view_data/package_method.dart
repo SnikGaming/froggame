@@ -1,15 +1,15 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:froggame/view_data/firesore_packageQuestion.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
-import '../screens/gameplay/quizz_game_screen.dart';
-
+// ignore: duplicate_ignore
 class PackageMethod {
   // ignore: prefer_final_fields
   static String _idgoi = UserSimplePreferences.getUserId();
-  static int idlv = 0, idch = 0, timer = 0;
+  static int idlv = 0, idch = 0, timer = 0, cd = 0;
   static String idUser = _idgoi;
   static String idgoi = _idgoi;
   static bool isData = true;
@@ -31,8 +31,10 @@ class PackageMethod {
         idlv = int.parse("${element.data()['idlv']}");
         idch = int.parse("${element.data()['idch']}");
         timer = int.parse("${element.data()['timer']}");
+        cd = int.parse("${element.data()['cautldung']}");
+        UserSimplePreferences.setSLCD(CauDung: cd);
         // ignore: avoid_print
-        print("==1111111111111111===>  $idch");
+        //print("==1111111111111111===>  $idch");
         UserSimplePreferences.setSL(index: idch);
 
         isData = false;
@@ -53,7 +55,10 @@ class PackageMethod {
         'idch': idch,
         'timer': 0,
         'idlv': index,
-        'idUser': _idgoi
+        'idUser': _idgoi,
+        'cautldung': cd,
+        'email': UserSimplePreferences.getUserEmail(),
+        'name': UserSimplePreferences.getUsername()
       });
       isLoad = true;
     }
@@ -61,15 +66,21 @@ class PackageMethod {
 
   // ignore: non_constant_identifier_names
   static Future UpatePackage(
-      {required int currentIndex, required int index}) async {
+      {required int currentIndex,
+      required int index,
+      required int Ctrl}) async {
     UserSimplePreferences.setSL(index: currentIndex);
+    UserSimplePreferences.setSLCD(CauDung: Ctrl);
     // ignore: prefer_interpolation_to_compose_strings
     await docPakage.doc(_idgoi + "$index").update({
       'idgoi': "$_idgoi$index",
       'idch': UserSimplePreferences.getSL(),
       'timer': 0,
       'idlv': index,
-      'idUser': _idgoi
+      'idUser': _idgoi,
+      'cautldung': UserSimplePreferences.getSLCD(),
+      'email': UserSimplePreferences.getUserEmail(),
+      'name': UserSimplePreferences.getUsername()
     });
   }
 }

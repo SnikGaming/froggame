@@ -5,7 +5,7 @@ import 'package:quickalert/quickalert.dart';
 
 // ignore: non_constant_identifier_names
 void show_ModalBottomSheet(BuildContext context) {
-  var _txt = TextEditingController();
+  var txt = TextEditingController();
 
   showModalBottomSheet(
     context: context,
@@ -39,7 +39,7 @@ void show_ModalBottomSheet(BuildContext context) {
               margin: const EdgeInsets.all(12),
               height: 5 * 24.0,
               child: TextField(
-                controller: _txt,
+                controller: txt,
                 maxLines: 5,
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
@@ -70,10 +70,10 @@ void show_ModalBottomSheet(BuildContext context) {
                   await data.set({
                     "iduser": UserSimplePreferences.getUserId(),
                     "gamil": UserSimplePreferences.getUserEmail(),
-                    "content": _txt.text,
+                    "content": txt.text,
                     "time": DateTime.now().toString()
                   }).then((value) {
-                    _txt.clear();
+                    txt.clear();
                     Navigator.of(context).pop();
                     QuickAlert.show(
                       context: context,
@@ -82,7 +82,7 @@ void show_ModalBottomSheet(BuildContext context) {
                     );
                   });
                 },
-                child: Text("GỬI"))
+                child: const Text("GỬI"))
           ],
         ),
       );

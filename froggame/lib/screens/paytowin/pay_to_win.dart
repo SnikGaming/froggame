@@ -155,10 +155,11 @@ AppBar appbarWidget() {
   );
 }
 
+// ignore: non_constant_identifier_names
 showCard({required int MenhGia, required context}) {
   return QuickAlert.show(
     context: context,
     type: QuickAlertType.info,
-    text: 'Bạn đã nạp thành công ${MenhGia}.000 Vnđ',
+    text: 'Bạn đã nạp thành công $MenhGia.000 Vnđ',
   );
 }
