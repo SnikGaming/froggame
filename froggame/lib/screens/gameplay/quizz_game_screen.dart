@@ -229,7 +229,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                 title: const Text("Thông báo"),
                 content: Text(
-                    "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                    "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
                 actions: [
                   TextButton(
                       onPressed: () {
