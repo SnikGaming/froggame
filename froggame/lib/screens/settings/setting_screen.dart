@@ -63,7 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         Mp3Simple.VolumeMP3();
                         // ignore: avoid_print
                         //print(
-                            //'slider value : ${SettingSimplePreferences.getSound() / 100}');
+                        //'slider value : ${SettingSimplePreferences.getSound() / 100}');
                       },
                     ),
                   ),
@@ -104,38 +104,38 @@ class _SettingScreenState extends State<SettingScreen> {
                 child: Container(),
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () async {
-                  int id = 1;
-                  String name =
-                      "Đang làm gì? Nâng em lên/Đặt em xuống/Dạng chân ra/Tha hồ mà bóp";
-                  String a = "Thất Tình";
-                  String b = "Suy Tình";
-                  String c = "Bảy Tình";
-                  String d = "Tài Tình";
-//!:
-                  int idlv = 3;
-                  String table = "questions";
-                  final data = FirebaseFirestore.instance
-                      .collection(table)
-                      .doc("${id}${idlv}");
+//               GestureDetector(
+//                 onTap: () async {
+//                   int id = 1;
+//                   String name =
+//                       "Đang làm gì? Nâng em lên/Đặt em xuống/Dạng chân ra/Tha hồ mà bóp";
+//                   String a = "Thất Tình";
+//                   String b = "Suy Tình";
+//                   String c = "Bảy Tình";
+//                   String d = "Tài Tình";
+// //!:
+//                   int idlv = 3;
+//                   String table = "questions";
+//                   final data = FirebaseFirestore.instance
+//                       .collection(table)
+//                       .doc("${id}${idlv}");
 
-                  await data.set({
-                    "id": id,
-                    "idlv": idlv,
-                    "name": name,
-                    "a": a,
-                    "b": b,
-                    "c": c,
-                    "d": d
-                  });
-                },
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.red,
-                ),
-              ),
+//                   await data.set({
+//                     "id": id,
+//                     "idlv": idlv,
+//                     "name": name,
+//                     "a": a,
+//                     "b": b,
+//                     "c": c,
+//                     "d": d
+//                   });
+//                 },
+//                 child: Container(
+//                   height: 100,
+//                   width: 100,
+//                   color: Colors.red,
+//                 ),
+//               ),
             ],
           ),
         ),

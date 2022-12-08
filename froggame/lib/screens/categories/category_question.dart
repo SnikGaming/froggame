@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:timer_snackbar/timer_snackbar.dart';
 import '../../const/colors.dart';
 import '../../const/font_app.dart';
 import '../../const/str_Type.dart';
@@ -118,7 +120,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                         // FureStorePackageQuestions.update(
                                         //     index: index + 1);
                                         PackageMethod.createPackage(
-                                            index: index + 1);
+                                            index: index + 1, context: context);
                                         if (UserSimplePreferences.getHeart() <
                                             1) {
                                           Alert(
@@ -133,58 +135,79 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                           PackageMethod.createPackage(
                                                   index: index + 1)
                                               .then((value) => {
-                                                    ScaffoldMessenger.of(
-                                                            context)
-                                                        .showSnackBar(
-                                                            const SnackBar(
-                                                                duration:
-                                                                    Duration(
-                                                                        seconds:
-                                                                            10),
-                                                                content: Text(
-                                                                    "Vui lòng đợi.."))),
-                                                    if (PackageMethod.idch < 30)
-                                                      {
-                                                        Future.delayed(
-                                                            const Duration(
-                                                                seconds: 10),
-                                                            () {
-                                                          Navigator.of(context).push(
-                                                              MaterialPageRoute(
-                                                                  builder: (_) =>
-                                                                      QuizzGameScreen(
-                                                                          idlv: index +
-                                                                              1)));
-                                                        })
-                                                      }
-                                                    else
-                                                      {
-                                                        showDialog(
-                                                            context: context,
-                                                            builder:
-                                                                ((context) =>
-                                                                    AlertDialog(
-                                                                      backgroundColor: const Color
-                                                                              .fromARGB(
-                                                                          255,
-                                                                          167,
-                                                                          79,
-                                                                          225),
-                                                                      title: const Text(
-                                                                          "Thông báo"),
-                                                                      content: Text(
-                                                                          "${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực ${lsCategories[index]} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
-                                                                      actions: [
-                                                                        TextButton(
-                                                                            onPressed:
-                                                                                () {
-                                                                              Navigator.of(context).pop();
-                                                                            },
-                                                                            child:
-                                                                                const Text("Ok"))
-                                                                      ],
-                                                                    )))
-                                                      }
+                                                    // ScaffoldMessenger.of(
+                                                    //         context)
+                                                    //     .showSnackBar(
+                                                    //         const SnackBar(
+                                                    //             duration:
+                                                    //                 Duration(
+                                                    //                     seconds:
+                                                    //                         10),
+                                                    //             content: Text(
+                                                    //                 "Vui lòng đợi.."))),
+                                                    timerSnackbar(
+                                                      context: context,
+                                                      contentText:
+                                                          "Vui lòng đợi... thời gian có thể lâu hơn mong đợi ❤️",
+                                                      buttonPrefixWidget:
+                                                          Image.asset(
+                                                        'assets/images/frogkimono.webp',
+                                                        width: 17.0,
+                                                        height: 15.0,
+                                                        alignment:
+                                                            Alignment.topCenter,
+                                                        color: Color.fromARGB(
+                                                            255, 144, 11, 239),
+                                                      ),
+                                                      afterTimeExecute: () {
+                                                        if (PackageMethod.idch <
+                                                            30) {
+                                                          PackageMethod.isLoad
+                                                              ? PackageMethod
+                                                                      .idch =
+                                                                  PackageMethod
+                                                                      .idch
+                                                              : PackageMethod
+                                                                  .idch = 0;
+                                                          Future.delayed(
+                                                              const Duration(
+                                                                  seconds: 3),
+                                                              () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .push(MaterialPageRoute(
+                                                                    builder: (_) =>
+                                                                        QuizzGameScreen(
+                                                                            idlv:
+                                                                                index + 1)));
+                                                          });
+                                                        } else {
+                                                          showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  ((context) =>
+                                                                      AlertDialog(
+                                                                        backgroundColor: const Color.fromARGB(
+                                                                            255,
+                                                                            167,
+                                                                            79,
+                                                                            225),
+                                                                        title: const Text(
+                                                                            "Thông báo"),
+                                                                        content:
+                                                                            Text("${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực ${lsCategories[index]} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                                                                        actions: [
+                                                                          TextButton(
+                                                                              onPressed: () {
+                                                                                Navigator.of(context).pop();
+                                                                              },
+                                                                              child: const Text("Ok"))
+                                                                        ],
+                                                                      )));
+                                                        }
+                                                      },
+                                                      second: 10,
+                                                    ),
                                                   });
                                         }
 

@@ -55,6 +55,8 @@ dependencies:
   rflutter_alert: ^2.0.4
   riverpod_messages: ^1.0.2
   quickalert: ^1.0.1
+  awesome_snackbar_content: ^0.1.0
+  timer_snackbar: ^0.0.3
   
 dev_dependencies:
   flutter_test:
