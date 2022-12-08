@@ -17,9 +17,11 @@ class PackageMethod {
       FirebaseFirestore.instance.collection("packageQuestions");
   static bool isLoad = false;
   static Future createPackage({required index, context}) async {
+    UserSimplePreferences.setSL(index: 0);
     await docPakage
         // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
         .where('idgoi', isEqualTo: _idgoi + "${index}")
+        .where('idlv', isEqualTo: index)
         .get()
         .then(((value) {
       // ignore: avoid_function_literals_in_foreach_calls
@@ -32,10 +34,11 @@ class PackageMethod {
         idch = int.parse("${element.data()['idch']}");
         timer = int.parse("${element.data()['timer']}");
         cd = int.parse("${element.data()['cautldung']}");
+        UserSimplePreferences.setSL(index: idch);
+
         UserSimplePreferences.setSLCD(CauDung: cd);
         // ignore: avoid_print
         //print("==1111111111111111===>  $idch");
-        UserSimplePreferences.setSL(index: idch);
 
         isData = false;
         isLoad = true;

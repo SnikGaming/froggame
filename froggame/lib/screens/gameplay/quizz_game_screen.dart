@@ -313,8 +313,9 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                               Ctrl: Ctrl);
                           UpdateHeart();
                           isGameOver = true;
-
-                          Navigator.of(context).pop();
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, 'welcome2', (route) => false);
+                          //Navigator.of(context).pop();
                         },
                         child: const SizedBox(
                           height: 60,
