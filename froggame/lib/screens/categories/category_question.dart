@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +155,8 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                         height: 15.0,
                                                         alignment:
                                                             Alignment.topCenter,
-                                                        color: Color.fromARGB(
+                                                        color: const Color
+                                                                .fromARGB(
                                                             255, 144, 11, 239),
                                                       ),
                                                       afterTimeExecute: () {
@@ -169,18 +169,13 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                                       .idch
                                                               : PackageMethod
                                                                   .idch = 0;
-                                                          Future.delayed(
-                                                              const Duration(
-                                                                  seconds: 3),
-                                                              () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .push(MaterialPageRoute(
-                                                                    builder: (_) =>
-                                                                        QuizzGameScreen(
-                                                                            idlv:
-                                                                                index + 1)));
-                                                          });
+
+                                                          Navigator.of(context).push(
+                                                              MaterialPageRoute(
+                                                                  builder: (_) =>
+                                                                      QuizzGameScreen(
+                                                                          idlv: index +
+                                                                              1)));
                                                         } else {
                                                           showDialog(
                                                               context: context,
@@ -206,7 +201,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                                       )));
                                                         }
                                                       },
-                                                      second: 10,
+                                                      second: 3,
                                                     ),
                                                   });
                                         }

@@ -1,5 +1,6 @@
 // ignore: unused_import
-import 'package:froggame/screens/settings/setting_screen.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,6 +12,7 @@ class UserSimplePreferences {
   static const _keyUserHeart = "userHeart";
   static const _keyLogin = "statusUser";
   static const _keyEmail = "userEmail";
+  static const _keyDTL = "userDTL";
 
   static const _keySLQues = "SL";
 
@@ -71,7 +73,11 @@ class UserSimplePreferences {
   static getHeart() => preferences!.getInt(_keyUserHeart);
   static Future removeUserHeart() async =>
       await preferences!.remove(_keyUserHeart);
-
+  //! SLCD username
+  static Future setSLCD({required int CauDung}) async =>
+      await preferences!.setInt(_keyDTL, CauDung);
+  static getSLCD() => preferences!.getInt(_keyDTL);
+  static Future removeSLCD() async => await preferences!.remove(_keyDTL);
 //! removeAll
   static Future removeAll() async {
     await removeUsername();
@@ -84,5 +90,6 @@ class UserSimplePreferences {
     await removeUserScore();
     await SettingSimplePreferences.removeAll();
     await removeSL();
+    await removeSLCD();
   }
 }

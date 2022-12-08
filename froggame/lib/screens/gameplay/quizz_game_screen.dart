@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, duplicate_ignore
+// ignore_for_file: unnecessary_brace_in_string_interps, duplicate_ignore, non_constant_identifier_names
 
 import 'dart:async';
 
@@ -80,6 +80,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 // ignore: todo
 //TODO: Question
   int currenIndex = UserSimplePreferences.getSL() ?? 0;
+  int Ctrl = UserSimplePreferences.getSLCD() ?? 0;
   int number = 0;
   int val = -1;
 
@@ -144,8 +145,13 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                         child: const Text("Ok"))
                   ],
                 )));
+        Future.delayed(const Duration(seconds: 2), () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, 'welcome2', (route) => false);
+        });
       }
-      PackageMethod.UpatePackage(currentIndex: currenIndex, index: idlv);
+      PackageMethod.UpatePackage(
+          currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
       sec = 15;
       lsAnswer = [];
       isLoadAnswer = false;
@@ -179,7 +185,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
             if (sec < 0) {
               currenIndex++;
               PackageMethod.UpatePackage(
-                  currentIndex: currenIndex, index: idlv);
+                  currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
               if (currenIndex >= 30) {
                 timer.cancel();
                 showDialog(
@@ -199,6 +205,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                 child: const Text("Ok"))
                           ],
                         )));
+                Future.delayed(const Duration(seconds: 2), () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, 'welcome2', (route) => false);
+                });
               }
 
               heart--;
@@ -229,6 +239,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                       child: const Text("Ok"))
                 ],
               )));
+      Future.delayed(const Duration(seconds: 2), () {
+        Navigator.pushNamedAndRemoveUntil(
+            context, 'welcome2', (route) => false);
+      });
     }
   }
 
@@ -294,7 +308,9 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                           currenIndex++;
                           heart--;
                           PackageMethod.UpatePackage(
-                              currentIndex: currenIndex, index: idlv);
+                              currentIndex: currenIndex,
+                              index: idlv,
+                              Ctrl: Ctrl);
                           UpdateHeart();
                           isGameOver = true;
 
@@ -424,6 +440,9 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                               // print("dung");
 
                                               score++;
+                                              Ctrl++;
+                                              UserSimplePreferences.setSLCD(
+                                                  CauDung: Ctrl);
                                               UpdateHeart();
                                             } else {
                                               // ignore: avoid_print
@@ -444,7 +463,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 currenIndex++;
                                                 PackageMethod.UpatePackage(
                                                     currentIndex: currenIndex,
-                                                    index: idlv);
+                                                    index: idlv,
+                                                    Ctrl: Ctrl);
 
                                                 lsAnswer = [];
                                                 isLoadAnswer = false;
@@ -491,6 +511,15 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                   "Ok"))
                                                         ],
                                                       )));
+                                              Future.delayed(
+                                                  const Duration(seconds: 2),
+                                                  () {
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                        context,
+                                                        'welcome2',
+                                                        (route) => false);
+                                              });
                                             }
                                           } else {}
                                         },
@@ -521,7 +550,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                               child: Text(
                                                 "${lsAnswer[index]}",
                                                 style: F_pacifico.copyWith(
-                                                    color: white, fontSize: 20),
+                                                    color: white, fontSize: 16),
                                               ),
                                             ),
                                           ),
