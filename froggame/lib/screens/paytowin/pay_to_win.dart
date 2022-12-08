@@ -6,6 +6,7 @@ import 'package:froggame/view_data/user_pre.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import '../../const/colors.dart';
+import '../../view_data/firesore_napthe.dart';
 import '../../view_data/firestore_user.dart';
 
 class PaytoWin extends StatefulWidget {
@@ -42,6 +43,7 @@ class _PaytoWinState extends State<PaytoWin> {
                 FureStoreUser.addDataUser(
                     heart: UserSimplePreferences.getHeart(),
                     score: UserSimplePreferences.getScore());
+                NapThe.Save(menhgia: 20);
                 showCard(MenhGia: 20, context: context);
 
                 setState(() {});
@@ -69,6 +71,8 @@ class _PaytoWinState extends State<PaytoWin> {
                 FureStoreUser.addDataUser(
                     heart: UserSimplePreferences.getHeart(),
                     score: UserSimplePreferences.getScore());
+                NapThe.Save(menhgia: 50);
+
                 showCard(MenhGia: 50, context: context);
 
                 setState(() {});
@@ -96,6 +100,8 @@ class _PaytoWinState extends State<PaytoWin> {
                 FureStoreUser.addDataUser(
                     heart: UserSimplePreferences.getHeart(),
                     score: UserSimplePreferences.getScore());
+                NapThe.Save(menhgia: 100);
+
                 showCard(MenhGia: 100, context: context);
 
                 setState(() {});
@@ -123,6 +129,8 @@ class _PaytoWinState extends State<PaytoWin> {
                 FureStoreUser.addDataUser(
                     heart: UserSimplePreferences.getHeart(),
                     score: UserSimplePreferences.getScore());
+                NapThe.Save(menhgia: 200);
+
                 showCard(MenhGia: 200, context: context);
                 setState(() {});
               },
