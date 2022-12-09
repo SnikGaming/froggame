@@ -6,7 +6,6 @@ import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screen_load/view.dart';
-import 'package:froggame/screens/paytowin/pay_to_win.dart';
 import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
@@ -158,11 +157,6 @@ class QuizzHome extends StatelessWidget {
               str: StrOption.shop,
               colorIcon: Colors.blue.shade300,
               icon: FontAwesomeIcons.shop),
-          StrOption.listView(
-              func: () => nextScreen(ctx, const PaytoWin()),
-              str: StrOption.card,
-              colorIcon: green,
-              icon: FontAwesomeIcons.moneyBills),
           StrOption.listView(
               func: () {
                 show_ModalBottomSheet(ctx);
