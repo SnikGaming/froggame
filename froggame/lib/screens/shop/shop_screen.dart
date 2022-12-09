@@ -13,6 +13,7 @@ import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/screen_load/view.dart';
 import 'package:froggame/screens/shop/shop_pay.dart';
 import 'package:froggame/view_data/user_pre.dart';
+import 'package:froggame/const/str_pay.dart';
 
 import '../../const/text_style.dart';
 import '../../view_data/firesore_napthe.dart';
@@ -129,230 +130,42 @@ class _ShopScreenState extends State<ShopScreen> {
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
                     height: size.height * .52,
-                    child: GridView.count(
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      crossAxisCount: 2,
-                      children: <Widget>[
-                        ElevatedButton(
+                    child: GridView.builder(
+                      itemCount: Pay.Coins.length,
+                      // ignore: prefer_const_constructors
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          crossAxisCount: 2),
+                      itemBuilder: ((context, index) {
+                        return ElevatedButton(
                           onPressed: () {
                             UserSimplePreferences.setHeart(
                                 heart: UserSimplePreferences.getHeart() + 2);
                             UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 12);
+                                score: UserSimplePreferences.getScore() +
+                                    int.parse(Pay.Coins[index]));
                             FureStoreUser.addDataUser(
                                 heart: UserSimplePreferences.getHeart(),
                                 score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 22);
-                            showCard(MenhGia: 22, context: context);
+                            NapThe.Save(menhgia: int.parse(Pay.MenhGia[index]));
+                            showCard(
+                                MenhGia: int.parse(Pay.MenhGia[index]),
+                                context: context);
 
                             setState(() {});
                           },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "12 coin \n 22.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
+                          
+                          child: Pay.item(Pay.Coins[index], Pay.MenhGia[index]),
                           style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(30),
                             shape: RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.circular(12), // <-- Radius
                             ),
                           ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 2);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 50);
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 109);
-
-                            showCard(MenhGia: 109, context: context);
-
-                            setState(() {});
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "50 coin \n 109.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 4);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 220);
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 219);
-
-                            showCard(MenhGia: 219, context: context);
-
-                            setState(() {});
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "220 coin \n 219.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 6);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 450);
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 449);
-
-                            showCard(MenhGia: 449, context: context);
-                            setState(() {});
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "450 coin \n 449.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 6);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 1000);
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 1099);
-
-                            showCard(MenhGia: 1099, context: context);
-                            setState(() {});
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "1000 coin \n 1.099.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 6);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() + 2000);
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: 2199);
-
-                            showCard(MenhGia: 2199, context: context);
-                            setState(() {});
-                          },
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/coin.png",
-                                width: 50,
-                                height: 50,
-                              ),
-                              headingText(
-                                  text: "2000 coin \n 2.199.000đ",
-                                  size: 18,
-                                  color: blue),
-                            ],
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        ),
-                      ],
+                        );
+                      }),
                     ),
                   ),
                 ],
