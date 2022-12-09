@@ -55,12 +55,12 @@ class _PaytoWinState extends State<PaytoWin> {
                           UserSimplePreferences.setHeart(
                               heart: UserSimplePreferences.getHeart() + 2);
                           UserSimplePreferences.setScore(
-                              score: UserSimplePreferences.getScore() + 20);
+                              score: UserSimplePreferences.getScore() + 12);
                           FureStoreUser.addDataUser(
                               heart: UserSimplePreferences.getHeart(),
                               score: UserSimplePreferences.getScore());
-                          NapThe.Save(menhgia: 20);
-                          showCard(MenhGia: 20, context: context);
+                          NapThe.Save(menhgia: 22);
+                          showCard(MenhGia: 22, context: context);
 
                           setState(() {});
                         },
@@ -74,7 +74,7 @@ class _PaytoWinState extends State<PaytoWin> {
                               height: 50,
                             ),
                             headingText(
-                                text: "20.000đ \n 20 coin",
+                                text: "12 coin \n 22.000đ",
                                 size: 18,
                                 color: blue),
                           ],
@@ -89,9 +89,9 @@ class _PaytoWinState extends State<PaytoWin> {
                           FureStoreUser.addDataUser(
                               heart: UserSimplePreferences.getHeart(),
                               score: UserSimplePreferences.getScore());
-                          NapThe.Save(menhgia: 50);
+                          NapThe.Save(menhgia: 109);
 
-                          showCard(MenhGia: 50, context: context);
+                          showCard(MenhGia: 109, context: context);
 
                           setState(() {});
                         },
@@ -105,7 +105,7 @@ class _PaytoWinState extends State<PaytoWin> {
                               height: 50,
                             ),
                             headingText(
-                                text: "50.000đ \n 50 coin",
+                                text: "50 coin \n 109.000đ",
                                 size: 18,
                                 color: blue),
                           ],
@@ -116,13 +116,13 @@ class _PaytoWinState extends State<PaytoWin> {
                           UserSimplePreferences.setHeart(
                               heart: UserSimplePreferences.getHeart() + 4);
                           UserSimplePreferences.setScore(
-                              score: UserSimplePreferences.getScore() + 100);
+                              score: UserSimplePreferences.getScore() + 220);
                           FureStoreUser.addDataUser(
                               heart: UserSimplePreferences.getHeart(),
                               score: UserSimplePreferences.getScore());
-                          NapThe.Save(menhgia: 100);
+                          NapThe.Save(menhgia: 219);
 
-                          showCard(MenhGia: 100, context: context);
+                          showCard(MenhGia: 219, context: context);
 
                           setState(() {});
                         },
@@ -136,7 +136,7 @@ class _PaytoWinState extends State<PaytoWin> {
                               height: 50,
                             ),
                             headingText(
-                                text: "100.000đ \n 100 coin",
+                                text: "220 coin \n 219.000đ",
                                 size: 18,
                                 color: blue),
                           ],
@@ -147,13 +147,13 @@ class _PaytoWinState extends State<PaytoWin> {
                           UserSimplePreferences.setHeart(
                               heart: UserSimplePreferences.getHeart() + 6);
                           UserSimplePreferences.setScore(
-                              score: UserSimplePreferences.getScore() + 200);
+                              score: UserSimplePreferences.getScore() + 450);
                           FureStoreUser.addDataUser(
                               heart: UserSimplePreferences.getHeart(),
                               score: UserSimplePreferences.getScore());
-                          NapThe.Save(menhgia: 200);
+                          NapThe.Save(menhgia: 449);
 
-                          showCard(MenhGia: 200, context: context);
+                          showCard(MenhGia: 449, context: context);
                           setState(() {});
                         },
                         child: Column(
@@ -166,7 +166,67 @@ class _PaytoWinState extends State<PaytoWin> {
                               height: 50,
                             ),
                             headingText(
-                                text: "200.000đ \n 200 coin",
+                                text: "450 coin \n 449.000đ",
+                                size: 18,
+                                color: blue),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          UserSimplePreferences.setHeart(
+                              heart: UserSimplePreferences.getHeart() + 6);
+                          UserSimplePreferences.setScore(
+                              score: UserSimplePreferences.getScore() + 1000);
+                          FureStoreUser.addDataUser(
+                              heart: UserSimplePreferences.getHeart(),
+                              score: UserSimplePreferences.getScore());
+                          NapThe.Save(menhgia: 1099);
+
+                          showCard(MenhGia: 1099, context: context);
+                          setState(() {});
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/coin.png",
+                              width: 50,
+                              height: 50,
+                            ),
+                            headingText(
+                                text: "1000 coin \n 1.099.000đ",
+                                size: 18,
+                                color: blue),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          UserSimplePreferences.setHeart(
+                              heart: UserSimplePreferences.getHeart() + 6);
+                          UserSimplePreferences.setScore(
+                              score: UserSimplePreferences.getScore() + 2000);
+                          FureStoreUser.addDataUser(
+                              heart: UserSimplePreferences.getHeart(),
+                              score: UserSimplePreferences.getScore());
+                          NapThe.Save(menhgia: 2199);
+
+                          showCard(MenhGia: 2199, context: context);
+                          setState(() {});
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              "assets/coin.png",
+                              width: 50,
+                              height: 50,
+                            ),
+                            headingText(
+                                text: "2000 coin \n 2.199.000đ",
                                 size: 18,
                                 color: blue),
                           ],
