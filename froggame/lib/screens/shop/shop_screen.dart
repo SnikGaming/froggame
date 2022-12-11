@@ -27,6 +27,45 @@ class ShopScreen extends StatefulWidget {
 }
 
 class _ShopScreenState extends State<ShopScreen> {
+  itemdata(size) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: size.height * .52,
+      child: GridView.builder(
+        itemCount: Pay.Coins.length,
+        // ignore: prefer_const_constructors
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 8, mainAxisSpacing: 8, crossAxisCount: 2),
+        itemBuilder: ((context, index) {
+          return ElevatedButton(
+            onPressed: () {
+              UserSimplePreferences.setHeart(
+                  heart: UserSimplePreferences.getHeart() + 2);
+              UserSimplePreferences.setScore(
+                  score: UserSimplePreferences.getScore() +
+                      int.parse(Pay.Coins[index]));
+              FureStoreUser.addDataUser(
+                  heart: UserSimplePreferences.getHeart(),
+                  score: UserSimplePreferences.getScore());
+              NapThe.Save(menhgia: int.parse(Pay.MenhGia[index]));
+              showCard(
+                  MenhGia: int.parse(Pay.MenhGia[index]), context: context);
+
+              setState(() {});
+            },
+            child: Pay.item(Pay.Coins[index], Pay.MenhGia[index]),
+            style: ElevatedButton.styleFrom(
+              padding: EdgeInsets.all(30),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12), // <-- Radius
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
   var _index = StrShop.categories[0];
   @override
   Widget build(BuildContext context) {
@@ -126,48 +165,13 @@ class _ShopScreenState extends State<ShopScreen> {
 
                   // ignore: todo
                   //TODO : ITEMS LIST
-
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    height: size.height * .52,
-                    child: GridView.builder(
-                      itemCount: Pay.Coins.length,
-                      // ignore: prefer_const_constructors
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                          crossAxisCount: 2),
-                      itemBuilder: ((context, index) {
-                        return ElevatedButton(
-                          onPressed: () {
-                            UserSimplePreferences.setHeart(
-                                heart: UserSimplePreferences.getHeart() + 2);
-                            UserSimplePreferences.setScore(
-                                score: UserSimplePreferences.getScore() +
-                                    int.parse(Pay.Coins[index]));
-                            FureStoreUser.addDataUser(
-                                heart: UserSimplePreferences.getHeart(),
-                                score: UserSimplePreferences.getScore());
-                            NapThe.Save(menhgia: int.parse(Pay.MenhGia[index]));
-                            showCard(
-                                MenhGia: int.parse(Pay.MenhGia[index]),
-                                context: context);
-
-                            setState(() {});
-                          },
-                          
-                          child: Pay.item(Pay.Coins[index], Pay.MenhGia[index]),
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.all(30),
-                            shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(12), // <-- Radius
-                            ),
-                          ),
-                        );
-                      }),
-                    ),
-                  ),
+                  //
+                  _index == StrShop.categories[0]
+                      ? Container()
+                      : _index == StrShop.categories[1]
+                          ? Container()
+                          : itemdata(size)
+                  //
                 ],
               )
 
