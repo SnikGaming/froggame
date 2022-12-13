@@ -71,30 +71,30 @@ class _SettingScreenState extends State<SettingScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    StrSetting.hieuung,
-                    style: F_lobster.copyWith(fontSize: 30, color: white),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  // ignore: sized_box_for_whitespace
-                  Container(
-                    width: size.width * .55,
-                    child: SliderController(
-                      value: SettingSimplePreferences.getEffect() ?? 100,
-                      onChanged: (value) {
-                        SettingSimplePreferences.setEffect(val: value);
-                        // ignore: avoid_print
-                        //print('slider value : ${value / 10}');
-                      },
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     Text(
+              //       StrSetting.hieuung,
+              //       style: F_lobster.copyWith(fontSize: 30, color: white),
+              //     ),
+              //     const SizedBox(
+              //       width: 10,
+              //     ),
+              //     // ignore: sized_box_for_whitespace
+              //     Container(
+              //       width: size.width * .55,
+              //       child: SliderController(
+              //         value: SettingSimplePreferences.getEffect() ?? 100,
+              //         onChanged: (value) {
+              //           SettingSimplePreferences.setEffect(val: value);
+              //           // ignore: avoid_print
+              //           //print('slider value : ${value / 10}');
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
 
               // ignore: todo
               //TODO : Run

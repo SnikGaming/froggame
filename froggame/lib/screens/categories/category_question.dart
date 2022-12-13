@@ -106,6 +106,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                     // ignore: sort_child_properties_last
                                     child: AnimatedCus(
                                       context: context,
+                                      s: 1500,
                                       x: 150,
                                       y: -150,
                                       curve: Curves.elasticIn,
@@ -132,10 +133,6 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                     left: 20,
                                     child: GestureDetector(
                                       onTap: () {
-                                        // FureStorePackageQuestions.update(
-                                        //     index: index + 1);
-                                        // PackageMethod.createPackage(
-                                        //     index: index + 1, context: context);
                                         if (UserSimplePreferences.getHeart() <
                                             1) {
                                           Alert(
@@ -144,7 +141,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                             desc:
                                                 "BẠN ĐÃ HẾT HEART VUI LÒNG NẠP THÊM TIỀN ĐỂ TIẾP TỤC TRÒ CHƠI...",
                                             image:
-                                                Image.asset("assets/cayyy.gif"),
+                                                Image.asset("assets/234.webp"),
                                           ).show();
                                         } else {
                                           PackageMethod.createPackage(

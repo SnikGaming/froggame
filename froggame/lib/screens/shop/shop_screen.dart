@@ -55,7 +55,7 @@ class _ShopScreenState extends State<ShopScreen> {
             },
             child: Pay.item(Pay.Coins[index], Pay.MenhGia[index]),
             style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.all(30),
+              padding: const EdgeInsets.all(30),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12), // <-- Radius
               ),
