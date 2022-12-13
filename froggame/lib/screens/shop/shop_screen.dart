@@ -78,15 +78,15 @@ class _ShopScreenState extends State<ShopScreen> {
           decoration: BoxDecoration(gradient: background),
           // ignore: sized_box_for_whitespace
           child: Container(
-              height: size.height,
-              width: size.width,
-              child: Column(
-                children: [
-                  // ignore: todo
-                  //TODO : USER
-                  UserHeader(height: size.height * .1),
-                  // ignore: todo
-                  //TODO : EVEN OR CARD
+            height: size.height,
+            width: size.width,
+            child: Column(
+              children: [
+                // ignore: todo
+                //TODO : USER
+                UserHeader(height: size.height * .1, context: context),
+                // ignore: todo
+                //TODO : EVEN OR CARD
 
                   CarouselSlider(
                       items: const [View()],

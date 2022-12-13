@@ -1,11 +1,6 @@
-// ignore: duplicate_ignore
-// ignore: duplicate_ignore
-// ignore: duplicate_ignore
-// ignore: duplicate_ignore
-// ignore: file_names
-// ignore: file_names
-// ignore: file_names
-// ignore_for_file: file_names, duplicate_ignore
+
+
+// ignore_for_file: file_names
 
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:froggame/const/values.dart';
