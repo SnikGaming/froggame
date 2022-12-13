@@ -20,7 +20,6 @@ Future<void> main(List<String> args) async {
   await UserSimplePreferences.init();
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
-
   runApp(const MyApp());
 }
 
@@ -41,6 +40,7 @@ class MyApp extends StatelessWidget {
       initialRoute: UserSimplePreferences.getUserId() == null ||
               UserSimplePreferences.getUserId() == ""
           ? 'welcome'
+          //  : "quizz_screen",
           : 'welcome2',
       theme: ThemeData(fontFamily: "quick"),
     );

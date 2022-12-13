@@ -4,7 +4,7 @@ class StrShop {
   static List<String> categories = [
     "Tất cả",
     "Khung",
-    "Gói VIP",
+    "Nạp",
   ];
 
   // ignore: constant_identifier_names
