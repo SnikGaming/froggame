@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'colors.dart';
-import 'text_style.dart';
 
 class Pay {
+  // ignore: non_constant_identifier_names
   static List<String> MenhGia = ["22", "109", "219", "449", "1099", "2199"];
 
+  // ignore: non_constant_identifier_names
   static List<String> Coins = ["12", "50", "220", "450", "1000", "2000"];
 
   static item(String coin, String menhgia) {
@@ -23,7 +24,7 @@ class Pay {
             Text(
               "$coin coin \n $menhgia.000đ",
               textAlign: TextAlign.center,
-              style: TextStyle(color: blue, fontSize: 18),
+              style: const TextStyle(color: blue, fontSize: 18),
             ),
           ],
         ),

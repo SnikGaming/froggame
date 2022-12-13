@@ -8,6 +8,7 @@ void show_ModalBottomSheet(BuildContext context) {
   var txt = TextEditingController();
 
   showModalBottomSheet(
+    backgroundColor: Color.fromARGB(255, 213, 91, 140),
     context: context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
@@ -17,8 +18,8 @@ void show_ModalBottomSheet(BuildContext context) {
     ),
     builder: (context) {
       return Padding(
-        padding:
-            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom + 25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -27,7 +28,7 @@ void show_ModalBottomSheet(BuildContext context) {
               // leading: Icon(Icons.close),
               title: Text('Gửi phản hồi cho chúng tôi',
                   style: TextStyle(
-                      color: Colors.red,
+                      color: Color.fromARGB(255, 54, 209, 244),
                       fontWeight: FontWeight.bold,
                       fontSize: 15)),
             ),
@@ -82,7 +83,9 @@ void show_ModalBottomSheet(BuildContext context) {
                     );
                   });
                 },
-                child: const Text("GỬI"))
+                child: const Text("GỬI",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 24)))
           ],
         ),
       );

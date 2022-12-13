@@ -56,26 +56,30 @@ UserHeader({required double height, required BuildContext context}) {
         ),
 
         //! HEART && SCORE
-        Row(
-          children: [
-            //?SCORE
-            Text(
-              "${UserSimplePreferences.getScore()} 🪙",
-              style: F_lobster.copyWith(fontSize: 20, color: white),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            //?HEART
-            Text(
-              "${UserSimplePreferences.getHeart()} ❤️",
-              style: F_lobster.copyWith(fontSize: 20, color: white),
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-          ],
-        ),
+        AnimatedCus(
+            context: context,
+            x: 110,
+            curve: Curves.elasticInOut,
+            chil: Row(
+              children: [
+                //?SCORE
+                Text(
+                  "${UserSimplePreferences.getScore()} 🪙",
+                  style: F_lobster.copyWith(fontSize: 20, color: white),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                //?HEART
+                Text(
+                  "${UserSimplePreferences.getHeart()} ❤️",
+                  style: F_lobster.copyWith(fontSize: 20, color: white),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+              ],
+            )),
       ],
     ),
   );
