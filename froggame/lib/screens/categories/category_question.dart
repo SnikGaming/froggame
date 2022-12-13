@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
-import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
+import 'package:froggame/screens/gameplay/game_play_screen.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../const/colors.dart';

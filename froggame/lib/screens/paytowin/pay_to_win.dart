@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/const/text_style.dart';
 // ignore: unused_import
-import 'package:froggame/screens/gameplay/options_screen.dart';
+import 'package:froggame/screens/gameplay/menu_screen.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
