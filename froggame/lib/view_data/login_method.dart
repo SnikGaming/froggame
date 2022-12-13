@@ -4,9 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:froggame/const/next_screen.dart';
 // ignore: unused_import
-import 'package:froggame/screens/gameplay/options_screen.dart';
+import 'package:froggame/screens/gameplay/menu_screen.dart';
 // ignore: unused_import
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/package_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import '../models/user_model.dart';
@@ -45,14 +46,16 @@ class AuthMethod {
     UserSimplePreferences.setUsername(
         username: account!.displayName.toString());
     //nextScreen(context, const QuizzHome());
-    pushNamedRemove(context, 'welcome2');
+    PackageMethod.InitPackage()
+        .then((value) => pushNamedRemove(context, 'welcome2'));
   }
 
   static googleSignOutMethod(context) async {
     await googleSignIn.signOut().then((value) {
       //nextScreen(context, const SiginPage());
-      pushNamedRemove(context, "welcome");
+      UserSimplePreferences.removeUserId();
       UserSimplePreferences.removeAll();
+      pushNamedRemove(context, "welcome");
     });
   }
 

@@ -457,7 +457,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                             if (currenIndex + 1 < number) {
                                               Future.delayed(
                                                   const Duration(
-                                                      milliseconds: 1000), () {
+                                                      milliseconds: 200), () {
                                                 //sec = 15;
 
                                                 startTimer();
