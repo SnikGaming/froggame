@@ -3,12 +3,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 // ignore: unused_import
 import 'package:froggame/view_data/firesore_packageQuestion.dart';
+import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 // ignore: duplicate_ignore
 class PackageMethod {
   // ignore: prefer_final_fields
-  static String _idgoi = UserSimplePreferences.getUserId();
+  static String _idgoi = "";
   static int idlv = 0, idch = 0, timer = 0, cd = 0;
   static String idUser = _idgoi;
   static String idgoi = _idgoi;
@@ -17,11 +18,11 @@ class PackageMethod {
       FirebaseFirestore.instance.collection("packageQuestions");
   static bool isLoad = false;
   static Future createPackage({required index, context}) async {
+    _idgoi = UserSimplePreferences.getUserId();
     UserSimplePreferences.setSL(index: 0);
     await docPakage
         // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
         .where('idgoi', isEqualTo: _idgoi + "${index}")
-
         .get()
         .then(((value) {
       // ignore: avoid_function_literals_in_foreach_calls
@@ -85,5 +86,12 @@ class PackageMethod {
       'email': UserSimplePreferences.getUserEmail(),
       'name': UserSimplePreferences.getUsername()
     });
+  }
+
+  static Future<void> InitPackage() async {
+    int i = FureStoreCategory.lst.length;
+    for (var j = 0; j < i; j++) {
+      createPackage(index: j + 1);
+    }
   }
 }
