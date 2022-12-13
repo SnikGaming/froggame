@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 // ignore: implementation_imports
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/const/str_heart.dart';
 import 'package:froggame/const/str_shop.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/screen_load/view.dart';
@@ -28,7 +29,10 @@ class ShopScreen extends StatefulWidget {
 }
 
 class _ShopScreenState extends State<ShopScreen> {
-  itemdata(size) {
+  int heart = UserSimplePreferences.getHeart();
+  int score = UserSimplePreferences.getScore();
+
+  itempay(size) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       height: size.height * .52,
@@ -48,15 +52,71 @@ class _ShopScreenState extends State<ShopScreen> {
               FureStoreUser.addDataUser(
                   heart: UserSimplePreferences.getHeart(),
                   score: UserSimplePreferences.getScore());
-              NapThe.Save(menhgia: int.parse(Pay.MenhGia[index]));
-              showCard(
-                  MenhGia: int.parse(Pay.MenhGia[index]), context: context);
-
+              NapThe.Save(menhgia: int.parse(Hearts.Heart[index]));
+              showCardPay(
+                  MenhGia: int.parse(Hearts.Heart[index]), context: context);
+              score = UserSimplePreferences.getScore();
+              heart = UserSimplePreferences.getHeart();
               setState(() {});
             },
             child: Pay.item(Pay.Coins[index], Pay.MenhGia[index]),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(30),
+              shadowColor: Colors.orange,
+              // ignore: deprecated_member_use
+              primary: Colors.orange,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12), // <-- Radius
+              ),
+            ),
+          );
+        }),
+      ),
+    );
+  }
+
+  itemheart(size) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      height: size.height * .52,
+      child: GridView.builder(
+        itemCount: Hearts.Coins.length,
+        // ignore: prefer_const_constructors
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisSpacing: 8, mainAxisSpacing: 8, crossAxisCount: 2),
+        itemBuilder: ((context, index) {
+          return ElevatedButton(
+            onPressed: () {
+              if (score >= int.parse(Hearts.Coins[index])) {
+                UserSimplePreferences.setHeart(
+                    heart: UserSimplePreferences.getHeart() +
+                        int.parse(Hearts.Heart[index]));
+                UserSimplePreferences.setScore(
+                    score: UserSimplePreferences.getScore() -
+                        int.parse(Hearts.Coins[index]));
+                FureStoreUser.addDataUser(
+                    heart: UserSimplePreferences.getHeart(),
+                    score: UserSimplePreferences.getScore());
+                showCardHeart(
+                    heart: int.parse(Hearts.Heart[index]),
+                    score: true,
+                    context: context);
+                score = UserSimplePreferences.getScore();
+                heart = UserSimplePreferences.getHeart();
+                setState(() {});
+              } else {
+                showCardHeart(
+                    heart: int.parse(Hearts.Heart[index]),
+                    score: false,
+                    context: context);
+              }
+            },
+            child: Hearts.item(Hearts.Coins[index], Hearts.Heart[index]),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.all(30),
+              shadowColor: Colors.orange,
+              // ignore: deprecated_member_use
+              primary: Colors.orange,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12), // <-- Radius
               ),
@@ -152,8 +212,8 @@ class _ShopScreenState extends State<ShopScreen> {
                   //
                   Expanded(
                     child: _index == StrShop.categories[0]
-                        ? Container()
-                        : itemdata(size),
+                        ? itemheart(size)
+                        : itempay(size),
                   )
 
                   //
@@ -188,10 +248,26 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 }
 
-showCard({required int MenhGia, required context}) {
+showCardPay({required int MenhGia, required context}) {
   return QuickAlert.show(
     context: context,
     type: QuickAlertType.info,
     text: 'Bạn đã nạp thành công $MenhGia.000 Vnđ',
   );
+}
+
+showCardHeart({required int heart, required bool score, required context}) {
+  if (score) {
+    return QuickAlert.show(
+      context: context,
+      type: QuickAlertType.info,
+      text: 'Bạn đã mua thành công $heart ❤️',
+    );
+  } else {
+    return QuickAlert.show(
+      context: context,
+      type: QuickAlertType.info,
+      text: 'Bạn đã không đủ điểm, vui lòng nạp thêm',
+    );
+  }
 }

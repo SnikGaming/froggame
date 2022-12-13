@@ -16,15 +16,27 @@ class Pay {
         //TODO :
         Column(
           children: [
-            Image.asset(
-              "assets/coin.png",
-              width: 50,
-              height: 50,
+            //Image.asset(
+            //  "assets/coin.png",
+            //  width: 50,
+            //  height: 50,
+            //),
+            const Text(
+              '🪙',
+              style: TextStyle(fontSize: 40),
+            ),
+            SizedBox(
+              width: 10,
+              height: 10,
             ),
             Text(
-              "$coin coin \n $menhgia.000đ",
-              textAlign: TextAlign.center,
-              style: const TextStyle(color: blue, fontSize: 18),
+              "$coin 🪙",
+              //textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20, color: Colors.black),
+            ),
+            Text(
+              '$menhgia.000đ',
+              style: const TextStyle(fontSize: 20, color: Colors.black),
             ),
           ],
         ),
