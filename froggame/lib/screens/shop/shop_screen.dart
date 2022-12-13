@@ -44,17 +44,15 @@ class _ShopScreenState extends State<ShopScreen> {
         itemBuilder: ((context, index) {
           return ElevatedButton(
             onPressed: () {
-              UserSimplePreferences.setHeart(
-                  heart: UserSimplePreferences.getHeart() + 2);
               UserSimplePreferences.setScore(
                   score: UserSimplePreferences.getScore() +
                       int.parse(Pay.Coins[index]));
               FureStoreUser.addDataUser(
                   heart: UserSimplePreferences.getHeart(),
                   score: UserSimplePreferences.getScore());
-              NapThe.Save(menhgia: int.parse(Hearts.Heart[index]));
+              NapThe.Save(menhgia: int.parse(Pay.MenhGia[index]));
               showCardPay(
-                  MenhGia: int.parse(Hearts.Heart[index]), context: context);
+                  MenhGia: int.parse(Pay.MenhGia[index]), context: context);
               score = UserSimplePreferences.getScore();
               heart = UserSimplePreferences.getHeart();
               setState(() {});
