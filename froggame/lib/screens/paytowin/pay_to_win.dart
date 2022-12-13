@@ -39,7 +39,7 @@ class _PaytoWinState extends State<PaytoWin> {
               ),
               SizedBox(
                 height: size.height * .05,
-                child: UserHeader(height: size.height),
+                child: UserHeader(height: size.height,context: context),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

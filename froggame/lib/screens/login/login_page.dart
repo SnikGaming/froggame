@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/str_login.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
@@ -37,30 +38,17 @@ class _SiginPageState extends State<SiginPage> {
             ),
             //! Image game
             // Image.asset(StrLogin.imageMain),
-            Image.asset("assets/images/giphy1.webp"),
+
+            AnimatedCusScal(
+                context: context,
+                s: 1500,
+                chil: Image.asset("assets/images/giphy1.webp")),
             Flexible(
               // ignore: sort_child_properties_last
               child: Container(),
               flex: 1,
             ),
             // ignore: todo
-            // //TODO :Slider
-            // CarouselSlider(
-            //     items: const [View()],
-            //     options: CarouselOptions(
-            //       //height: 150,
-            //       aspectRatio: 16 / 9,
-            //       viewportFraction: 0.8,
-            //       initialPage: 0,
-            //       enableInfiniteScroll: true,
-            //       reverse: false,
-            //       autoPlay: true,
-            //       autoPlayInterval: const Duration(seconds: 3),
-            //       autoPlayAnimationDuration: const Duration(milliseconds: 800),
-            //       autoPlayCurve: Curves.fastOutSlowIn,
-            //       enlargeCenterPage: true,
-            //       scrollDirection: Axis.horizontal,
-            //     )),
             const SizedBox(
               height: 40,
             ),
@@ -71,33 +59,37 @@ class _SiginPageState extends State<SiginPage> {
             ),
             const Spacer(),
             //! Button
-            RoundedLoadingButton(
-                controller: googleController,
-                successColor: red,
-                width: MediaQuery.of(context).size.width * .8,
-                elevation: 0,
-                borderRadius: 25,
-                color: red,
-                onPressed: () async {
-                  try {
-                    AuthMethod().googleSignInMethod(context);
-                  } catch (e) {
-                    // return;
-                  }
-                },
-                child: Wrap(
-                  children: [
-                    const Icon(
-                      FontAwesomeIcons.google,
-                      size: 20,
-                      color: white,
-                    ),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    normalText(text: StrLogin.btnName, size: 15, color: white),
-                  ],
-                )),
+            AnimatedCus(
+                context: context,
+                y: 80,
+                chil: RoundedLoadingButton(
+                    controller: googleController,
+                    successColor: red,
+                    width: MediaQuery.of(context).size.width * .8,
+                    elevation: 0,
+                    borderRadius: 25,
+                    color: red,
+                    onPressed: () async {
+                      try {
+                        AuthMethod().googleSignInMethod(context);
+                      } catch (e) {
+                        // return;
+                      }
+                    },
+                    child: Wrap(
+                      children: [
+                        const Icon(
+                          FontAwesomeIcons.google,
+                          size: 20,
+                          color: white,
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        normalText(
+                            text: StrLogin.btnName, size: 15, color: white),
+                      ],
+                    ))),
             Flexible(
               // ignore: sort_child_properties_last
               child: Container(),

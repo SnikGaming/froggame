@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/history/info.dart';
@@ -36,9 +37,11 @@ class QuizzHome extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               //!Img
-              Image.asset(
-                StrOption.img,
-              ),
+              AnimatedCusScal(
+                  context: context,
+                  chil: Image.asset(
+                    StrOption.img,
+                  )),
               normalText(text: StrOption.caption, color: lightgrey, size: 18),
               Row(
                 children: [
@@ -83,34 +86,36 @@ class QuizzHome extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        maximumSize: Size(size.width, 45),
-                        elevation: 9,
-                        shadowColor: Colors.orange,
-                        // ignore: deprecated_member_use
-                        primary: Colors.orange,
-                        minimumSize: const Size(240, 40),
-                        //  side: const BorderSide(width: 2, color: blue),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      onPressed: () {
-                        
-                        nextScreen(context, const TypeQuestionPage());
-                      },
-                      child: Text(
-                        StrOption.tieptuc,
-                        style: F_lobster.copyWith(
-                            fontSize: 20, fontWeight: FontWeight.w500),
-                      )),
-                ),
-              )
+              AnimatedCus(
+                  context: context,
+                  y: 120,
+                  chil: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            maximumSize: Size(size.width, 45),
+                            elevation: 9,
+                            shadowColor: Colors.orange,
+                            // ignore: deprecated_member_use
+                            primary: Colors.orange,
+                            minimumSize: const Size(240, 40),
+                            //  side: const BorderSide(width: 2, color: blue),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () {
+                            nextScreen(context, const TypeQuestionPage());
+                          },
+                          child: Text(
+                            StrOption.tieptuc,
+                            style: F_lobster.copyWith(
+                                fontSize: 20, fontWeight: FontWeight.w500),
+                          )),
+                    ),
+                  ))
             ],
           ),
         ));

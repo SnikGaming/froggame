@@ -2,11 +2,11 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:timer_snackbar/timer_snackbar.dart';
 import '../../const/colors.dart';
 import '../../const/font_app.dart';
 import '../../const/str_Type.dart';
@@ -21,7 +21,6 @@ class TypeQuestionPage extends StatefulWidget {
 }
 
 class _TypeQuestionPageState extends State<TypeQuestionPage> {
-  
   @override
   void initState() {
     // ignore: todo
@@ -49,7 +48,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
 
                 flex: 1,
               ),
-              UserHeader(height: size.height * .1),
+              UserHeader(height: size.height * .1, context: context),
               Flexible(
                 // ignore: sort_child_properties_last
                 child: Container(),
@@ -105,20 +104,29 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                     right: 20,
                                     bottom: 0,
                                     // ignore: sort_child_properties_last
-                                    child: Image.asset(type.image),
+                                    child: AnimatedCus(
+                                      context: context,
+                                      x: 150,
+                                      y: -150,
+                                      curve: Curves.elasticIn,
+                                      chil: Image.asset(type.image),
+                                    ),
                                     height: 170,
                                   ),
                                   Positioned(
                                       left: 20,
                                       top: 30,
-                                      child: Text(
-                                        // ignore: unnecessary_string_interpolations
-                                        "${lsCategories[index]}",
-                                        style: F_permanent.copyWith(
-                                            color: white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 30),
-                                      )),
+                                      child: AnimatedCus(
+                                          x: -250,
+                                          curve: Curves.elasticInOut,
+                                          context: context,
+                                          chil: Text(
+                                            lsCategories[index],
+                                            style: F_permanent.copyWith(
+                                                color: white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 30),
+                                          ))),
                                   Positioned(
                                     bottom: 20,
                                     left: 20,
@@ -126,8 +134,8 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                       onTap: () {
                                         // FureStorePackageQuestions.update(
                                         //     index: index + 1);
-                                        PackageMethod.createPackage(
-                                            index: index + 1, context: context);
+                                        // PackageMethod.createPackage(
+                                        //     index: index + 1, context: context);
                                         if (UserSimplePreferences.getHeart() <
                                             1) {
                                           Alert(
@@ -142,59 +150,55 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                           PackageMethod.createPackage(
                                                   index: index + 1)
                                               .then((value) => {
-                                                    // ScaffoldMessenger.of(
-                                                    //         context)
-                                                    //     .showSnackBar(
-                                                    //         const SnackBar(
-                                                    //             duration:
-                                                    //                 Duration(
-                                                    //                     seconds:
-                                                    //                         10),
-                                                    //             content: Text(
-                                                    //                 "Vui lòng đợi.."))),
                                                     if (PackageMethod.idch < 30)
                                                       {
-                                                        timerSnackbar(
-                                                          context: context,
-                                                          contentText:
-                                                              "Vui lòng đợi... thời gian có thể lâu hơn mong đợi ❤️",
-                                                          buttonPrefixWidget:
-                                                              Image.asset(
-                                                            'assets/images/frogkimono.webp',
-                                                            width: 17.0,
-                                                            height: 15.0,
-                                                            alignment: Alignment
-                                                                .topCenter,
-                                                            color: const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                144,
-                                                                11,
-                                                                239),
-                                                          ),
-                                                          afterTimeExecute: () {
-                                                            if (PackageMethod
-                                                                    .idch <
-                                                                30) {
-                                                              PackageMethod
-                                                                      .isLoad
-                                                                  ? PackageMethod
-                                                                          .idch =
-                                                                      PackageMethod
-                                                                          .idch
-                                                                  : PackageMethod
-                                                                      .idch = 0;
+                                                        // timerSnackbar(
+                                                        //   context: context,
+                                                        //   contentText:
+                                                        //       "Vui lòng đợi... thời gian có thể lâu hơn mong đợi ❤️",
+                                                        //   buttonPrefixWidget:
+                                                        //       Image.asset(
+                                                        //     'assets/images/frogkimono.webp',
+                                                        //     width: 17.0,
+                                                        //     height: 15.0,
+                                                        //     alignment: Alignment
+                                                        //         .topCenter,
+                                                        //     color: const Color
+                                                        //             .fromARGB(
+                                                        //         255,
+                                                        //         144,
+                                                        //         11,
+                                                        //         239),
+                                                        //   ),
+                                                        //   afterTimeExecute: () {
+                                                        //     if (PackageMethod
+                                                        //             .idch <
+                                                        //         30) {
+                                                        //       PackageMethod
+                                                        //               .isLoad
+                                                        //           ? PackageMethod
+                                                        //                   .idch =
+                                                        //               PackageMethod
+                                                        //                   .idch
+                                                        //           : PackageMethod
+                                                        //               .idch = 0;
 
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .push(MaterialPageRoute(
-                                                                      builder: (_) =>
-                                                                          QuizzGameScreen(
-                                                                              idlv: index + 1)));
-                                                            }
-                                                          },
-                                                          second: 3,
-                                                        ),
+                                                        //       Navigator.of(
+                                                        //               context)
+                                                        //           .push(MaterialPageRoute(
+                                                        //               builder: (_) =>
+                                                        //                   QuizzGameScreen(
+                                                        //                       idlv: index + 1)));
+                                                        //     }
+                                                        //   },
+                                                        //   second: 3,
+                                                        // ),
+                                                        Navigator.of(context).push(
+                                                            MaterialPageRoute(
+                                                                builder: (_) =>
+                                                                    QuizzGameScreen(
+                                                                        idlv: index +
+                                                                            1)))
                                                       }
                                                     else
                                                       {

@@ -6,10 +6,8 @@ import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
-import 'package:froggame/view_data/firesore_packageQuestion.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
-import 'package:froggame/view_data/package_method.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
