@@ -7,6 +7,8 @@ import 'package:froggame/screens/gameplay/game_play_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
+import 'package:froggame/view_data/firestore_history.dart';
+import 'package:froggame/view_data/firestore_rank.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -20,6 +22,8 @@ Future<void> main(List<String> args) async {
   await UserSimplePreferences.init();
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
+  await FutureRank.getData();
+  await FutureHistory.getData();
   runApp(const MyApp());
 }
 

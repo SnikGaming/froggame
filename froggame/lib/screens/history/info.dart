@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/models/history_model.dart';
+import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
+import 'package:froggame/view_data/firestore_history.dart';
+import 'package:froggame/view_data/firestore_rank.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,29 +14,48 @@ import '../../const/str_Type.dart';
 // ignore: camel_case_types
 class infomation_screen extends StatefulWidget {
   const infomation_screen({super.key});
-
   @override
   State<infomation_screen> createState() => _infomation_screenState();
-  
 }
-  List<String>dt=[];
 
-var selected = FureStoreCategory.lst[0];
-
-
+var selected = 0;
+var indexLst = 1;
 
 // ignore: camel_case_types
 class _infomation_screenState extends State<infomation_screen> {
-  
-  bool isClickEvent = true;
+  static bool isClickEvent = true;
   // ignore: non_constant_identifier_names
-  bool isColor_history = true;
+  static bool isColor_history = true;
   // ignore: non_constant_identifier_names
-  bool isColor_rank = false;
- 
+  static bool isColor_rank = false;
+
+  static List<rankModels> lstRankSort = [];
+//sửa
+  static void lstId() {
+    for (var i in FutureRank.lstRank) {
+      if (i.idlv == selected + 1) {
+        lstRankSort.add(i);
+        // print(
+        //     '========= idlv  =====================${i.idlv} name: ${i.NamePlayer} score: ${i.score} index $indexLst');
+      }
+    }
+    print(
+        '======================chieu dai ======================${lstRankSort.length}');
+    FutureRank.lstRank.clear();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    lstId();
+    // print(
+    //     '================================length=================${lstRankSort.length}');
+  }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size *0.105;
+    Size size = MediaQuery.of(context).size * 0.105;
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -41,11 +64,10 @@ class _infomation_screenState extends State<infomation_screen> {
                 end: Alignment.bottomCenter,
                 colors: [bg1, bg2])),
         child: Column(
-
           children: [
             Container(
               width: 370,
-              height: size.height ,
+              height: size.height,
               margin: const EdgeInsets.only(top: 35),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -75,8 +97,11 @@ class _infomation_screenState extends State<infomation_screen> {
                         const Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: 10, horizontal: 105)),
-                        GestureDetector (
+                        GestureDetector(
                           onTap: () {
+                            setState(() {
+                              lstRankSort.clear();
+                            });
                             Navigator.pop(context);
                           },
                           child: const Icon(
@@ -94,6 +119,7 @@ class _infomation_screenState extends State<infomation_screen> {
                       GestureDetector(
                           onTap: () {
                             isClickEvent = true;
+
                             setState(() {
                               isColor_history = true;
                               isColor_rank = false;
@@ -106,9 +132,10 @@ class _infomation_screenState extends State<infomation_screen> {
                           )),
                       GestureDetector(
                         onTap: () {
+                          isClickEvent = false;
+
                           setState(
                             () {
-                              isClickEvent = false;
                               isColor_history = false;
                               isColor_rank = true;
                             },
@@ -125,9 +152,6 @@ class _infomation_screenState extends State<infomation_screen> {
                 padding: const EdgeInsets.only(top: 10),
                 height: 700,
                 child: isClickEvent ? historyPlay(context) : rank(context)),
-            //   Container(
-            //   color: red,height: 100,
-            // ),
             Flexible(
               // ignore: sort_child_properties_last
               child: Container(),
@@ -149,7 +173,7 @@ class _infomation_screenState extends State<infomation_screen> {
       child: Center(
         child: Text(
           chiEvent,
-          style: F_permanent .copyWith(fontSize: 20),
+          style: F_permanent.copyWith(fontSize: 20),
         ),
       ),
     );
@@ -159,7 +183,7 @@ class _infomation_screenState extends State<infomation_screen> {
     return SingleChildScrollView(
       child: Column(
         children: List.generate(
-          FureStoreCategory.lst.length,
+          FutureHistory.lst.length < 10 ? FutureHistory.lst.length : 10,
           (index) => Card(
             color: bg2,
             child: Container(
@@ -178,20 +202,20 @@ class _infomation_screenState extends State<infomation_screen> {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         child: Center(
-                          child: Image.asset(TypeModel.listType[index].image)
-                        ),
+                            child: Image.asset(TypeModel
+                                .listType[FutureHistory.idlv[index]].image)),
                       ),
                       const Padding(padding: EdgeInsets.all(10)),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(FureStoreCategory.lst[index],
-                              style: F_pacifico .copyWith(
+                          Text(FutureHistory.lst[index].catName,
+                              style: F_pacifico.copyWith(
                                   fontSize: 27,
                                   color: white,
                                   fontWeight: FontWeight.w500)),
                           Text(
-                            '1p30',
+                            FutureHistory.lst[index].timer,
                             style: F_popins.copyWith(fontSize: 15),
                           )
                         ],
@@ -208,13 +232,13 @@ class _infomation_screenState extends State<infomation_screen> {
                         borderRadius: BorderRadius.circular(30)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
+                      children: [
                         Icon(
                           Icons.star_rate_outlined,
                           color: Colors.yellow,
                         ),
                         Text(
-                          '100',
+                          '${FutureHistory.lst[index].score == null ? 0 : FutureHistory.lst[index].score}',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -231,34 +255,39 @@ class _infomation_screenState extends State<infomation_screen> {
   }
 
   Widget rank(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        // ignore: sized_box_for_whitespace
+        //ignore: sized_box_for_whitespace
         Container(
           height: 60,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: FureStoreCategory.lst.length,
             itemBuilder: (context, index) => GestureDetector(
-              onTap:() {
-                selected = FureStoreCategory.lst[index];
+              onTap: () {
+                selected = index;
 
                 setState(() {
-                  
+                  indexLst = index;
+                  lstId();
+
+                  //FutureRank.getData();
+                  //selected == FureStoreCategory.lst[index];
                 });
+                // lstRank.clear();
+                // lstRankSort.clear();
               },
               child: Container(
                 margin: const EdgeInsets.all(5),
                 height: 150,
                 width: 100,
                 decoration: BoxDecoration(
-                    color: selected == FureStoreCategory.lst[index] ? Colors.red : Colors.white,
+                    color: selected == index ? Colors.red : Colors.white,
                     borderRadius: BorderRadius.circular(15)),
                 child: Center(
-                  child: Text(
-                    FureStoreCategory.lst[index],
-                    style: F_lobster.copyWith(fontSize: 20)
-                  ),
+                  child: Text(FureStoreCategory.lst[index],
+                      style: F_lobster.copyWith(fontSize: 20)),
                 ),
               ),
             ),
@@ -267,115 +296,128 @@ class _infomation_screenState extends State<infomation_screen> {
         const Padding(padding: EdgeInsets.only(bottom: 10)),
         // ignore: sized_box_for_whitespace
         Container(
-          height: 500,
-          child: SingleChildScrollView(
-            child: Column(
-              children: List.generate(
-                10,
-                (index) => Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50,
-                    width: 360,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: const Color.fromARGB(255, 76, 129, 241),
-                    ),
-                    // ignore: sort_child_properties_last
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const SizedBox(
-                              width: 30,
-                            ),
-                            Text('${index + 1}.',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18)),
-                            const CircleAvatar(),
-                            const Text('Phong',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 18,
-                                    color: white))
-                          ],
-                        ),
-                        Row(
-                          children: const [
-                            Text(
-                              '100',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                  color: white),
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          height: size.height * 0.55,
+          child: ListRank(context),
         ),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            height: 80,
-            width: 360,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: const Color.fromARGB(255, 212, 86, 185),
-            ),
-            // ignore: sort_child_properties_last
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text('100+.',
-                    style:
-                        TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
-                Row(
-                  children: [
-                    Container(
-                      height: 70,
-                      width: 60,
-                      decoration: BoxDecoration(
-                          color: const Color.fromARGB(255, 76, 129, 241),
-                          borderRadius: BorderRadius.circular(30)),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: const [
-                    Text(
-                      '100',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: white),
-                    ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                  ],
-                )
-              ],
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: Container(
+        //     height: 80,
+        //     width: 360,
+        //     decoration: BoxDecoration(
+        //       borderRadius: BorderRadius.circular(15),
+        //       color: const Color.fromARGB(255, 212, 86, 185),
+        //     ),
+        //     // ignore: sort_child_properties_last
+        //     child: Row(
+        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //       children: [
+        //         const Text('100+.',
+        //             style:
+        //                 TextStyle(fontWeight: FontWeight.w500, fontSize: 18)),
+        //         Row(
+        //           children: [
+        //             Container(
+        //               height: 70,
+        //               width: 60,
+        //               decoration: BoxDecoration(
+        //                   color: const Color.fromARGB(255, 76, 129, 241),
+        //                   borderRadius: BorderRadius.circular(30)),
+        //             ),
+        //             const SizedBox(
+        //               width: 5,
+        //             ),
+        //           ],
+        //         ),
+        //         Row(
+        //           children: const [
+        //             Text(
+        //               '100',
+        //               style: TextStyle(
+        //                   fontWeight: FontWeight.w500,
+        //                   fontSize: 18,
+        //                   color: white),
+        //             ),
+        //             SizedBox(
+        //               width: 30,
+        //             ),
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //     padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        //   ),
+        // ),
       ],
+    );
+  }
+
+  @override
+  Widget ListRank(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: List.generate(
+          lstRankSort.length < 10 ? lstRankSort.length : 10,
+          (index) => Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 80,
+              width: 360,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: const Color.fromARGB(255, 76, 129, 241),
+              ),
+              // ignore: sort_child_properties_last
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      const SizedBox(
+                        width: 30,
+                      ),
+                      Text('${index + 1}. ',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w500, fontSize: 18)),
+                      Container(
+                        width: 80,
+                        height: 100,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(40)),
+                        child: Image.network(
+                          lstRankSort[index].avatar,
+                          height: 100,
+                          width: 100,
+                        ),
+                      ),
+                      Text('${lstRankSort[index].NamePlayer}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                              color: white))
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        '${lstRankSort[index].score}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 18,
+                            color: white),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
