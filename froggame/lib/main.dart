@@ -6,10 +6,8 @@ import 'package:froggame/screens/gameplay/options_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_game_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
-import 'package:froggame/view_data/firesore_packageQuestion.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
-import 'package:froggame/view_data/package_method.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
@@ -22,7 +20,6 @@ Future<void> main(List<String> args) async {
   await UserSimplePreferences.init();
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
-
   runApp(const MyApp());
 }
 
@@ -43,6 +40,7 @@ class MyApp extends StatelessWidget {
       initialRoute: UserSimplePreferences.getUserId() == null ||
               UserSimplePreferences.getUserId() == ""
           ? 'welcome'
+          //  : "quizz_screen",
           : 'welcome2',
       theme: ThemeData(fontFamily: "quick"),
     );
