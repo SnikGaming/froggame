@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 class StrShop {
   static List<String> categories = [
-    "Tất cả",
-    "Khung",
+    "Tim",
     "Nạp",
   ];
 

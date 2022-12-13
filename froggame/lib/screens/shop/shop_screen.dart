@@ -11,9 +11,10 @@ import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_shop.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/screen_load/view.dart';
-import 'package:froggame/screens/shop/shop_pay.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:froggame/const/str_pay.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import '../../const/text_style.dart';
 import '../../view_data/firesore_napthe.dart';
@@ -78,34 +79,17 @@ class _ShopScreenState extends State<ShopScreen> {
           decoration: BoxDecoration(gradient: background),
           // ignore: sized_box_for_whitespace
           child: Container(
-            height: size.height,
-            width: size.width,
-            child: Column(
-              children: [
-                // ignore: todo
-                //TODO : USER
-                UserHeader(height: size.height * .1, context: context),
-                // ignore: todo
-                //TODO : EVEN OR CARD
+              height: size.height,
+              width: size.width,
+              child: Column(
+                children: [
+                  // ignore: todo
+                  //TODO : USER
+                  UserHeader(height: size.height * .1, context: context),
+                  // ignore: todo
+                  //TODO : EVEN OR CARD
 
-                  CarouselSlider(
-                      items: const [View()],
-                      options: CarouselOptions(
-                        height: size.height * .25,
-                        aspectRatio: 16 / 9,
-                        viewportFraction: 0.8,
-                        initialPage: 0,
-                        enableInfiniteScroll: true,
-                        reverse: false,
-                        autoPlay: true,
-                        autoPlayInterval: const Duration(seconds: 3),
-                        autoPlayAnimationDuration:
-                            const Duration(milliseconds: 3000),
-                        autoPlayCurve: Curves.fastLinearToSlowEaseIn,
-                        enlargeCenterPage: true,
-                        scrollDirection: Axis.horizontal,
-                      )),
-
+                  // ~az
                   // ignore: todo
                   //TODO : CATEGORIEs LIST
                   SingleChildScrollView(
@@ -166,11 +150,12 @@ class _ShopScreenState extends State<ShopScreen> {
                   // ignore: todo
                   //TODO : ITEMS LIST
                   //
-                  _index == StrShop.categories[0]
-                      ? Container()
-                      : _index == StrShop.categories[1]
-                          ? Container()
-                          : itemdata(size)
+                  Expanded(
+                    child: _index == StrShop.categories[0]
+                        ? Container()
+                        : itemdata(size),
+                  )
+
                   //
                 ],
               )
@@ -201,4 +186,12 @@ class _ShopScreenState extends State<ShopScreen> {
       ),
     );
   }
+}
+
+showCard({required int MenhGia, required context}) {
+  return QuickAlert.show(
+    context: context,
+    type: QuickAlertType.info,
+    text: 'Bạn đã nạp thành công $MenhGia.000 Vnđ',
+  );
 }
