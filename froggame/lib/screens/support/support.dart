@@ -8,7 +8,7 @@ void show_ModalBottomSheet(BuildContext context) {
   var txt = TextEditingController();
 
   showModalBottomSheet(
-    backgroundColor: Color.fromARGB(255, 213, 91, 140),
+    backgroundColor: const Color.fromARGB(255, 213, 91, 140),
     context: context,
     isScrollControlled: true,
     shape: const RoundedRectangleBorder(
@@ -53,35 +53,33 @@ void show_ModalBottomSheet(BuildContext context) {
             ),
             TextButton(
                 onPressed: () async {
-                  //         final _docPakage = FirebaseFirestore.instance
-                  //     .collection("packageQuestions")
-                  //     // ignore: prefer_interpolation_to_compose_strings, unnecessary_brace_in_string_interps
-                  //     .doc(_idgoi + "${index}");
-                  // await _docPakage.set({
-                  //   // ignore: prefer_interpolation_to_compose_strings
-                  //   'idgoi': _idgoi + "$index",
-                  //   'idch': idch,
-                  //   'timer': 0,
-                  //   'idlv': index,
-                  //   'idUser': _idgoi
-                  // });
-                  final data = FirebaseFirestore.instance
-                      .collection("report")
-                      .doc(DateTime.now().toString());
-                  await data.set({
-                    "iduser": UserSimplePreferences.getUserId(),
-                    "gamil": UserSimplePreferences.getUserEmail(),
-                    "content": txt.text,
-                    "time": DateTime.now().toString()
-                  }).then((value) {
-                    txt.clear();
-                    Navigator.of(context).pop();
-                    QuickAlert.show(
-                      context: context,
-                      type: QuickAlertType.success,
-                      text: 'Đã gửi\n Cảm ơn đóng góp của bạn về ứng dụng...',
-                    );
-                  });
+                  if (txt.text.isNotEmpty) {
+                    final data = FirebaseFirestore.instance
+                        .collection("report")
+                        .doc(DateTime.now().toString());
+                    await data.set({
+                      "iduser": UserSimplePreferences.getUserId(),
+                      "gamil": UserSimplePreferences.getUserEmail(),
+                      "content": txt.text,
+                      "time": DateTime.now().toString()
+                    }).then((value) {
+                      txt.clear();
+                      Navigator.of(context).pop();
+                      QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.success,
+                        text: 'Đã gửi\n Cảm ơn đóng góp của bạn về ứng dụng...',
+                      );
+                    });
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return const AlertDialog(
+                            content: Text("Bạn chưa nhập gì cả..."),
+                          );
+                        });
+                  }
                 },
                 child: const Text("GỬI",
                     style:
