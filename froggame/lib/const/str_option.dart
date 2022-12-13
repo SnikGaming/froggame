@@ -7,12 +7,11 @@ import 'package:froggame/view_data/user_pre.dart';
 
 class StrOption {
   static const bxh = "BXH";
-  static const shop = "Shop";
-  static const card = "Pay to win";
-  static const support = "Support";
-  static const setting = "Setting";
-  static const signout = "Sign out";
-  static const quit = "Quit";
+  static const shop = "Cửa Hàng";
+  static const support = "Hỗ Trợ";
+  static const setting = "Cài Đặt";
+  static const signout = "Đăng Xuất";
+  static const quit = "Thoát";
 
   static const tieptuc = "TIẾP TỤC";
   // static final tieptuc = "Continue";

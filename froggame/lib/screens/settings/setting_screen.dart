@@ -104,37 +104,37 @@ class _SettingScreenState extends State<SettingScreen> {
                 child: Container(),
                 flex: 1,
               ),
-              GestureDetector(
-                onTap: () async {
-                  int id = 30;
-                  String name = "Hoàng Sa - Trường Sa của nước nào?";
-                  String a = "Việt Nam";
-                  String b = "Việt Nam";
-                  String c = "Việt Nam";
-                  String d = "Việt Nam";
-//!:
-                  int idlv = 4;
-                  String table = "questions";
-                  final data = FirebaseFirestore.instance
-                      .collection(table)
-                      .doc("${id}${idlv}");
+//               GestureDetector(
+//                 onTap: () async {
+//                   int id = 30;
+//                   String name = "Hoàng Sa - Trường Sa của nước nào?";
+//                   String a = "Việt Nam";
+//                   String b = "Việt Nam";
+//                   String c = "Việt Nam";
+//                   String d = "Việt Nam";
+// //!:
+//                   int idlv = 4;
+//                   String table = "questions";
+//                   final data = FirebaseFirestore.instance
+//                       .collection(table)
+//                       .doc("${id}${idlv}");
 
-                  await data.set({
-                    "id": id,
-                    "idlv": idlv,
-                    "name": name,
-                    "a": a,
-                    "b": b,
-                    "c": c,
-                    "d": d
-                  });
-                },
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  color: Colors.red,
-                ),
-              ),
+//                   await data.set({
+//                     "id": id,
+//                     "idlv": idlv,
+//                     "name": name,
+//                     "a": a,
+//                     "b": b,
+//                     "c": c,
+//                     "d": d
+//                   });
+//                 },
+//                 child: Container(
+//                   height: 100,
+//                   width: 100,
+//                   color: Colors.red,
+//                 ),
+//               ),
             ],
           ),
         ),

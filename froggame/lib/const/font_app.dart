@@ -8,4 +8,3 @@ final F_pacifico = GoogleFonts.pacifico();
 final F_popins = GoogleFonts.poppins();
 // ignore: non_constant_identifier_names
 final F_permanent = GoogleFonts.permanentMarker();
-
