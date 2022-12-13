@@ -21,6 +21,7 @@ class TypeQuestionPage extends StatefulWidget {
 }
 
 class _TypeQuestionPageState extends State<TypeQuestionPage> {
+  
   @override
   void initState() {
     // ignore: todo

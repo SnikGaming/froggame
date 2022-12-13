@@ -80,16 +80,16 @@ class UserSimplePreferences {
   static Future removeSLCD() async => await preferences!.remove(_keyDTL);
 //! removeAll
   static Future removeAll() async {
-    await removeUsername();
-    await removeUserId();
-    await removeUserPic();
-    await removeUserHeart();
-    await removeUserEmail();
+    removeUsername();
+    removeUserId();
+    removeUserPic();
+    removeUserHeart();
+    removeUserEmail();
     UserSimplePreferences.setUserId(id: "");
-    await removeUserLogin();
-    await removeUserScore();
-    await SettingSimplePreferences.removeAll();
-    await removeSL();
-    await removeSLCD();
+    removeUserLogin();
+    removeUserScore();
+    SettingSimplePreferences.removeAll();
+    removeSL();
+    removeSLCD();
   }
 }
