@@ -1,3 +1,4 @@
+// ignore: camel_case_types
 class lstHistory {
   String img;
   String catName;

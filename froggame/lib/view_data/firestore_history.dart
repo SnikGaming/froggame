@@ -14,7 +14,7 @@ class FutureHistory {
 
   static Future getData() async {
     List<String> catName = FureStoreCategory.lst;
-    await await hisData.get().then(
+    await hisData.get().then(
           (value) => {
             for (var a in value.docs)
               {

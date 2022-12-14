@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
+import 'package:froggame/screens/profile/profile_screen.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 import '../const/colors.dart';
@@ -33,9 +34,16 @@ UserHeader({required double height, required BuildContext context}) {
                   gradient: const LinearGradient(
                       colors: [Colors.purple, Colors.pink]),
                 ),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.network(UserSimplePreferences.getUserPic())),
+                child: GestureDetector(
+                  onTap: () => Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const ProfileScreen(),
+                    ),
+                  ),
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.network(UserSimplePreferences.getUserPic())),
+                ),
               ),
             ),
             const SizedBox(

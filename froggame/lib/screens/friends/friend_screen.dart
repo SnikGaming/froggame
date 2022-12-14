@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_friend.dart';
@@ -25,14 +23,14 @@ class _FriendScreenState extends State<FriendScreen> {
           height: size.height,
           width: size.width,
           decoration: BoxDecoration(gradient: background),
-          child: Container(
+          child: SizedBox(
             height: size.height,
             width: size.width,
             child: Column(
               children: [
                 UserHeader(height: size.height * .1, context: context),
                 SingleChildScrollView(
-                  child: Container(
+                  child: SizedBox(
                     height: size.height * .09,
                     child: Row(
                       children: List.generate(

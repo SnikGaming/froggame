@@ -1,6 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
-import 'package:froggame/models/history_model.dart';
 import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_history.dart';
@@ -39,13 +40,12 @@ class _infomation_screenState extends State<infomation_screen> {
         //     '========= idlv  =====================${i.idlv} name: ${i.NamePlayer} score: ${i.score} index $indexLst');
       }
     }
-    print(
-        '======================chieu dai ======================${lstRankSort.length}');
     FutureRank.lstRank.clear();
   }
 
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     lstId();
@@ -238,7 +238,7 @@ class _infomation_screenState extends State<infomation_screen> {
                           color: Colors.yellow,
                         ),
                         Text(
-                          '${FutureHistory.lst[index].score == null ? 0 : FutureHistory.lst[index].score}',
+                          FutureHistory.lst[index].score,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
@@ -352,7 +352,7 @@ class _infomation_screenState extends State<infomation_screen> {
     );
   }
 
-  @override
+  // ignore: non_constant_identifier_names
   Widget ListRank(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
@@ -390,7 +390,7 @@ class _infomation_screenState extends State<infomation_screen> {
                           width: 100,
                         ),
                       ),
-                      Text('${lstRankSort[index].NamePlayer}',
+                      Text(lstRankSort[index].NamePlayer,
                           style: TextStyle(
                               fontWeight: FontWeight.w500,
                               fontSize: 18,
