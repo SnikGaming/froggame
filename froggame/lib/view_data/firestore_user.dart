@@ -12,7 +12,6 @@ class FureStoreUser {
   }
 
   static Future addDataUser({required heart, required score}) async {
-    
     UserSimplePreferences.setHeart(heart: heart);
     UserSimplePreferences.setScore(score: score);
 
@@ -26,5 +25,14 @@ class FureStoreUser {
       "email": UserSimplePreferences.getUserEmail(),
       "score": UserSimplePreferences.getScore()
     });
+  }
+
+  static Future getAvatar(String userId) async {
+    var usAvatar = FirebaseFirestore.instance
+        .collection('users')
+        .where('userId', isEqualTo: userId);
+    await usAvatar.get().then(
+          (value) => {},
+        );
   }
 }

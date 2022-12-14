@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
 
 class Pay {
   // ignore: non_constant_identifier_names
@@ -25,7 +24,7 @@ class Pay {
               '🪙',
               style: TextStyle(fontSize: 40),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
               height: 10,
             ),

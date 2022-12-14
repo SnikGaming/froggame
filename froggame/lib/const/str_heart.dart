@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'colors.dart';
 
 class Hearts {
   // ignore: non_constant_identifier_names
@@ -25,17 +24,17 @@ class Hearts {
               '❤️',
               style: TextStyle(fontSize: 40),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
               height: 10,
             ),
-            Text('${heart} ❤️',
+            Text('$heart ❤️',
                 style: const TextStyle(fontSize: 20, color: Colors.black)),
-            SizedBox(
+            const SizedBox(
               width: 2,
               height: 2,
             ),
-            Text("${coin} 🪙",
+            Text("$coin 🪙",
                 //textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 20, color: Colors.black)),
           ],

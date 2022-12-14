@@ -246,6 +246,7 @@ class _ShopScreenState extends State<ShopScreen> {
   }
 }
 
+// ignore: non_constant_identifier_names
 showCardPay({required int MenhGia, required context}) {
   return QuickAlert.show(
     context: context,

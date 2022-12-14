@@ -8,6 +8,7 @@ import 'package:froggame/const/str_option.dart';
 import 'package:froggame/screens/friends/friend_screen.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screen_load/view.dart';
+import 'package:froggame/screens/profile/profile_screen.dart';
 import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
@@ -130,25 +131,29 @@ class QuizzHome extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 //Profile
+                Navigator.of(ctx)
+                    .push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
               },
-              child: Column(
-                children: [
-                  Container(
-                    height: 100,
-                    decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            image: NetworkImage(
-                                UserSimplePreferences.getUserPic()),
-                            fit: BoxFit.contain)),
-                  ),
-                  const Spacer(),
-                  headingText(
-                      text: UserSimplePreferences.getUsername(),
-                      color: white,
-                      size: 20)
-                ],
-              ),
+              child: AnimatedCusScal(
+                  context: ctx,
+                  chil: Column(
+                    children: [
+                      Container(
+                        height: 100,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: NetworkImage(
+                                    UserSimplePreferences.getUserPic()),
+                                fit: BoxFit.contain)),
+                      ),
+                      const Spacer(),
+                      headingText(
+                          text: UserSimplePreferences.getUsername(),
+                          color: white,
+                          size: 20)
+                    ],
+                  )),
             ),
           ),
           StrOption.listView(
