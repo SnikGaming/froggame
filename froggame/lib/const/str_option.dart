@@ -14,7 +14,9 @@ class StrOption {
   static const signout = "Đăng Xuất";
   static const quit = "Thoát";
 
-  static const tieptuc = "TIẾP TỤC";
+  static const tieptuc = "CHƠI ĐƠN";
+  static const doikhang = "ĐỐI KHÁNG";
+
   // static final tieptuc = "Continue";
 
   static final caption =
