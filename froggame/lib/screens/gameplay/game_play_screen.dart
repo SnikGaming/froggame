@@ -300,7 +300,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                           child: const Text("Không")),
                       TextButton(
                           onPressed: () => Navigator.of(context).pop(true),
-                          child: Text("Thoát")),
+                          child: const Text("Thoát")),
                     ],
                   )));
 
@@ -554,7 +554,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                           )));
                                                                 }
                                                               },
-                                                              child: Text(
+                                                              child: const Text(
                                                                   "Đã hiểu"))
                                                         ],
                                                         title: Text.rich(

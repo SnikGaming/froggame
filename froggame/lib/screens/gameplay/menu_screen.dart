@@ -23,7 +23,6 @@ import '../../view_data/package_method.dart';
 
 class QuizzHome extends StatelessWidget {
   const QuizzHome({super.key});
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
