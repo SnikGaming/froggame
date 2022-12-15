@@ -19,6 +19,7 @@ import '../../const/colors.dart';
 import '../../const/next_screen.dart';
 import '../../const/text_style.dart';
 import '../../const/values.dart';
+import '../../view_data/package_method.dart';
 
 class QuizzHome extends StatelessWidget {
   const QuizzHome({super.key});
@@ -115,6 +116,7 @@ class QuizzHome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
+                              PackageMethod.InitPackage();
                               nextScreen(context, const TypeQuestionPage());
                             },
                             child: Text(
