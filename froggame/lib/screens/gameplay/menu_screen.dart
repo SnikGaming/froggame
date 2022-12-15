@@ -29,95 +29,133 @@ class QuizzHome extends StatelessWidget {
     return Scaffold(
         appBar: appbarWidget(),
         endDrawer: drawerWidget(context),
-        body: Container(
-          width: size.width,
-          height: size.height,
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          decoration: BoxDecoration(gradient: background),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //!Img
-              AnimatedCusScal(
-                  context: context,
-                  chil: Image.asset(
-                    StrOption.img,
-                  )),
-              normalText(text: StrOption.caption, color: lightgrey, size: 18),
-              Row(
-                children: [
-                  Image.asset(
-                    frog_icon,
-                    height: 45,
-                  ),
-                  headingText(
-                      text: StrOption.namegame, size: 32, color: Colors.white)
-                ],
-              ),
-
-              // ignore: todo
-              // //TODO :Slider
-              CarouselSlider(
-                  items: [
-                    ViewData(
-                      txt: "Hãy đến đây với chúng tôi...",
+        body: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: Container(
+            width: size.width,
+            height: size.height,
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            decoration: BoxDecoration(gradient: background),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                //!Img
+                AnimatedCusScal(
+                    context: context,
+                    chil: Image.asset(
+                      StrOption.img,
+                      height: size.height * .3,
+                    )),
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: normalText(
+                        text: StrOption.caption, color: lightgrey, size: 18)),
+                Row(
+                  children: [
+                    Image.asset(
+                      frog_icon,
+                      height: 45,
                     ),
-                    ViewData(
-                      txt: "Hãy vừa học vừa chơi...",
-                    ),
-                    ViewData(
-                      txt: "Tiếp thu các kiến thức...",
-                    )
+                    headingText(
+                        text: StrOption.namegame, size: 32, color: Colors.white)
                   ],
-                  options: CarouselOptions(
-                    //height: 150,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    initialPage: 0,
-                    enableInfiniteScroll: true,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration:
-                        const Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    scrollDirection: Axis.horizontal,
-                  )),
-              const SizedBox(
-                height: 30,
-              ),
-              AnimatedCus(
-                  context: context,
-                  y: 120,
-                  chil: Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            maximumSize: Size(size.width, 45),
-                            elevation: 9,
-                            shadowColor: Colors.orange,
-                            // ignore: deprecated_member_use
-                            primary: Colors.orange,
-                            minimumSize: const Size(240, 40),
-                            //  side: const BorderSide(width: 2, color: blue),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
+                ),
+
+                // ignore: todo
+                // //TODO :Slider
+                CarouselSlider(
+                    items: [
+                      ViewData(
+                        txt: "Hãy đến đây với chúng tôi...",
+                      ),
+                      ViewData(
+                        txt: "Hãy vừa học vừa chơi...",
+                      ),
+                      ViewData(
+                        txt: "Tiếp thu các kiến thức...",
+                      )
+                    ],
+                    options: CarouselOptions(
+                      //height: 150,
+                      aspectRatio: 16 / 9,
+                      viewportFraction: 0.8,
+                      initialPage: 0,
+                      enableInfiniteScroll: true,
+                      reverse: false,
+                      autoPlay: true,
+                      autoPlayInterval: const Duration(seconds: 3),
+                      autoPlayAnimationDuration:
+                          const Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                      scrollDirection: Axis.horizontal,
+                    )),
+                const SizedBox(
+                  height: 40,
+                  //height: size.height * .2,
+                ),
+                AnimatedCus(
+                    context: context,
+                    y: 120,
+                    chil: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              maximumSize: Size(size.width, 45),
+                              elevation: 9,
+                              shadowColor: Colors.orange,
+                              // ignore: deprecated_member_use
+                              primary: Colors.orange,
+                              minimumSize: const Size(240, 40),
+                              //  side: const BorderSide(width: 2, color: blue),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
                             ),
-                          ),
-                          onPressed: () {
-                            nextScreen(context, const TypeQuestionPage());
-                          },
-                          child: Text(
-                            StrOption.tieptuc,
-                            style: F_lobster.copyWith(
-                                fontSize: 20, fontWeight: FontWeight.w500),
-                          )),
-                    ),
-                  ))
-            ],
+                            onPressed: () {
+                              nextScreen(context, const TypeQuestionPage());
+                            },
+                            child: Text(
+                              StrOption.tieptuc,
+                              style: F_lobster.copyWith(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            )),
+                      ),
+                    )),
+                AnimatedCus(
+                    context: context,
+                    y: 120,
+                    chil: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              maximumSize: Size(size.width, 45),
+                              elevation: 9,
+                              shadowColor: const Color.fromARGB(255, 255, 0, 0),
+                              // ignore: deprecated_member_use
+                              primary: const Color.fromARGB(255, 255, 0, 0),
+                              minimumSize: const Size(240, 40),
+                              //  side: const BorderSide(width: 2, color: blue),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                            ),
+                            onPressed: () {
+                              nextScreen(context, const TypeQuestionPage());
+                            },
+                            child: Text(
+                              StrOption.doikhang,
+                              style: F_lobster.copyWith(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            )),
+                      ),
+                    ))
+              ],
+            ),
           ),
         ));
   }
@@ -131,8 +169,8 @@ class QuizzHome extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 //Profile
-                Navigator.of(ctx)
-                    .push(MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                Navigator.of(ctx).push(
+                    MaterialPageRoute(builder: (_) => const ProfileScreen()));
               },
               child: AnimatedCusScal(
                   context: ctx,

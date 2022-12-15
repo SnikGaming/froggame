@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
+
 import 'package:froggame/view_data/user_pre.dart';
 
 import '../../const/colors.dart';
@@ -79,8 +80,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )),
                 //!: Name
                 Positioned(
-                    top: 80 + 150,
-                    child: AnimatedCus(
+                    top: size.height * .26,
+                    child: AnimatedCusScal(
                         x: 130,
                         curve: Curves.elasticOut,
                         s: 2400,
@@ -122,25 +123,99 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ],
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
                                 //!: TEXT FIELD
                                 Visibility(
                                   visible: isVisT,
-                                  child: SizedBox(
-                                      width: size.width - 100,
-                                      child: TextField(
-                                        controller: _controller,
-                                        maxLength: 32,
-                                        decoration: const InputDecoration(
-                                            border: OutlineInputBorder()),
-                                      )),
+                                  child: AnimatedCus(
+                                    context: context,
+                                    y: -40,
+                                    s: 700,
+                                    chil: SizedBox(
+                                        width: size.width - 100,
+                                        child: TextField(
+                                          controller: _controller,
+                                          maxLength: 32,
+                                          decoration: const InputDecoration(
+                                              border: OutlineInputBorder()),
+                                        )),
+                                  ),
                                 )
                               ],
                             ),
                           ),
                         ))),
-                //!: Avater
+                //!: DATE TIME
                 Positioned(
-                  top: 80,
+                    top: size.height * .4,
+
+                    //top: 370,
+                    child: GestureDetector(
+                      onTap: _showDatePicker,
+                      child: SizedBox(
+                        height: 60,
+                        width: size.width,
+                        child: AnimatedCus(
+                          context: context,
+                          s: 1200,
+                          y: -250,
+                          curve: Curves.bounceInOut,
+                          chil: Center(
+                              child: Text(date,
+                                  style: const TextStyle(
+                                      fontFamily: "DS-DIGITAL",
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 0, 251, 9)))),
+                        ),
+                      ),
+                    )),
+                //!: Email
+                Positioned(
+                    top: size.height * .45,
+
+                    //top: 370,
+                    child: GestureDetector(
+                      onTap: _showDatePicker,
+                      child: SizedBox(
+                        height: 60,
+                        width: size.width,
+                        child: Center(
+                          child: AnimatedCusScal(
+                            context: context,
+                            curve: Curves.elasticInOut,
+                            s: 2000,
+                            chil: SelectableText.rich(
+                              TextSpan(children: [
+                                const TextSpan(
+                                  text: "Gmail: ",
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 7, 7, 7),
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: UserSimplePreferences.getUserEmail(),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 251, 84, 0),
+                                  ),
+                                )
+                              ]),
+                            ),
+                          ),
+                        ),
+                      ),
+                    )),
+
+                //!: Avatar
+                Positioned(
+                  //top: 80,
+                  top: size.height * .1,
                   child: AnimatedCus(
                       y: -140,
                       curve: Curves.slowMiddle,
@@ -176,38 +251,43 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const SizedBox(height: 10),
                             Visibility(
                               visible: isVis,
-                              child: Container(
-                                height: 160,
-                                padding: const EdgeInsets.all(10),
-                                width: size.width - 40,
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(26, 6, 6, 6),
-                                    borderRadius: BorderRadius.circular(16)),
-                                child: GridView.builder(
-                                    itemCount: lsAvatar.length,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisSpacing: 5,
-                                            mainAxisSpacing: 5,
-                                            crossAxisCount: 4),
-                                    itemBuilder: ((context, index) => Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                              color: Colors.purple,
-                                              borderRadius:
-                                                  BorderRadius.circular(16)),
-                                          child: GestureDetector(
-                                            onTapUp: ((details) {
-                                              avatar = lsAvatar[index];
-                                              isVis = false;
-                                              setState(() {});
-                                            }),
-                                            child: Image.asset(
-                                              lsAvatar[index],
+                              child: AnimatedCusScal(
+                                context: context,
+                                curve: Curves.easeInCubic,
+                                chil: Container(
+                                  height: 160,
+                                  padding: const EdgeInsets.all(10),
+                                  width: size.width - 40,
+                                  decoration: BoxDecoration(
+                                      color: Colors.purpleAccent,
+                                      borderRadius: BorderRadius.circular(16)),
+                                  child: GridView.builder(
+                                      itemCount: lsAvatar.length,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisSpacing: 5,
+                                              mainAxisSpacing: 5,
+                                              crossAxisCount: 4),
+                                      itemBuilder: ((context, index) =>
+                                          Container(
+                                            height: 30,
+                                            width: 30,
+                                            decoration: BoxDecoration(
+                                                color: Colors.purple,
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            child: GestureDetector(
+                                              onTapUp: ((details) {
+                                                avatar = lsAvatar[index];
+                                                isVis = false;
+                                                setState(() {});
+                                              }),
+                                              child: Image.asset(
+                                                lsAvatar[index],
+                                              ),
                                             ),
-                                          ),
-                                        ))),
+                                          ))),
+                                ),
                               ),
                             ),
                           ],
@@ -235,29 +315,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //   ),
                 // ),
 
-                //!: DATE TIME
+                //!: INFORMATION
                 Positioned(
-                    top: 370,
-                    child: GestureDetector(
-                      onTap: _showDatePicker,
-                      child: SizedBox(
-                        height: 60,
-                        width: size.width,
-                        child: Center(
-                            child: Text(date,
-                                style: const TextStyle(
-                                    fontFamily: "DS-DIGITAL",
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 0, 251, 9)))),
-                      ),
-                    )),
-
-//!: INFORMATION
-                Positioned(
-                  bottom: 80 + 20,
+                  bottom: size.height * .1,
+                  //bottom: 80 + 20,
                   child: Container(
-                    height: 280,
+                    height: size.height * .3,
+                    // height: 280,
                     width: size.width,
                     decoration: const BoxDecoration(),
                     child: Column(
