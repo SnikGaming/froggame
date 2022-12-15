@@ -3,8 +3,10 @@ import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 
 import 'package:froggame/view_data/user_pre.dart';
+import 'package:quickalert/quickalert.dart';
 
 import '../../const/colors.dart';
+import '../../const/next_screen.dart';
 import '../../const/str_Type.dart';
 import '../../const/str_avatar.dart';
 import '../../view_data/firestore_user.dart';
@@ -377,23 +379,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               fit: BoxFit.cover)),
                       child: TextButton(
                           onPressed: () {
+                            bool isCheck = false;
                             if (_controller.text !=
-                                UserSimplePreferences.getUsername()) {
+                                    UserSimplePreferences.getUsername() &&
+                                _controller.text !=
+                                    UserSimplePreferences.getName()) {
                               UserSimplePreferences.setName(
                                   name: _controller.text);
                               FureStoreUser.addDataUser(
                                   heart: UserSimplePreferences.getHeart(),
                                   score: UserSimplePreferences.getScore());
+                              isCheck = true;
                             }
-                            if (avatar != "") {
+                            if (avatar != "" &&
+                                avatar != UserSimplePreferences.getAvatar()) {
                               UserSimplePreferences.setAvatar(avatar: avatar);
                               FureStoreUser.addDataUser(
                                   heart: UserSimplePreferences.getHeart(),
                                   score: UserSimplePreferences.getScore());
+                              isCheck = true;
                             }
+
                             // print(
                             //     "===============================><<<<><><><><><$avatar");
-                            setState(() {});
+                            // setState(() {});
+                            QuickAlert.show(
+                                context: context,
+                                type: isCheck
+                                    ? QuickAlertType.success
+                                    : QuickAlertType.warning,
+                                text: isCheck
+                                    ? 'Đã chỉnh sửa thành công.'
+                                    : 'Không có gì thay đổi cả',
+                                onConfirmBtnTap: () {
+                                  if (isCheck) {
+                                    pushNamedRemove(context, 'welcome2');
+                                  } else {
+                                    Navigator.of(context).pop();
+                                  }
+                                });
                           },
                           child: const Text("Lưu"))),
                 )
