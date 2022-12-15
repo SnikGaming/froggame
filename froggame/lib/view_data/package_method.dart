@@ -89,10 +89,10 @@ class PackageMethod {
     });
   }
 
-  static Future<void> InitPackage() async {
+  static InitPackage() async {
     int i = FureStoreCategory.lst.length;
     for (var j = 0; j < i; j++) {
-      createPackage(index: j + 1);
+      await createPackage(index: j + 1);
     }
   }
 }
