@@ -10,6 +10,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../const/colors.dart';
 import '../../const/font_app.dart';
 import '../../const/str_Type.dart';
+import '../../view_data/firesore_questions.dart';
 import '../../view_data/package_method.dart';
 import '../../view_data/user_pre.dart';
 
@@ -147,7 +148,9 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                           PackageMethod.createPackage(
                                                   index: index + 1)
                                               .then((value) => {
-                                                    if (PackageMethod.idch < 30)
+                                                    if (PackageMethod.idch <
+                                                        FureStoreQuestions
+                                                            .count[index])
                                                       {
                                                         // timerSnackbar(
                                                         //   context: context,

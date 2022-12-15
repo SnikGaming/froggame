@@ -116,7 +116,7 @@ class QuizzHome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              PackageMethod.InitPackage();
+                              PackageMethod.InitPackage2();
                               nextScreen(context, const TypeQuestionPage());
                             },
                             child: Text(

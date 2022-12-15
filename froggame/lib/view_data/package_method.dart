@@ -92,7 +92,14 @@ class PackageMethod {
   static InitPackage() async {
     int i = FureStoreCategory.lst.length;
     for (var j = 0; j < i; j++) {
-      await createPackage(index: j + 1);
+      createPackage(index: j + 1);
+    }
+  }
+
+  static InitPackage2()  {
+    int i = FureStoreCategory.lst.length;
+    for (var j = 0; j < i; j++) {
+      createPackage(index: j + 1);
     }
   }
 }

@@ -6,6 +6,7 @@ import 'package:froggame/screens/gameplay/menu_screen.dart';
 import 'package:froggame/screens/gameplay/game_play_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/firesore_questions.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_history.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
@@ -24,6 +25,7 @@ Future<void> main(List<String> args) async {
   await FureStoreCategory.GetData();
   await FutureRank.getData();
   await FutureHistory.getData();
+  await FureStoreQuestions.getLenght();
   runApp(const MyApp());
 }
 

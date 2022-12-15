@@ -300,7 +300,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                           child: const Text("Không")),
                       TextButton(
                           onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text("Thoát")),
+                          child: Text("Thoát")),
                     ],
                   )));
 
@@ -495,7 +495,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 UpdateHeart();
                                               }
                                               setState(() {});
-                                              if (currenIndex + 1 < number) {
+                                              if (currenIndex < number) {
                                                 showDialog(
                                                   context: context,
                                                   builder: ((context) =>
@@ -508,16 +508,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                 Navigator.of(
                                                                         context)
                                                                     .pop();
-                                                                // Future.delayed(
-                                                                //     const Duration(
-                                                                //         milliseconds:
-                                                                //             400),
-                                                                //     () {
-                                                                //   //sec = 15;
 
-                                                                //   startTimer();
-
-                                                                // });
+                                                                startTimer();
                                                                 currenIndex++;
                                                                 PackageMethod.UpatePackage(
                                                                     currentIndex:
@@ -531,8 +523,38 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                 resetColor();
 
                                                                 setState(() {});
+                                                                if (currenIndex +
+                                                                        1 >
+                                                                    number) {
+                                                                  isGameOver =
+                                                                      true;
+                                                                  timer!
+                                                                      .cancel();
+                                                                  showDialog(
+                                                                      context:
+                                                                          context,
+                                                                      builder: ((context) =>
+                                                                          AlertDialog(
+                                                                            backgroundColor: const Color.fromARGB(
+                                                                                255,
+                                                                                167,
+                                                                                79,
+                                                                                225),
+                                                                            title:
+                                                                                const Text("Thông báo"),
+                                                                            content:
+                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                                                                            actions: [
+                                                                              TextButton(
+                                                                                  onPressed: () {
+                                                                                    Navigator.pushNamedAndRemoveUntil(context, 'welcome2', (route) => false);
+                                                                                  },
+                                                                                  child: const Text("Ok"))
+                                                                            ],
+                                                                          )));
+                                                                }
                                                               },
-                                                              child: const Text(
+                                                              child: Text(
                                                                   "Đã hiểu"))
                                                         ],
                                                         title: Text.rich(
