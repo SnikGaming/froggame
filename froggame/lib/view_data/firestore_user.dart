@@ -23,7 +23,9 @@ class FureStoreUser {
       "pic": UserSimplePreferences.getUserPic(),
       "heart": UserSimplePreferences.getHeart(),
       "email": UserSimplePreferences.getUserEmail(),
-      "score": UserSimplePreferences.getScore()
+      "score": UserSimplePreferences.getScore(),
+      'nameIg': UserSimplePreferences.getName(),
+      'avatar': UserSimplePreferences.getAvatar()
     });
   }
 

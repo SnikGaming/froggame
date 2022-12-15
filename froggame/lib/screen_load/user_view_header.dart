@@ -42,7 +42,9 @@ UserHeader({required double height, required BuildContext context}) {
                   ),
                   child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
-                      child: Image.network(UserSimplePreferences.getUserPic())),
+                      child: UserSimplePreferences.getAvatar() != ""
+                          ? Image.asset(UserSimplePreferences.getAvatar())
+                          : Image.network(UserSimplePreferences.getUserPic())),
                 ),
               ),
             ),
@@ -55,7 +57,9 @@ UserHeader({required double height, required BuildContext context}) {
                 curve: Curves.fastLinearToSlowEaseIn,
                 s: 1200,
                 chil: Text(
-                  UserSimplePreferences.getUsername(),
+                  UserSimplePreferences.getName() != ""
+                      ? UserSimplePreferences.getName()
+                      : UserSimplePreferences.getUsername(),
                   style: F_lobster.copyWith(
                       fontSize: 24,
                       color: const Color.fromARGB(255, 102, 17, 205)),

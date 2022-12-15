@@ -13,6 +13,10 @@ class UserSimplePreferences {
   static const _keyLogin = "statusUser";
   static const _keyEmail = "userEmail";
   static const _keyDTL = "userDTL";
+  //!:
+  static const _keyAvatar = "avatar";
+  static const _name = "name";
+  static const _ngaysinh = "ngaysinh";
 
   static const _keySLQues = "SL";
 
@@ -20,6 +24,21 @@ class UserSimplePreferences {
   static Future init() async =>
       preferences = await SharedPreferences.getInstance();
 
+  // //! Login ngaysinh
+  static Future setNgaySinh({required String ngaysinh}) async =>
+      await preferences!.setString(_ngaysinh, ngaysinh);
+  static getNgaySinh() => preferences!.get(_ngaysinh);
+  static Future removeNgaySinh() async => await preferences!.remove(_ngaysinh);
+  // //! Login name
+  static Future setName({required String name}) async =>
+      await preferences!.setString(_name, name);
+  static getName() => preferences!.get(_name);
+  static Future removeName() async => await preferences!.remove(_name);
+  // //! Login Avatar
+  static Future setAvatar({required String avatar}) async =>
+      await preferences!.setString(_keyAvatar, avatar);
+  static getAvatar() => preferences!.get(_keyAvatar);
+  static Future removeAvatar() async => await preferences!.remove(_keyAvatar);
   //?:
   // //! Login user
   static Future setSL({required int index}) async =>
@@ -91,5 +110,9 @@ class UserSimplePreferences {
     await SettingSimplePreferences.removeAll();
     await removeSL();
     await removeSLCD();
+    await removeNgaySinh();
+    await removeName();
+    await removeName();
+    await removeAvatar();
   }
 }
