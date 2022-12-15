@@ -182,14 +182,21 @@ class QuizzHome extends StatelessWidget {
                         height: 100,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: NetworkImage(
-                                    UserSimplePreferences.getUserPic()),
-                                fit: BoxFit.contain)),
+                            image: UserSimplePreferences.getAvatar() != ""
+                                ? DecorationImage(
+                                    image: AssetImage(
+                                        UserSimplePreferences.getAvatar()),
+                                    fit: BoxFit.contain)
+                                : DecorationImage(
+                                    image: NetworkImage(
+                                        UserSimplePreferences.getUserPic()),
+                                    fit: BoxFit.contain)),
                       ),
                       const Spacer(),
                       headingText(
-                          text: UserSimplePreferences.getUsername(),
+                          text: UserSimplePreferences.getName() != ""
+                              ? UserSimplePreferences.getName()
+                              : UserSimplePreferences.getUsername(),
                           color: white,
                           size: 20)
                     ],

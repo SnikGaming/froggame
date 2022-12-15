@@ -65,6 +65,8 @@ class AuthMethod {
     final user_firebase = FirebaseFirestore.instance.collection('users');
     int score = 0;
     int heart = 5;
+    String nameIg = "";
+    String avatar = "";
     bool isId = false;
     // ignore: todo
     //TODO: Thực hiện truy vấn lấy User theo uiser ID = UID
@@ -78,6 +80,9 @@ class AuthMethod {
         //TODO: Lấy các giá trị của User X { Score Heart  }
         score = element.data()['score'];
         heart = element.data()['heart'];
+        avatar = element.data()['avatar'];
+        nameIg = element.data()['nameIg'];
+
         UserSimplePreferences.setUserId(id: element.data()['userId']);
         //!: Tồn tại trả về true
         //!: Không tồn tại giữ nguyên false
@@ -92,7 +97,9 @@ class AuthMethod {
         name: user.user!.displayName!,
         pic: user.user!.photoURL!,
         heart: heart,
-        score: score));
+        score: score,
+        nameIg: nameIg,
+        avatar: avatar));
     //!: S
     if (!isId) {
       UserSimplePreferences.setUserId(id: user.user!.uid);
@@ -100,5 +107,7 @@ class AuthMethod {
     UserSimplePreferences.setScore(score: score);
     UserSimplePreferences.setUserEmail(email: user.user!.email!);
     UserSimplePreferences.setHeart(heart: heart);
+    UserSimplePreferences.setAvatar(avatar: avatar);
+    UserSimplePreferences.setName(name: nameIg);
   }
 }

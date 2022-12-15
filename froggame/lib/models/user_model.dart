@@ -1,5 +1,6 @@
 class UserModel {
   String userId, email, name, pic;
+  String? nameIg, avatar;
   int? score, heart;
   UserModel(
       {required this.userId,
@@ -7,7 +8,9 @@ class UserModel {
       required this.name,
       required this.pic,
       this.heart,
-      this.score});
+      this.score,
+      this.nameIg,
+      this.avatar});
   toJson() {
     return {
       'userId': userId,
@@ -15,15 +18,17 @@ class UserModel {
       'name': name,
       'pic': pic,
       'heart': heart,
-      'score': score
+      'score': score,
+      'nameIg': nameIg,
+      'avatar': avatar,
     };
   }
 
-  static UserModel fromJson(Map<String, dynamic> json) => UserModel(
-      userId: json["userId"],
-      email: json["email"],
-      name: json["name"],
-      pic: json["pic"],
-      heart: json["heart"],
-      score: json["score"]);
+  // static UserModel fromJson(Map<String, dynamic> json) => UserModel(
+  //     userId: json["userId"],
+  //     email: json["email"],
+  //     name: json["name"],
+  //     pic: json["pic"],
+  //     heart: json["heart"],
+  //     score: json["score"]);
 }

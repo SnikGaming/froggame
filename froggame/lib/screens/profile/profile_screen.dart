@@ -7,6 +7,7 @@ import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
 import '../../const/str_Type.dart';
 import '../../const/str_avatar.dart';
+import '../../view_data/firestore_user.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -16,14 +17,18 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  String avatar = "";
+  String avatar = UserSimplePreferences.getAvatar();
   final _controller = TextEditingController();
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    _controller.text = UserSimplePreferences.getUsername();
+    if (UserSimplePreferences.getName() != "") {
+      _controller.text = UserSimplePreferences.getName();
+    } else {
+      _controller.text = UserSimplePreferences.getUsername();
+    }
   }
 
   bool isVis = false;
@@ -371,7 +376,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               image: AssetImage("assets/button/14.png"),
                               fit: BoxFit.cover)),
                       child: TextButton(
-                          onPressed: () {}, child: const Text("Lưu"))),
+                          onPressed: () {
+                            if (_controller.text !=
+                                UserSimplePreferences.getUsername()) {
+                              UserSimplePreferences.setName(
+                                  name: _controller.text);
+                              FureStoreUser.addDataUser(
+                                  heart: UserSimplePreferences.getHeart(),
+                                  score: UserSimplePreferences.getScore());
+                            }
+                            if (avatar != "") {
+                              UserSimplePreferences.setAvatar(avatar: avatar);
+                              FureStoreUser.addDataUser(
+                                  heart: UserSimplePreferences.getHeart(),
+                                  score: UserSimplePreferences.getScore());
+                            }
+                            // print(
+                            //     "===============================><<<<><><><><><$avatar");
+                            setState(() {});
+                          },
+                          child: const Text("Lưu"))),
                 )
               ],
             ),
