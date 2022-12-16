@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_Type.dart';
@@ -25,6 +26,11 @@ class _FriendScreenState extends State<FriendScreen> {
   @override
   var _index = StrFriend.friend[0];
 
+  _search(String txt) {
+    FureStoreUser.getUserSearch(txt);
+    lsData = FureStoreUser.lsUserSearch;
+  }
+
   _itemFriend(Size size) {
     // ignore: sized_box_for_whitespace
     return Container();
@@ -41,20 +47,60 @@ class _FriendScreenState extends State<FriendScreen> {
               border: OutlineInputBorder(),
             ),
           ),
-          ElevatedButton(onPressed: () {}, child: Icon(Icons.search)),
+          ElevatedButton(
+              onPressed: () {
+                if (txt_key.text.isNotEmpty) {
+                  _search(txt_key.text);
+                } else {
+                  lsData = FureStoreUser.lsUserAll;
+                }
+                setState(() {});
+              },
+              child: Icon(Icons.search)),
           // ignore: sized_box_for_whitespace
           Container(
               height: size.height * .82,
               child: ListView.builder(
                   shrinkWrap: true,
                   itemCount: lsData.length,
-                  itemBuilder: ((context, index) => Card(
+                  itemBuilder: ((context, index) => Slidable(
+                        // Specify a key if the Slidable is dismissible.
+                        key: const ValueKey(0),
+
+                        // The start action pane is the one at the left or the top side.
+
+                        // The end action pane is the one at the right or the bottom side.
+                        endActionPane: const ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              // An action can be bigger than the others.
+                              flex: 2,
+                              onPressed: doNothing,
+                              backgroundColor: Color(0xFF7BC043),
+                              foregroundColor: Colors.white,
+                              icon: Icons.add,
+                              label: 'Kết bạn',
+                            ),
+                            SlidableAction(
+                              flex: 2,
+                              onPressed: doNothing,
+                              backgroundColor: Color(0xFF0392CF),
+                              foregroundColor: Colors.white,
+                              icon: Icons.info,
+                              label: 'Thông tin',
+                            ),
+                          ],
+                        ),
+
+                        // The child of the Slidable is what the user sees when the
+                        // component is not dragged.
                         child: ListTile(
                           leading: CircleAvatar(
-                              backgroundImage: NetworkImage(lsData[index].pic)),
-                          title: Text(lsData[index].name),
-                          subtitle: Text('${lsData[index].score}'),
-                          trailing: Icon(Icons.more_vert),
+                            backgroundImage:
+                                NetworkImage('${lsData[index].pic}'),
+                          ),
+                          title: Text('${lsData[index].name}'),
                         ),
                       )))),
         ],
@@ -148,44 +194,4 @@ class _FriendScreenState extends State<FriendScreen> {
   }
 }
 
-
-
-// StreamBuilder<QuerySnapshot>(
-//         stream: FureStoreUser.StreamUsers,
-//         builder: (context, snapshot) {
-//           if (snapshot.hasData) {
-//             final data = snapshot.data!.docs;
-//             List<UserModel> lsUsers = [];
-//             for (var row in data) {
-//               final r = row.data() as Map<String, dynamic>;
-//               // lsUsers.add(r['name']);
-//               // lsUsers.add(r['pic']);
-//               lsUsers.add(UserModel(
-//                   userId: r['id'],
-//                   email: r['email'],
-//                   name: r['name'],
-//                   pic: r['pic']));
-//             }
-//             return ListView.builder(
-//               itemCount: lsUsers.length,
-//               itemBuilder: (context, index) {
-//                 TypeModel type = TypeModel.listType[index];
-//                 return Card(
-//                   child: ListTile(
-//                     leading: CircleAvatar(
-//                       backgroundImage: NetworkImage(
-//                           'https://lh3.googleusercontent.com/a/AEdFTp6xrw-kUgufZTnmvBx3in1fw1QRZVw4nU49p2H9=s96-c'),
-//                     ),
-//                     title: Text(lsUsers[index].name),
-//                     trailing: Icon(Icons.more_vert),
-//                   ),
-//                 );
-//               },
-//             );
-//           } else {
-//             return const CupertinoActivityIndicator(
-//               color: Colors.orange,
-//             );
-//           }
-//         },
-//       ),
+void doNothing(BuildContext context) {}

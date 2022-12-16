@@ -7,6 +7,7 @@ class FureStoreUser {
   static final CollectionReference _userCollection =
       FirebaseFirestore.instance.collection("users");
   static List<UserModel> lsUserAll = [];
+  static List<UserModel> lsUserSearch = [];
   Future<void> addUserToFireStore(UserModel userModel) async {
     return await _userCollection.doc(userModel.userId).set(userModel.toJson());
   }
@@ -37,8 +38,8 @@ class FureStoreUser {
           (value) => {},
         );
   }
-  
-  static getData() async {
+
+  static getUserAll() async {
     await FirebaseFirestore.instance.collection("users").get().then((value) {
       for (var val in value.docs) {
         lsUserAll.add(UserModel(
@@ -48,5 +49,14 @@ class FureStoreUser {
             pic: val.data()["pic"]));
       }
     });
+  }
+
+  static getUserSearch(String txt) async {
+    for (int i = 0; i < lsUserAll.length; i++) {
+      if (lsUserAll[i].name.toLowerCase().contains(txt.toLowerCase()) ||
+          lsUserAll[i].email.toLowerCase().contains(txt.toLowerCase())) {
+        lsUserSearch.add(lsUserAll[i]);
+      }
+    }
   }
 }
