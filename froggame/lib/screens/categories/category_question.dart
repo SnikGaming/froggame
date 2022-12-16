@@ -20,6 +20,9 @@ class TypeQuestionPage extends StatefulWidget {
 }
 
 class _TypeQuestionPageState extends State<TypeQuestionPage> {
+  String name = UserSimplePreferences.getName() == ""
+      ? UserSimplePreferences.getUsername()
+      : UserSimplePreferences.getName();
   List<Category> lsCategory = FureStoreCategory.lsData;
   @override
   void initState() {
@@ -198,9 +201,19 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                                   79,
                                                                   225),
                                                           title: const Text(
-                                                              "Thông báo"),
+                                                              "Thông báo",
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: white,
+                                                                  fontSize:
+                                                                      24)),
                                                           content: Text(
-                                                              "${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực ${lsCategory[index]} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                                                              "$name đã hoàn thành lĩnh vực ${lsCategory[index].name} !!!\nHãy hoàn thành các thử thách khác.",
+                                                              style: const TextStyle(
+                                                                  color:
+                                                                      white)),
                                                           actions: [
                                                             TextButton(
                                                                 onPressed: () {
@@ -208,9 +221,13 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                                           context)
                                                                       .pop();
                                                                 },
-                                                                child:
-                                                                    const Text(
-                                                                        "Ok"))
+                                                                child: const Text(
+                                                                    "Đã hiểu",
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color:
+                                                                          white,
+                                                                    )))
                                                           ],
                                                         )))
                                               }

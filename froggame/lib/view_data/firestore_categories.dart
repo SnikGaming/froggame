@@ -42,11 +42,11 @@ class FureStoreCategory {
         .orderBy("createddate", descending: false)
         .get()
         .then((value) {
-      for (var _data in value.docs) {
+      for (var data in value.docs) {
         lsData.add(Category(
-            name: _data.data()['name'],
-            img: _data.data()['img'],
-            createddate: _data.data()['createddate']));
+            name: data.data()['name'],
+            img: data.data()['img'],
+            createddate: data.data()['createddate']));
       }
     });
   }

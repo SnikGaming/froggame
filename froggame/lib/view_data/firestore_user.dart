@@ -52,6 +52,7 @@ class FureStoreUser {
   }
 
   static getUserSearch(String txt) async {
+    lsUserSearch = [];
     for (int i = 0; i < lsUserAll.length; i++) {
       if (lsUserAll[i].name.toLowerCase().contains(txt.toLowerCase()) ||
           lsUserAll[i].email.toLowerCase().contains(txt.toLowerCase())) {

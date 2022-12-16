@@ -1,4 +1,5 @@
 const lsAvatar = [
+  "assets/item_avatar/0.png",
   "assets/item_avatar/1.png",
   "assets/item_avatar/2.png",
   "assets/item_avatar/3.png",
@@ -49,4 +50,8 @@ const lsAvatar = [
   "assets/item_avatar/48.png",
   "assets/item_avatar/49.png",
   "assets/item_avatar/50.png",
+  "assets/images/khoahoc1.webp",
+  "assets/images/happy1.webp",
 ];
+
+final avatarDef = lsAvatar[0];

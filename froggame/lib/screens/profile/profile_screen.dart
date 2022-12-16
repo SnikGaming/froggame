@@ -393,6 +393,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             }
                             if (avatar != "" &&
                                 avatar != UserSimplePreferences.getAvatar()) {
+                              if (avatar == avatarDef) {
+                                avatar = "";
+                              }
                               UserSimplePreferences.setAvatar(avatar: avatar);
                               FureStoreUser.addDataUser(
                                   heart: UserSimplePreferences.getHeart(),

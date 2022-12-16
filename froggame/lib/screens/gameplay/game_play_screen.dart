@@ -31,6 +31,9 @@ class QuizzGameScreen extends StatefulWidget {
 }
 
 class _QuizzGameScreenState extends State<QuizzGameScreen> {
+  String name = UserSimplePreferences.getName() == ""
+      ? UserSimplePreferences.getUsername()
+      : UserSimplePreferences.getName();
   String tOrf = "";
   int idlv;
   late Future questions;
@@ -138,7 +141,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                   backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                   title: const Text("Thông báo"),
                   content: Text(
-                      "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                      "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
                   actions: [
                     TextButton(
                         onPressed: () {
@@ -198,9 +201,15 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                     builder: ((context) => AlertDialog(
                           backgroundColor:
                               const Color.fromARGB(255, 167, 79, 225),
-                          title: const Text("Thông báo"),
+                          title: const Text(
+                            "Thông báo",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: white,
+                                fontSize: 24),
+                          ),
                           content: Text(
-                              "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành lĩnh vực này !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                              "Chúc mừng $name đã hoàn thành lĩnh vực này !!!\nNhấn Ok để hoàn thành các thử thách khác."),
                           actions: [
                             TextButton(
                                 onPressed: () {
@@ -208,7 +217,9 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                       context, 'welcome2', (route) => false);
                                 },
                                 child: const Text("Ok",
-                                    style: TextStyle(color: Colors.white)))
+                                    style: TextStyle(
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))))
                           ],
                         )));
                 Future.delayed(const Duration(seconds: 2), () {
@@ -236,7 +247,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                 title: const Text("Thông báo"),
                 content: Text(
-                    "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                    "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -559,7 +570,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                             title:
                                                                                 const Text("Thông báo", style: TextStyle(color: Colors.white)),
                                                                             content:
-                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
+                                                                                Text("Chúc mừng $name đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
                                                                             actions: [
                                                                               TextButton(
                                                                                   onPressed: () {
@@ -620,7 +631,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                           title: const Text(
                                                               "Thông báo"),
                                                           content: Text(
-                                                              "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
+                                                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white)),
