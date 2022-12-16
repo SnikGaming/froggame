@@ -132,6 +132,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
             content: Text("Bạn đã được chuyển sang câu mới...")));
       } else {
         showDialog(
+            barrierDismissible: false,
             context: context,
             builder: ((context) => AlertDialog(
                   backgroundColor: const Color.fromARGB(255, 167, 79, 225),
@@ -144,7 +145,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                           Navigator.pushNamedAndRemoveUntil(
                               context, 'welcome2', (route) => false);
                         },
-                        child: const Text("Ok"))
+                        child: const Text("Ok",
+                            style: TextStyle(color: Colors.white)))
                   ],
                 )));
         Future.delayed(const Duration(seconds: 2), () {
@@ -191,6 +193,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
               if (currenIndex >= 30) {
                 timer.cancel();
                 showDialog(
+                    barrierDismissible: false,
                     context: context,
                     builder: ((context) => AlertDialog(
                           backgroundColor:
@@ -204,7 +207,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                   Navigator.pushNamedAndRemoveUntil(
                                       context, 'welcome2', (route) => false);
                                 },
-                                child: const Text("Ok"))
+                                child: const Text("Ok",
+                                    style: TextStyle(color: Colors.white)))
                           ],
                         )));
                 Future.delayed(const Duration(seconds: 2), () {
@@ -226,6 +230,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       timer!.cancel();
 
       showDialog(
+          barrierDismissible: false,
           context: context,
           builder: ((context) => AlertDialog(
                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
@@ -238,7 +243,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                         Navigator.pushNamedAndRemoveUntil(
                             context, 'welcome2', (route) => false);
                       },
-                      child: const Text("Ok"))
+                      child: const Text("Ok",
+                          style: TextStyle(color: Colors.white)))
                 ],
               )));
       Future.delayed(const Duration(seconds: 2), () {
@@ -289,38 +295,45 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
       body: WillPopScope(
         onWillPop: () async {
           final value = await showDialog<bool>(
+              barrierDismissible: false,
               context: context,
               builder: ((context) => AlertDialog(
                     backgroundColor: Colors.green,
-                    title: const Text("Thông báo"),
-                    content: const Text("Bạn có muốn thoát khỏi đây.."),
+                    title: const Text("Thông báo",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 32)),
+                    content: const Text("Bạn có muốn thoát khỏi đây..",
+                        style: TextStyle(color: Colors.white)),
                     actions: [
                       TextButton(
                           onPressed: () => Navigator.of(context).pop(false),
-                          child: const Text("Không")),
+                          child: const Text("Không",
+                              style: TextStyle(color: Colors.white))),
                       TextButton(
-                          onPressed: () => Navigator.of(context).pop(true),
-                          child: const Text("Thoát")),
+                          onPressed: () {
+                            timer!.cancel();
+                            currenIndex++;
+                            heart--;
+                            PackageMethod.UpatePackage(
+                                currentIndex: currenIndex,
+                                index: idlv,
+                                Ctrl: Ctrl);
+                            UpdateHeart();
+                            isGameOver = true;
+                            Navigator.of(context).pop(true);
+                          },
+                          child: const Text("Thoát",
+                              style: TextStyle(color: Colors.white))),
                     ],
                   )));
 
           if (value != null) {
-            // timer!.cancel();
-            // currenIndex++;
-            // heart--;
-            // PackageMethod.UpatePackage(
-            //     currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
-            // UpdateHeart();
-            // isGameOver = true;
+            setState(() {});
+
             return Future.value(value);
           } else {
-            timer!.cancel();
-            currenIndex++;
-            heart--;
-            PackageMethod.UpatePackage(
-                currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
-            UpdateHeart();
-            isGameOver = true;
             return Future.value(false);
           }
         },
@@ -497,6 +510,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                               setState(() {});
                                               if (currenIndex < number) {
                                                 showDialog(
+                                                  barrierDismissible: false,
                                                   context: context,
                                                   builder: ((context) =>
                                                       AlertDialog(
@@ -531,6 +545,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                   timer!
                                                                       .cancel();
                                                                   showDialog(
+                                                                      barrierDismissible:
+                                                                          false,
                                                                       context:
                                                                           context,
                                                                       builder: ((context) =>
@@ -541,31 +557,40 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                                 79,
                                                                                 225),
                                                                             title:
-                                                                                const Text("Thông báo"),
+                                                                                const Text("Thông báo", style: TextStyle(color: Colors.white)),
                                                                             content:
-                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: TextStyle(color: Colors.white)),
                                                                             actions: [
                                                                               TextButton(
                                                                                   onPressed: () {
                                                                                     Navigator.pushNamedAndRemoveUntil(context, 'welcome2', (route) => false);
                                                                                   },
-                                                                                  child: const Text("Ok"))
+                                                                                  child: const Text("Ok", style: TextStyle(color: Colors.white)))
                                                                             ],
                                                                           )));
                                                                 }
                                                               },
                                                               child: const Text(
-                                                                  "Đã hiểu"))
+                                                                  "Đã hiểu",
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white)))
                                                         ],
                                                         title: Text.rich(
                                                           TextSpan(
                                                               children: [
                                                                 TextSpan(
                                                                     text:
-                                                                        "\nĐáp án là : ${data[currenIndex]['a']}")
+                                                                        "\nĐáp án là : ${data[currenIndex]['a']}",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white))
                                                               ],
                                                               text:
-                                                                  "Bạn chọn : $tOrf"),
+                                                                  "Bạn chọn : $tOrf",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white)),
                                                         ),
                                                       )),
                                                 );
@@ -581,6 +606,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 //             WinScreen()));
 
                                                 showDialog(
+                                                    barrierDismissible: false,
                                                     context: context,
                                                     builder: ((context) =>
                                                         AlertDialog(
@@ -594,7 +620,10 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                           title: const Text(
                                                               "Thông báo"),
                                                           content: Text(
-                                                              "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                                                              "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white)),
                                                           actions: [
                                                             TextButton(
                                                                 onPressed: () {
@@ -604,9 +633,11 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                       (route) =>
                                                                           false);
                                                                 },
-                                                                child:
-                                                                    const Text(
-                                                                        "Ok"))
+                                                                child: const Text(
+                                                                    "Ok",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .white)))
                                                           ],
                                                         )));
                                                 Future.delayed(

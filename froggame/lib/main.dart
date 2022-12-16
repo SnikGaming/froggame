@@ -10,6 +10,7 @@ import 'package:froggame/view_data/firesore_questions.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_history.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
+import 'package:froggame/view_data/firestore_user.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
