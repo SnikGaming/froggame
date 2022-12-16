@@ -14,7 +14,13 @@ class PackageMethod {
   static int idlv = 0, idch = 0, timer = 0, cd = 0;
   static String idUser = _idgoi;
   static String idgoi = _idgoi;
+
+  static String name = UserSimplePreferences.getUsername();
+  static String nameIg = UserSimplePreferences.getName();
+  static String avatar = UserSimplePreferences.getAvatar();
+  static String pic = UserSimplePreferences.getUserPic();
   static bool isData = true;
+
   static var docPakage =
       FirebaseFirestore.instance.collection("packageQuestions");
   static bool isLoad = false;
@@ -35,7 +41,9 @@ class PackageMethod {
         idlv = int.parse("${element.data()['idlv']}");
         idch = int.parse("${element.data()['idch']}");
         timer = int.parse("${element.data()['timer']}");
-        cd = int.parse("${element.data()['cautldung']}");
+        cd = int.parse(
+          "${element.data()['cautldung']}",
+        );
         UserSimplePreferences.setSL(index: idch);
 
         UserSimplePreferences.setSLCD(CauDung: cd);
@@ -63,7 +71,10 @@ class PackageMethod {
         'idUser': _idgoi,
         'cautldung': cd,
         'email': UserSimplePreferences.getUserEmail(),
-        'name': UserSimplePreferences.getUsername()
+        'name': UserSimplePreferences.getUsername(),
+        'nameIg': nameIg,
+        'avatar': avatar,
+        'pic': pic
       });
       isLoad = true;
     }
@@ -85,7 +96,10 @@ class PackageMethod {
       'idUser': _idgoi,
       'cautldung': UserSimplePreferences.getSLCD(),
       'email': UserSimplePreferences.getUserEmail(),
-      'name': UserSimplePreferences.getUsername()
+      'name': UserSimplePreferences.getUsername(),
+      'nameIg': UserSimplePreferences.getName(),
+      'avatar': UserSimplePreferences.getAvatar(),
+      'pic': UserSimplePreferences.getUserPic(),
     });
   }
 
@@ -96,7 +110,7 @@ class PackageMethod {
     }
   }
 
-  static InitPackage2()  {
+  static InitPackage2() {
     int i = FureStoreCategory.lst.length;
     for (var j = 0; j < i; j++) {
       createPackage(index: j + 1);

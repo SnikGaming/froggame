@@ -559,7 +559,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                             title:
                                                                                 const Text("Thông báo", style: TextStyle(color: Colors.white)),
                                                                             content:
-                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: TextStyle(color: Colors.white)),
+                                                                                Text("Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
                                                                             actions: [
                                                                               TextButton(
                                                                                   onPressed: () {
@@ -582,13 +582,13 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                 TextSpan(
                                                                     text:
                                                                         "\nĐáp án là : ${data[currenIndex]['a']}",
-                                                                    style: TextStyle(
+                                                                    style: const TextStyle(
                                                                         color: Colors
                                                                             .white))
                                                               ],
                                                               text:
                                                                   "Bạn chọn : $tOrf",
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .white)),
                                                         ),
@@ -621,7 +621,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                               "Thông báo"),
                                                           content: Text(
                                                               "Chúc mừng ${UserSimplePreferences.getUsername()} đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
-                                                              style: TextStyle(
+                                                              style: const TextStyle(
                                                                   color: Colors
                                                                       .white)),
                                                           actions: [
@@ -650,7 +650,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                           (route) => false);
                                                 });
                                               }
-                                            } else {}
+                                            }
                                           },
                                           child: Padding(
                                             padding: const EdgeInsets.symmetric(
