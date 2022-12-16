@@ -1,17 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
-import 'package:froggame/const/str_Type.dart';
 import 'package:froggame/const/str_friend.dart';
 import 'package:froggame/models/user_model.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
 import 'package:froggame/view_data/firestore_user.dart';
-import 'package:froggame/view_data/user_pre.dart';
 
 class FriendScreen extends StatefulWidget {
   const FriendScreen({super.key});
@@ -23,7 +19,6 @@ class FriendScreen extends StatefulWidget {
 class _FriendScreenState extends State<FriendScreen> {
   static List<UserModel> lsData = FureStoreUser.lsUserAll;
   var txt_key = TextEditingController();
-  @override
   var _index = StrFriend.friend[0];
 
   _search(String txt) {
@@ -56,7 +51,7 @@ class _FriendScreenState extends State<FriendScreen> {
                 }
                 setState(() {});
               },
-              child: Icon(Icons.search)),
+              child: const Icon(Icons.search)),
           // ignore: sized_box_for_whitespace
           Container(
               height: size.height * .82,
@@ -98,9 +93,9 @@ class _FriendScreenState extends State<FriendScreen> {
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage:
-                                NetworkImage('${lsData[index].pic}'),
+                                NetworkImage(lsData[index].pic),
                           ),
-                          title: Text('${lsData[index].name}'),
+                          title: Text(lsData[index].name),
                         ),
                       )))),
         ],
@@ -121,14 +116,14 @@ class _FriendScreenState extends State<FriendScreen> {
           height: size.height,
           width: size.width,
           decoration: BoxDecoration(gradient: background),
-          child: Container(
+          child: SizedBox(
             height: size.height,
             width: size.width,
             child: Column(
               children: [
                 UserHeader(height: size.height * .1, context: context),
                 SingleChildScrollView(
-                  child: Container(
+                  child: SizedBox(
                     height: size.height * .09,
                     child: Row(
                       children: List.generate(

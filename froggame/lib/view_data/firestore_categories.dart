@@ -18,25 +18,36 @@ class FureStoreCategory {
       .orderBy("createddate")
       .snapshots();
 
+  // ignore: non_constant_identifier_names
+  static GetData() async {
+    final data = FirebaseFirestore.instance.collection('categoties');
+    await data.get().then((value) {
+      // ignore: avoid_function_literals_in_foreach_calls
+      value.docs.forEach((element) {
+        //print("=======================>>>${element.data()['name']}");
 
-     // ignore: non_constant_identifier_names
-     static GetData()async{
-        final data = FirebaseFirestore.instance.collection('categoties');
-          await data.get().then((value) {
-
-          // ignore: avoid_function_literals_in_foreach_calls
-          value.docs.forEach((element) {
-            
-
-    //print("=======================>>>${element.data()['name']}");
-
-           // lst.add(element.data()['name'] as String);
-           lst.add(element.data()['name']);
+        // lst.add(element.data()['name'] as String);
+        lst.add(element.data()['name']);
       });
-        });
+    });
+  }
+
+  static List<String> lst = [];
+
+//!: GET ALL DATA CATEGORIES
+  static List<Category> lsData = [];
+  static Future<void> getAllData() async {
+    await FirebaseFirestore.instance
+        .collection('categoties')
+        .orderBy("createddate", descending: false)
+        .get()
+        .then((value) {
+      for (var _data in value.docs) {
+        lsData.add(Category(
+            name: _data.data()['name'],
+            img: _data.data()['img'],
+            createddate: _data.data()['createddate']));
       }
-static List<String>lst=[];
-
-
+    });
+  }
 }
-
