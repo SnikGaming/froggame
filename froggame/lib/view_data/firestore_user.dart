@@ -37,4 +37,16 @@ class FureStoreUser {
           (value) => {},
         );
   }
+  
+  static getData() async {
+    await FirebaseFirestore.instance.collection("users").get().then((value) {
+      for (var val in value.docs) {
+        lsUserAll.add(UserModel(
+            userId: val.data()["userId"],
+            email: val.data()["email"],
+            name: val.data()["name"],
+            pic: val.data()["pic"]));
+      }
+    });
+  }
 }
