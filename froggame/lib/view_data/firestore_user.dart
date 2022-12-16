@@ -6,7 +6,7 @@ import '../models/user_model.dart';
 class FureStoreUser {
   static final CollectionReference _userCollection =
       FirebaseFirestore.instance.collection("users");
-
+  static List<UserModel> lsUserAll = [];
   Future<void> addUserToFireStore(UserModel userModel) async {
     return await _userCollection.doc(userModel.userId).set(userModel.toJson());
   }
