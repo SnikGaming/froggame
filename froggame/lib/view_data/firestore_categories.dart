@@ -36,8 +36,8 @@ class FureStoreCategory {
 
 //!: GET ALL DATA CATEGORIES
   static List<Category> lsData = [];
-  static Future<void> getAllData() async {
-    await FirebaseFirestore.instance
+  static getAllData() {
+    FirebaseFirestore.instance
         .collection('categoties')
         .orderBy("createddate", descending: false)
         .get()
