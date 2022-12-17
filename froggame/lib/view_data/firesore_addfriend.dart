@@ -11,7 +11,7 @@ class AddFriend {
   static final DateFormat formatter = DateFormat('yyyy-MM-dd -- H-m-s');
   static final String formatted = formatter.format(now);
 
-  static final friend = FirebaseFirestore.instance.collection("friend");
+  static final friend = FirebaseFirestore.instance.collection("friends");
 
   static List<FriendModel> lsAddFriend = [];
   static List<FriendModel> lsFriend = [];
@@ -23,11 +23,15 @@ class AddFriend {
   // }
 
   // ignore: non_constant_identifier_names
-  static Save({required String idfriend, required String friendname}) async {
-    final addfriend = FirebaseFirestore.instance
-        .collection("friend")
+  static Save(
+      {required String idfriend,
+      required String friendname,
+      required String emailfriend,
+      required String picfriend}) async {
+    final addfriend1 = FirebaseFirestore.instance
+        .collection("friends")
         .doc(UserSimplePreferences.getUserId());
-    await addfriend.set({
+    await addfriend1.set({
       //"avatar": UserSimplePreferences.getAvatar(),
       "iduser": idfriend,
       "emailfriend": UserSimplePreferences.getUserEmail(),
@@ -36,6 +40,20 @@ class AddFriend {
       "pic": UserSimplePreferences.getUserPic(),
       "idfriend": UserSimplePreferences.getUserId(),
       "friendname": UserSimplePreferences.getUsername(),
+      "status": 0,
+    });
+
+    final addfriend2 =
+        FirebaseFirestore.instance.collection("friends").doc(idfriend);
+    await addfriend2.set({
+      //"avatar": UserSimplePreferences.getAvatar(),
+      "iduser": UserSimplePreferences.getUserId(),
+      "emailfriend": emailfriend,
+      "name": UserSimplePreferences.getUsername(),
+      //"nameIg": UserSimplePreferences.getName(),
+      "pic": picfriend,
+      "idfriend": idfriend,
+      "friendname": friendname,
       "status": 0,
     });
   }
@@ -84,6 +102,7 @@ class AddFriend {
 
   static acceptFriend(String idfriend) async {
     await friend.doc(idfriend).update({"status": 1});
+    await friend.doc(UserSimplePreferences.getUserId()).update({"status": 1});
   }
 
   static refuseFriend(String idfriend) async {
