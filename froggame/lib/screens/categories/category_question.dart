@@ -30,7 +30,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
     // TODO: implement initState
     super.initState();
     FureStoreCategory.getAllData();
-    List<Category> lsCategory = FureStoreCategory.lsData;
+    lsCategory = FureStoreCategory.lsData;
     setState(() {});
   }
 
