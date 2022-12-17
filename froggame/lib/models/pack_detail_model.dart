@@ -1,13 +1,12 @@
 class PackDetail {
-  String? idUser, idPacke, cautl;
-  String? caudung;
-  int? timer, idlv;
+  final int time;
+  final String question;
+  final String answerText;
+  final String status;
 
   PackDetail(
-      {required this.idUser,
-      required this.idPacke,
-      required this.cautl,
-      required this.caudung,
-      this.timer,
-      this.idlv});
+      {required this.time,
+      required this.question,
+      required this.answerText,
+      required this.status});
 }

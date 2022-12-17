@@ -1,8 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:froggame/const/str_Type.dart';
-import 'package:froggame/models/history_model.dart';
+import 'package:froggame/models/pack_detail_model.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 import 'firestore_categories.dart';
 
-class FutureHistory {}
+class FutureHistory {
+  static List<PackDetail> lstPackage = [];
+
+  static Future getAllDataPack(int idlv) async {
+    lstPackage = [];
+    int score = 0;
+    var package = FirebaseFirestore.instance.collection('detailpack');
+
+    List<String> lstAvatar = [];
+
+    await package.where('idlv', isEqualTo: idlv + 1).get().then(
+          (value) => {
+            for (var p in value.docs)
+              {
+                lstPackage.add(
+                  PackDetail(
+                    time: p.data()['timer'],
+                    question: p.data()['cauhoi'],
+                    answerText: p.data()['cautraloi'],
+                    status: p.data()['tOrf'],
+                  ),
+                ),
+                print(
+                    '================== status =======================>> ${lstPackage[0].status}'),
+              },
+          },
+        );
+  }
+}
