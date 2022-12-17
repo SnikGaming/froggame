@@ -44,7 +44,7 @@ class ViewData extends StatelessWidget {
             ),
           ),
           Positioned(
-              bottom: 15,
+              bottom: 30,
               left: 20,
               child: DefaultTextStyle(
                 style: F_pacifico.copyWith(

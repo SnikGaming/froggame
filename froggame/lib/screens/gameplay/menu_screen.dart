@@ -76,7 +76,7 @@ class QuizzHome extends StatelessWidget {
                       )
                     ],
                     options: CarouselOptions(
-                      height: 150,
+                      height: size.height * .24,
                       aspectRatio: 16 / 9,
                       viewportFraction: 0.8,
                       initialPage: 0,
@@ -90,9 +90,9 @@ class QuizzHome extends StatelessWidget {
                       enlargeCenterPage: true,
                       scrollDirection: Axis.horizontal,
                     )),
-                const SizedBox(
-                  height: 40,
-                  //height: size.height * .2,
+                SizedBox(
+                  //height: 40,
+                  height: size.height * .02,
                 ),
                 AnimatedCus(
                     context: context,
