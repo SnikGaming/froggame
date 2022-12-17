@@ -70,33 +70,29 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     padding: const EdgeInsets.only(left: 10),
                     height: 200,
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Row(
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(255, 42, 226, 171),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Center(child: CircleAvatar()),
+                            ),
+                            const Padding(padding: EdgeInsets.all(10)),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(255, 42, 226, 171),
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: Center(child: CircleAvatar()),
-                                ),
-                                const Padding(padding: EdgeInsets.all(10)),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('Thời Gian',
-                                        style: F_pacifico.copyWith(
-                                            fontSize: 27,
-                                            color: white,
-                                            fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
+                                Text('Thời Gian',
+                                    style: F_pacifico.copyWith(
+                                        fontSize: 27,
+                                        color: white,
+                                        fontWeight: FontWeight.w500)),
                               ],
                             ),
                             Container(
@@ -127,6 +123,24 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               ),
                             )
                           ],
+                        ),
+                        Container(
+                          child: ListTile(
+                            title: Text(
+                              'Câu hỏi',
+                              style: F_pacifico.copyWith(
+                                  fontSize: 25,
+                                  color: white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            subtitle: Text(
+                              'Câu trả lời đúng',
+                              style: F_pacifico.copyWith(
+                                  fontSize: 25,
+                                  color: white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
                       ],
                     ),
