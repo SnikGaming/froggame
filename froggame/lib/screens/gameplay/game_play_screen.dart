@@ -37,7 +37,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   String tOrf = "";
   int idlv;
   late Future questions;
-  int defTimer = 30;
+  int defTimer = 5;
   _QuizzGameScreenState({required this.idlv});
 
   // ignore: todo
@@ -190,9 +190,39 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
           setState(() {
             sec--;
             if (sec < 0) {
-              currenIndex++;
-              PackageMethod.UpatePackage(
-                  currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
+              heart--;
+              UpdateHeart();
+              if (heart < 1) {
+                timer.cancel();
+                showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: ((context) => AlertDialog(
+                          backgroundColor:
+                              const Color.fromARGB(255, 167, 79, 225),
+                          title: const Text("Thông báo"),
+                          content: Text(
+                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context, 'welcome2', (route) => false);
+                                },
+                                child: const Text("Ok",
+                                    style: TextStyle(color: Colors.white)))
+                          ],
+                        )));
+                Future.delayed(const Duration(seconds: 2), () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, 'welcome2', (route) => false);
+                });
+              } else {
+                currenIndex++;
+                PackageMethod.UpatePackage(
+                    currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
+              }
+
               if (currenIndex >= 30) {
                 timer.cancel();
                 showDialog(
@@ -228,7 +258,6 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 });
               }
 
-              heart--;
               sec = defTimer;
               setState(() {});
             }
@@ -431,8 +460,8 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 
                 //!: Question and answer
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  height: size.height * .73,
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  height: size.height * .78,
                   child: FutureBuilder(
                       future: questions,
                       builder: ((context, AsyncSnapshot snapshot) {
@@ -446,7 +475,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                             return Column(
                               children: [
                                 SizedBox(
-                                  height: size.height * .05,
+                                  height: size.height * .044,
                                   width: size.width,
                                   child: Align(
                                     alignment: Alignment.centerLeft,
@@ -486,7 +515,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                   height: 7,
                                 ),
                                 SizedBox(
-                                  height: size.height * .47,
+                                  height: size.height * .52,
                                   width: size.width,
                                   child: ListView.builder(
                                       shrinkWrap: true,
@@ -668,7 +697,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 vertical: 5),
                                             child: Container(
                                               padding: const EdgeInsets.all(13),
-                                              height: size.height * .1,
+                                              height: size.height * .115,
                                               width: size.width,
                                               decoration: BoxDecoration(
                                                 boxShadow: const [
@@ -715,7 +744,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 //!: BTN helps
                 SizedBox(
                   width: size.width,
-                  height: size.height * .12,
+                  height: size.height * .07,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
