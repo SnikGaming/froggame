@@ -8,7 +8,6 @@ import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
 import 'package:froggame/view_data/firesore_questions.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
-import 'package:froggame/view_data/firestore_history.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
 import 'package:froggame/view_data/firestore_user.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
