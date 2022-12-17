@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/battle/battle_vs_screen.dart';
+import 'package:froggame/view_data/user_pre.dart';
 
 class BattleScreen extends StatefulWidget {
   const BattleScreen({super.key});
@@ -39,8 +40,7 @@ class _BattleScreenState extends State<BattleScreen> {
             children: <Widget>[
               Visibility(
                 visible: isStart,
-                child: Image.network(
-                    "https://media.giphy.com/media/LXnF8Zzto0AwKtoO8B/giphy.gif"),
+                child: Image.asset("assets/vs.webp"),
               ),
               Visibility(
                 visible: !isStart,
@@ -56,7 +56,7 @@ class _BattleScreenState extends State<BattleScreen> {
                   onTap: () {
                     isStart = !isStart;
                     setState(() {});
-                    Future.delayed(const Duration(milliseconds: 1000), () {
+                    Future.delayed(const Duration(milliseconds: 900), () {
                       if (isStart) {
                         nextScreen(context, const BattleVsScreen());
                       }
@@ -68,7 +68,69 @@ class _BattleScreenState extends State<BattleScreen> {
                     color: Colors.white,
                   ),
                 ),
-              )
+              ),
+              //!: VS1
+              Positioned(
+                  top: 40,
+                  left: 40,
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.amber,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      height: 110,
+                      width: 110,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: UserSimplePreferences.getAvatar() == ""
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  UserSimplePreferences.getUserPic(),
+                                ),
+                              )
+                            : DecorationImage(
+                                image: AssetImage(
+                                  UserSimplePreferences.getAvatar(),
+                                ),
+                              ),
+                      ),
+                    ),
+                  )),
+              //!: VS2
+              Positioned(
+                  bottom: 40,
+                  right: 40,
+                  child: Container(
+                    height: 120,
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.amber,
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      height: 110,
+                      width: 110,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: UserSimplePreferences.getAvatar() == ""
+                            ? DecorationImage(
+                                image: NetworkImage(
+                                  UserSimplePreferences.getUserPic(),
+                                ),
+                              )
+                            : DecorationImage(
+                                image: AssetImage(
+                                  UserSimplePreferences.getAvatar(),
+                                ),
+                              ),
+                      ),
+                    ),
+                  ))
             ],
           ),
         ),
