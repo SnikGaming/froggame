@@ -37,6 +37,7 @@ class FureStoreCategory {
 //!: GET ALL DATA CATEGORIES
   static List<Category> lsData = [];
   static getAllData() {
+    lsData = [];
     FirebaseFirestore.instance
         .collection('categoties')
         .orderBy("createddate", descending: false)

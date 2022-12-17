@@ -58,6 +58,7 @@ dependencies:
   awesome_snackbar_content: ^0.1.0
   timer_snackbar: ^0.0.3
   flutter_slidable: ^2.0.0
+  expandable: ^5.0.1
 
   
 dev_dependencies:

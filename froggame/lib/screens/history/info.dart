@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/screens/history/HistoryScreen.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
@@ -24,8 +25,6 @@ class _infomation_screenState extends State<infomation_screen> {
 
   List<String> playInfomation = ['Lịch sử', 'Xếp hạng', 'Thách đấu'];
 
-
-
 //sửa
   // static void lstId() {
   //   for (var i in FutureRank.lstRank) {
@@ -43,6 +42,7 @@ class _infomation_screenState extends State<infomation_screen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
+
     // FutureHistory.getListHistory();
     // lsHs = FutureHistory.lsHistory;
     //lstId();
@@ -64,7 +64,7 @@ class _infomation_screenState extends State<infomation_screen> {
           children: [
             Container(
               width: size.width,
-              height: size.height * 0.21,
+              height: size.height * 0.18,
               decoration: BoxDecoration(
                   gradient: background,
                   borderRadius: BorderRadius.circular(10)),
@@ -75,35 +75,26 @@ class _infomation_screenState extends State<infomation_screen> {
                   // ignore: avoid_unnecessary_containers
                   Container(
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Row(
-                            children: [
-                              const Icon(Icons.info_outline_rounded),
-                              Text('Thông tin',
-                                  style: F_lobster.copyWith(
-                                      fontSize: 20, color: white))
-                            ],
-                          ),
-                        ),
-                        const Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 105)),
-                        GestureDetector(
-                            onTap: () {
-                              setState(() {});
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image:
-                                          AssetImage('assets/button/close.png'),
-                                      fit: BoxFit.cover)),
-                            ))
+                        Container(),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, top: 10),
+                          child: GestureDetector(
+                              onTap: () {
+                                setState(() {});
+                                Navigator.pop(context);
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage(
+                                            'assets/button/close.png'),
+                                        fit: BoxFit.cover)),
+                              )),
+                        )
                       ],
                     ),
                   ),
