@@ -2,6 +2,7 @@ class UserModel {
   String userId, email, name, pic;
   String? nameIg, avatar;
   int? score, heart;
+  String? age;
   UserModel(
       {required this.userId,
       required this.email,
@@ -10,7 +11,8 @@ class UserModel {
       this.heart,
       this.score,
       this.nameIg,
-      this.avatar});
+      this.avatar,
+      this.age});
   toJson() {
     return {
       'userId': userId,
@@ -21,6 +23,7 @@ class UserModel {
       'score': score,
       'nameIg': nameIg,
       'avatar': avatar,
+      'age': age
     };
   }
 
