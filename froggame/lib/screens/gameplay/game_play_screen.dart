@@ -16,6 +16,7 @@ import 'package:froggame/view_data/package_method.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../const/colors.dart';
+import '../../view_data/firesore_detailpack.dart';
 import '../../view_data/firestore_user.dart';
 import '../../view_data/user_pre.dart';
 
@@ -37,7 +38,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   String tOrf = "";
   int idlv;
   late Future questions;
-  int defTimer = 30;
+  static int defTimer = 30;
   _QuizzGameScreenState({required this.idlv});
 
   // ignore: todo
@@ -71,7 +72,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
 
 //!: Values
   Timer? timer;
-  int sec = 0;
+  static int sec = 0;
 
   var isLoadAnswer = false;
 // ignore: todo
@@ -535,9 +536,6 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 tOrf = "đúng";
                                                 score++;
                                                 Ctrl++;
-                                                UserSimplePreferences.setSLCD(
-                                                    CauDung: Ctrl);
-                                                UpdateHeart();
                                               } else {
                                                 // ignore: avoid_print
                                                 // print("Sai");
@@ -547,6 +545,21 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 heart--;
                                                 UpdateHeart();
                                               }
+                                              UserSimplePreferences.setSLCD(
+                                                  CauDung: Ctrl);
+                                              UpdateHeart();
+                                              FireStoredetailpack.saveData(
+                                                  timer: defTimer - sec,
+                                                  chucnang: "",
+                                                  idlv: idlv,
+                                                  cautraloi: lsAnswer[index]
+                                                      .toString(),
+                                                  cautldung: data[currenIndex]
+                                                      ['a'],
+                                                  causo: currenIndex + 1,
+                                                  cauhoi: data[currenIndex]
+                                                      ['name'],
+                                                  tOrf: tOrf);
                                               setState(() {});
                                               if (currenIndex < number) {
                                                 showDialog(

@@ -24,14 +24,18 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
       ? UserSimplePreferences.getUsername()
       : UserSimplePreferences.getName();
   List<Category> lsCategory = [];
+  loadData() async {
+    var data = FureStoreCategory.lsData;
+    setState(() {});
+    lsCategory = data;
+  }
+
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    FureStoreCategory.getAllData();
-    lsCategory = FureStoreCategory.lsData;
-    setState(() {});
+    loadData();
   }
 
   @override
