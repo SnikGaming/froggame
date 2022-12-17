@@ -56,8 +56,13 @@ class _FriendScreenState extends State<FriendScreen> {
     lsData = FureStoreUser.lsUserSearch;
   }
 
-  void addFriend(String idFriend, String nameFriend, Action action) {
-    AddFriend.Save(idfriend: idFriend, friendname: nameFriend);
+  void addFriend(String idFriend, String nameFriend, String emailFriend,
+      String picFriend, Action action) {
+    AddFriend.Save(
+        idfriend: idFriend,
+        friendname: nameFriend,
+        emailfriend: emailFriend,
+        picfriend: picFriend);
   }
 
   void acceptFriend(String idFiend, Action action) {
@@ -178,6 +183,8 @@ class _FriendScreenState extends State<FriendScreen> {
                               onPressed: (context) => addFriend(
                                   lsData[index].userId,
                                   lsData[index].name,
+                                  lsData[index].email,
+                                  lsData[index].pic,
                                   Action.Add),
                               backgroundColor: Color(0xFF7BC043),
                               foregroundColor: Colors.white,
