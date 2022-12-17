@@ -42,7 +42,7 @@ class _SiginPageState extends State<SiginPage> {
             AnimatedCusScal(
                 context: context,
                 s: 1500,
-                chil: Image.asset("assets/images/giphy1.webp")),
+                chil: Image.asset("assets/images/giphy1.webp", height: 500)),
             Flexible(
               // ignore: sort_child_properties_last
               child: Container(),
