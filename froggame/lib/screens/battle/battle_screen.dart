@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
-import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/battle/battle_vs_screen.dart';
@@ -80,13 +79,13 @@ class _BattleScreenState extends State<BattleScreen> {
                       child: Container(
                         height: 80,
                         width: 120,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("assets/button/btn_1/9.png"),
                             fit: BoxFit.cover,
                           ),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text("Start"),
                         ),
                       ),
@@ -110,7 +109,7 @@ class _BattleScreenState extends State<BattleScreen> {
                         color: Colors.amber,
                       ),
                       child: Container(
-                        margin: EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(10),
                         height: 110,
                         width: 110,
                         decoration: BoxDecoration(
@@ -164,11 +163,12 @@ class _BattleScreenState extends State<BattleScreen> {
                     s: 700,
                     x: 160,
                     context: context,
-                    chil: Container(
+                    chil: SizedBox(
                       height: 280,
                       width: 300,
                       child: Stack(
                         children: [
+                          // ignore: todo
                           //TODO: USER
                           Positioned(
                             bottom: 0,
@@ -186,7 +186,7 @@ class _BattleScreenState extends State<BattleScreen> {
                                   color: Colors.amber,
                                 ),
                                 child: Container(
-                                  margin: EdgeInsets.all(10),
+                                  margin: const EdgeInsets.all(10),
                                   height: 110,
                                   width: 110,
                                   decoration: BoxDecoration(
@@ -209,6 +209,7 @@ class _BattleScreenState extends State<BattleScreen> {
                               ),
                             ),
                           ),
+                          // ignore: todo
                           //TODO: LIST USER
                           Visibility(
                             visible: isLsbanbe,
