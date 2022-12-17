@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:froggame/const/font_app.dart';
-import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/screens/history/HistoryScreen.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';

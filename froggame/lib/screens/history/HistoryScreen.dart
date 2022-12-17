@@ -1,12 +1,12 @@
+// ignore_for_file: file_names
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/models/category_model.dart';
-import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_history.dart';
 
-import '../../const/colors.dart';
 import '../../models/pack_detail_model.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -19,6 +19,7 @@ class HistoryScreen extends StatefulWidget {
 class _HistoryScreenState extends State<HistoryScreen> {
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     FutureHistory.getAllDataPack(selectedPack);
@@ -66,13 +67,13 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         fit: BoxFit.cover)),
                 child: Center(
                   child: Text(
-                    '${goi[index].name}',
+                    goi[index].name,
                     style: selectedPack == index
-                        ? TextStyle(
+                        ? const TextStyle(
                             color: Color.fromARGB(255, 250, 248, 248),
                             fontSize: 20,
                             fontWeight: FontWeight.w500)
-                        : TextStyle(
+                        : const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.w500),
@@ -83,7 +84,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
         ),
         const Padding(padding: EdgeInsets.only(bottom: 10)),
-        Container(
+        SizedBox(
           height: size.height * 0.631,
           child: SingleChildScrollView(
             child: Column(
@@ -113,7 +114,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                     _addHeader(context, true, lstHistory, index)
                                 //_addHeader(context, false),
                                 ),
-                            Divider(
+                            const Divider(
                               height: 1,
                             ),
                             Row(
@@ -125,10 +126,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         context,
                                         required: true)!;
                                     return Padding(
-                                      padding: EdgeInsets.only(left: 230),
+                                      padding: const EdgeInsets.only(left: 230),
                                       child: ElevatedButton(
                                         child: Container(
-                                          padding: EdgeInsets.all(10),
+                                          padding: const EdgeInsets.all(10),
                                           width: size.width * 0.2,
                                           child: Center(
                                             child: Text(
@@ -139,8 +140,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                   .textTheme
                                                   .button!
                                                   .copyWith(
-                                                      color: Color.fromARGB(
-                                                          255, 243, 243, 245),
+                                                      color:
+                                                          const Color.fromARGB(
+                                                              255,
+                                                              243,
+                                                              243,
+                                                              245),
                                                       fontSize: 15,
                                                       fontWeight:
                                                           FontWeight.w500),
@@ -173,115 +178,110 @@ class _HistoryScreenState extends State<HistoryScreen> {
     );
   }
 
-  @override
   Widget _addHeader(
       BuildContext context, bool chkHiden, List<PackDetail> lst, int index) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Container(
-                width: 60,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 42, 226, 171),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: Image.network('${goi[selectedPack].img}'),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 42, 226, 171),
+                borderRadius: BorderRadius.circular(100),
               ),
-              const Padding(padding: EdgeInsets.all(10)),
-              RichText(
-                text: TextSpan(
-                  text: '${lstHistory[index].time}',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 54, 159, 61),
-                      fontSize: 30,
-                      fontFamily: 'DS-DIGITAL'),
-                  children: [
-                    TextSpan(
-                        text: ' s',
-                        style: TextStyle(
-                            fontSize: 24,
-                            color: Colors.black,
-                            fontFamily: 'quick',
-                            fontWeight: FontWeight.w200)),
-                  ],
-                ),
+              child: Image.network(goi[selectedPack].img),
+            ),
+            const Padding(padding: EdgeInsets.all(10)),
+            RichText(
+              text: TextSpan(
+                text: '${lstHistory[index].time}',
+                style: const TextStyle(
+                    color: Color.fromARGB(255, 54, 159, 61),
+                    fontSize: 30,
+                    fontFamily: 'DS-DIGITAL'),
+                children: const [
+                  TextSpan(
+                      text: ' s',
+                      style: TextStyle(
+                          fontSize: 24,
+                          color: Colors.black,
+                          fontFamily: 'quick',
+                          fontWeight: FontWeight.w200)),
+                ],
               ),
-              Container(
-                width: 100,
-                height: 100,
-                padding: const EdgeInsets.only(
-                    top: 10, right: 20, left: 20, bottom: 10),
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/button/btn_1/18.png'),
-                        fit: BoxFit.cover)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    // Icon(
-                    //   Icons.star_rate_outlined,
-                    //   color: Colors.yellow,
-                    // ),
-                    Text(
-                      '${lst[index].status}',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+            ),
+            Container(
+              width: 100,
+              height: 100,
+              padding: const EdgeInsets.only(
+                  top: 10, right: 20, left: 20, bottom: 10),
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/button/btn_1/18.png'),
+                      fit: BoxFit.cover)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Icon(
+                  //   Icons.star_rate_outlined,
+                  //   color: Colors.yellow,
+                  // ),
+                  Text(
+                    lst[index].status,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
-            ],
-          ),
-          chkHiden ? _addFooter(lst, index) : Container(),
-        ],
-      ),
+            ),
+          ],
+        ),
+        chkHiden ? _addFooter(lst, index) : Container(),
+      ],
     );
   }
 
   _addFooter(List<PackDetail> lst, int index) {
-    return Container(
-      child: ListTile(
-        title: RichText(
-          text: TextSpan(
-            text: 'Câu hỏi: ',
-            style: F_pacifico.copyWith(
-              color: Color.fromARGB(255, 6, 6, 230),
-              fontSize: 30,
-            ),
-            children: [
-              TextSpan(
-                  text: '${lst[index].question} ?',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontFamily: 'quick',
-                      fontWeight: FontWeight.w200)),
-            ],
+    return ListTile(
+      title: RichText(
+        text: TextSpan(
+          text: 'Câu hỏi: ',
+          style: F_pacifico.copyWith(
+            color: const Color.fromARGB(255, 6, 6, 230),
+            fontSize: 30,
           ),
-        ),
-        subtitle: RichText(
-          text: TextSpan(
-            text: 'Câu trả lời của bạn: ',
-            style: F_pacifico.copyWith(
-              color: Color.fromARGB(255, 6, 6, 230),
-              fontSize: 30,
-            ),
-            children: [
-              TextSpan(
-                text: ' ${lst[index].answerText} ',
-                style: TextStyle(
+          children: [
+            TextSpan(
+                text: '${lst[index].question} ?',
+                style: const TextStyle(
                     fontSize: 18,
-                    color:
-                        lst[index].status == 'đúng' ? Colors.green : Colors.red,
+                    color: Colors.black,
                     fontFamily: 'quick',
-                    fontWeight: FontWeight.w200),
-              ),
-            ],
+                    fontWeight: FontWeight.w200)),
+          ],
+        ),
+      ),
+      subtitle: RichText(
+        text: TextSpan(
+          text: 'Câu trả lời của bạn: ',
+          style: F_pacifico.copyWith(
+            color: const Color.fromARGB(255, 6, 6, 230),
+            fontSize: 30,
           ),
+          children: [
+            TextSpan(
+              text: ' ${lst[index].answerText} ',
+              style: TextStyle(
+                  fontSize: 18,
+                  color:
+                      lst[index].status == 'đúng' ? Colors.green : Colors.red,
+                  fontFamily: 'quick',
+                  fontWeight: FontWeight.w200),
+            ),
+          ],
         ),
       ),
     );
