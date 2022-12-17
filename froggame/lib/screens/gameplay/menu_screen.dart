@@ -115,8 +115,9 @@ class QuizzHome extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            onPressed: () {
-                              PackageMethod.InitPackage2();
+                            onPressed: () async {
+                              await PackageMethod.InitPackage();
+                              // ignore: use_build_context_synchronously
                               nextScreen(context, const TypeQuestionPage());
                             },
                             child: Text(

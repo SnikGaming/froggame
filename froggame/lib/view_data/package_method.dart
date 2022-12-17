@@ -24,7 +24,7 @@ class PackageMethod {
   static var docPakage =
       FirebaseFirestore.instance.collection("packageQuestions");
   static bool isLoad = false;
-  static Future createPackage({required index, context}) async {
+  static Future<void> createPackage({required index, context}) async {
     _idgoi = UserSimplePreferences.getUserId();
     UserSimplePreferences.setSL(index: 0);
     await docPakage
@@ -81,7 +81,7 @@ class PackageMethod {
   }
 
   // ignore: non_constant_identifier_names
-  static UpatePackage(
+  static Future<void> UpatePackage(
       {required int currentIndex,
       required int index,
       required int Ctrl}) async {
@@ -103,17 +103,10 @@ class PackageMethod {
     });
   }
 
-  static InitPackage() async {
+  static Future<void> InitPackage() async {
     int i = FureStoreCategory.lst.length;
     for (var j = 0; j < i; j++) {
-      createPackage(index: j + 1);
-    }
-  }
-
-  static InitPackage2() {
-    int i = FureStoreCategory.lst.length;
-    for (var j = 0; j < i; j++) {
-      createPackage(index: j + 1);
+      await createPackage(index: j + 1);
     }
   }
 }

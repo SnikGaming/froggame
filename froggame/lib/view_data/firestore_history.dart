@@ -1,17 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:froggame/const/str_Type.dart';
 import 'package:froggame/models/pack_detail_model.dart';
-import 'package:froggame/view_data/user_pre.dart';
 
 class FutureHistory {
   static List<PackDetail> lstPackage = [];
 
   static Future getAllDataPack(int idlv) async {
     lstPackage = [];
-    int score = 0;
     var package = FirebaseFirestore.instance.collection('detailpack');
 
-    List<String> lstAvatar = [];
 
     await package.where('idlv', isEqualTo: idlv + 1).get().then(
           (value) => {
@@ -25,6 +21,7 @@ class FutureHistory {
                     status: p.data()['tOrf'],
                   ),
                 ),
+                // ignore: avoid_print
                 print(
                     '================== status =======================>> ${lstPackage[0].status}'),
               },

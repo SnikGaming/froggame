@@ -46,7 +46,7 @@ class AuthMethod {
     UserSimplePreferences.setUsername(
         username: account!.displayName.toString());
     //nextScreen(context, const QuizzHome());
-    PackageMethod.InitPackage()
+    await PackageMethod.InitPackage()
         .then((value) => pushNamedRemove(context, 'welcome2'));
   }
 
