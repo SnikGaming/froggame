@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_option.dart';
+import 'package:froggame/screens/battle/battle_screen.dart';
 import 'package:froggame/screens/friends/friend_screen.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screen_load/view.dart';
@@ -146,7 +147,7 @@ class QuizzHome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              nextScreen(context, const TypeQuestionPage());
+                              nextScreen(context, const BattleScreen());
                             },
                             child: Text(
                               StrOption.doikhang,
