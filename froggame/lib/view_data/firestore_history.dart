@@ -3,8 +3,6 @@ import 'package:froggame/const/str_Type.dart';
 import 'package:froggame/models/pack_detail_model.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
-import 'firestore_categories.dart';
-
 class FutureHistory {
   static List<PackDetail> lstPackage = [];
 

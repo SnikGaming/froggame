@@ -1,19 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/screens/history/HistoryScreen.dart';
-import 'package:froggame/view_data/firestore_categories.dart';
-import 'package:froggame/view_data/firestore_history.dart';
-import 'package:froggame/view_data/firestore_rank.dart';
 // ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../const/colors.dart';
-import '../../const/str_Type.dart';
 
 // ignore: camel_case_types
 class infomation_screen extends StatefulWidget {
@@ -106,41 +100,39 @@ class _infomation_screenState extends State<infomation_screen> {
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
-                    child: Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: List.generate(
-                          playInfomation.length,
-                          (index) => GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                selected = index;
-                              });
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 140,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: selected == index
-                                          ? AssetImage(
-                                              'assets/button/btn_1/7.png')
-                                          : AssetImage(
-                                              'assets/button/btn_1/9.png'),
-                                      fit: BoxFit.cover)),
-                              child: Center(
-                                child: Text(
-                                  '${playInfomation[index]}',
-                                  style: selected == index
-                                      ? TextStyle(
-                                          color: white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold)
-                                      : TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500),
-                                ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: List.generate(
+                        playInfomation.length,
+                        (index) => GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selected = index;
+                            });
+                          },
+                          child: Container(
+                            height: 100,
+                            width: 140,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: selected == index
+                                        ? AssetImage(
+                                            'assets/button/btn_1/7.png')
+                                        : AssetImage(
+                                            'assets/button/btn_1/9.png'),
+                                    fit: BoxFit.cover)),
+                            child: Center(
+                              child: Text(
+                                playInfomation[index],
+                                style: selected == index
+                                    ? TextStyle(
+                                        color: white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)
+                                    : TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),

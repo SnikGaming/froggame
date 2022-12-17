@@ -44,7 +44,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     Size size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 60,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -61,8 +61,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: selectedPack == index
-                            ? AssetImage('assets/button/btn_1/7.png')
-                            : AssetImage('assets/button/btn_1/9.png'),
+                            ? const AssetImage('assets/button/btn_1/7.png')
+                            : const AssetImage('assets/button/btn_1/9.png'),
                         fit: BoxFit.cover)),
                 child: Center(
                   child: Text(
