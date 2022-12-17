@@ -37,7 +37,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   String tOrf = "";
   int idlv;
   late Future questions;
-  int defTimer = 5;
+  int defTimer = 30;
   _QuizzGameScreenState({required this.idlv});
 
   // ignore: todo

@@ -81,7 +81,7 @@ class PackageMethod {
   }
 
   // ignore: non_constant_identifier_names
-  static Future UpatePackage(
+  static UpatePackage(
       {required int currentIndex,
       required int index,
       required int Ctrl}) async {
