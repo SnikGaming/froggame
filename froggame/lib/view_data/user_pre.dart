@@ -25,9 +25,9 @@ class UserSimplePreferences {
       preferences = await SharedPreferences.getInstance();
 
   // //! Login ngaysinh
-  static Future setNgaySinh({required String ngaysinh}) async =>
-      await preferences!.setString(_ngaysinh, ngaysinh);
-  static getNgaySinh() => preferences!.get(_ngaysinh);
+  static Future setNgaySinh({required String age}) async =>
+      await preferences!.setString(_ngaysinh, age);
+  static getNgaySinh() => preferences!.getString(_ngaysinh);
   static Future removeNgaySinh() async => await preferences!.remove(_ngaysinh);
   // //! Login name
   static Future setName({required String name}) async =>

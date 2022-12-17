@@ -36,7 +36,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   bool isVis = false;
   bool isVisT = false;
   DateTime _date = DateTime.now();
-  String date = "dd-MM-yyyy";
+  String date = UserSimplePreferences.getNgaySinh() == ""
+      ? "Chưa cập nhật"
+      : UserSimplePreferences.getNgaySinh();
 
   _showDatePicker() {
     showDatePicker(
@@ -47,7 +49,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
         .then(
       (value) {
         _date = value!;
-        date = "${_date.day}-${_date.month}-${_date.year}";
+        if (value.year <= DateTime.now().year) {
+          if (value.year < DateTime.now().year) {
+            date = "${_date.day}-${_date.month}-${_date.year}";
+          } else if (value.year == DateTime.now().year) {
+            if (value.month < DateTime.now().month) {
+              date = "${_date.day}-${_date.month}-${_date.year}";
+            } else if (value.month == DateTime.now().month) {
+              if (value.day < DateTime.now().day) {
+                date = "${_date.day}-${_date.month}-${_date.year}";
+              }
+            }
+          }
+        } else {
+          //date = "Ngày sinh lớn hơn ngày hiện tại.";
+        }
         setState(() {});
       },
     );
@@ -403,6 +419,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               isCheck = true;
                             }
 
+                            if (date != "" &&
+                                date != UserSimplePreferences.getNgaySinh()) {
+                              UserSimplePreferences.setNgaySinh(age: date);
+                              FureStoreUser.addDataUser(
+                                  heart: UserSimplePreferences.getHeart(),
+                                  score: UserSimplePreferences.getScore());
+                              isCheck = true;
+                            }
+
                             // print(
                             //     "===============================><<<<><><><><><$avatar");
                             // setState(() {});
@@ -423,7 +448,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 });
                           },
                           child: const Text("Lưu"))),
-                )
+                ),
               ],
             ),
           ),

@@ -67,6 +67,7 @@ class AuthMethod {
     int heart = 5;
     String nameIg = "";
     String avatar = "";
+    String age = "";
     bool isId = false;
     // ignore: todo
     //TODO: Thực hiện truy vấn lấy User theo uiser ID = UID
@@ -82,6 +83,7 @@ class AuthMethod {
         heart = element.data()['heart'];
         avatar = element.data()['avatar'];
         nameIg = element.data()['nameIg'];
+        age = element.data()['age'];
 
         UserSimplePreferences.setUserId(id: element.data()['userId']);
         //!: Tồn tại trả về true
@@ -99,7 +101,8 @@ class AuthMethod {
         heart: heart,
         score: score,
         nameIg: nameIg,
-        avatar: avatar));
+        avatar: avatar,
+        age: age));
     //!: S
     if (!isId) {
       UserSimplePreferences.setUserId(id: user.user!.uid);
@@ -109,5 +112,6 @@ class AuthMethod {
     UserSimplePreferences.setHeart(heart: heart);
     UserSimplePreferences.setAvatar(avatar: avatar);
     UserSimplePreferences.setName(name: nameIg);
+    UserSimplePreferences.setNgaySinh(age: age);
   }
 }
