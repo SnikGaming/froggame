@@ -1,13 +1,22 @@
-// ignore_for_file: non_constant_identifier_names
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/const/str_Type.dart';
 import 'package:froggame/const/str_friend.dart';
 import 'package:froggame/models/user_model.dart';
+import 'package:froggame/models/friend_model.dart';
 import 'package:froggame/screen_load/user_view_header.dart';
+import 'package:froggame/view_data/firesore_addfriend.dart';
+import 'package:froggame/view_data/firesore_addfriend.dart';
 import 'package:froggame/view_data/firestore_user.dart';
+import 'package:froggame/view_data/user_pre.dart';
+
+enum Action { Add, Remove, Accept, Refuse }
 
 class FriendScreen extends StatefulWidget {
   const FriendScreen({super.key});
@@ -17,8 +26,29 @@ class FriendScreen extends StatefulWidget {
 }
 
 class _FriendScreenState extends State<FriendScreen> {
+  loadData() async {
+    await AddFriend.getAddFriend(UserSimplePreferences.getUserId());
+    await AddFriend.getFriend(UserSimplePreferences.getUserId());
+    var data1 = AddFriend.lsFriend;
+    var data2 = AddFriend.lsAddFriend;
+    setState(() {});
+    lsFriend = data1;
+    lsAddFriend = data2;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
   static List<UserModel> lsData = FureStoreUser.lsUserAll;
+  List<FriendModel> lsAddFriend = [];
+  List<FriendModel> lsFriend = [];
+
   var txt_key = TextEditingController();
+  @override
   var _index = StrFriend.friend[0];
 
   _search(String txt) {
@@ -26,9 +56,83 @@ class _FriendScreenState extends State<FriendScreen> {
     lsData = FureStoreUser.lsUserSearch;
   }
 
-  _itemFriend(Size size) {
-    // ignore: sized_box_for_whitespace
-    return Container();
+  void addFriend(String idFriend, String nameFriend, Action action) {
+    AddFriend.Save(idfriend: idFriend, friendname: nameFriend);
+  }
+
+  void acceptFriend(String idFiend, Action action) {
+    AddFriend.acceptFriend(idFiend);
+  }
+
+  void refuseFriend(String idFiend, Action action) {
+    AddFriend.refuseFriend(idFiend);
+  }
+
+  viewUser(BuildContext context) {}
+
+  _itemFriend(Size size, List<FriendModel> friend) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // ignore: sized_box_for_whitespace
+          Container(
+              height: size.height * .82,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: lsFriend.length,
+                  itemBuilder: ((context, index) => Slidable(
+                        // Specify a key if the Slidable is dismissible.
+                        key: const ValueKey(0),
+
+                        // The start action pane is the one at the left or the top side.
+
+                        // The end action pane is the one at the right or the bottom side.
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              // An action can be bigger than the others.
+                              flex: 2,
+                              onPressed: (context) {
+                                setState(() {});
+                                return acceptFriend(
+                                    lsAddFriend[index].idfriend, Action.Accept);
+                              },
+                              backgroundColor: Color(0xFF7BC043),
+                              foregroundColor: Colors.white,
+                              icon: Icons.add,
+                              label: 'Thông tin',
+                            ),
+                            SlidableAction(
+                              flex: 2,
+                              onPressed: (context) {
+                                setState(() {});
+
+                                refuseFriend(
+                                    lsAddFriend[index].idfriend, Action.Accept);
+                              },
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              icon: Icons.close,
+                              label: 'Xóa bạn',
+                            ),
+                          ],
+                        ),
+
+                        // The child of the Slidable is what the user sees when the
+                        // component is not dragged.
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage('${lsFriend[index].pic}'),
+                          ),
+                          title: Text('${lsFriend[index].friendname}'),
+                          subtitle: Text('${lsFriend[index].email}'),
+                        ),
+                      )))),
+        ],
+      ),
+    );
   }
 
   _itemAddFriend(size) {
@@ -51,7 +155,7 @@ class _FriendScreenState extends State<FriendScreen> {
                 }
                 setState(() {});
               },
-              child: const Icon(Icons.search)),
+              child: Icon(Icons.search)),
           // ignore: sized_box_for_whitespace
           Container(
               height: size.height * .82,
@@ -65,13 +169,16 @@ class _FriendScreenState extends State<FriendScreen> {
                         // The start action pane is the one at the left or the top side.
 
                         // The end action pane is the one at the right or the bottom side.
-                        endActionPane: const ActionPane(
+                        endActionPane: ActionPane(
                           motion: ScrollMotion(),
                           children: [
                             SlidableAction(
                               // An action can be bigger than the others.
                               flex: 2,
-                              onPressed: doNothing,
+                              onPressed: (context) => addFriend(
+                                  lsData[index].userId,
+                                  lsData[index].name,
+                                  Action.Add),
                               backgroundColor: Color(0xFF7BC043),
                               foregroundColor: Colors.white,
                               icon: Icons.add,
@@ -79,7 +186,7 @@ class _FriendScreenState extends State<FriendScreen> {
                             ),
                             SlidableAction(
                               flex: 2,
-                              onPressed: doNothing,
+                              onPressed: viewUser,
                               backgroundColor: Color(0xFF0392CF),
                               foregroundColor: Colors.white,
                               icon: Icons.info,
@@ -93,9 +200,9 @@ class _FriendScreenState extends State<FriendScreen> {
                         child: ListTile(
                           leading: CircleAvatar(
                             backgroundImage:
-                                NetworkImage(lsData[index].pic),
+                                NetworkImage('${lsData[index].pic}'),
                           ),
-                          title: Text(lsData[index].name),
+                          title: Text('${lsData[index].name}'),
                         ),
                       )))),
         ],
@@ -103,8 +210,69 @@ class _FriendScreenState extends State<FriendScreen> {
     );
   }
 
-  _itemFriendRequest(Size size) {
-    return Container();
+  _itemFriendRequest(Size size, List<FriendModel> lsAddFriend) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          // ignore: sized_box_for_whitespace
+          Container(
+              height: size.height * .82,
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: lsAddFriend.length,
+                  itemBuilder: ((context, index) => Slidable(
+                        // Specify a key if the Slidable is dismissible.
+                        key: const ValueKey(0),
+
+                        // The start action pane is the one at the left or the top side.
+
+                        // The end action pane is the one at the right or the bottom side.
+                        endActionPane: ActionPane(
+                          motion: ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              // An action can be bigger than the others.
+                              flex: 2,
+                              onPressed: (context) {
+                                setState(() {});
+                                return acceptFriend(
+                                    lsAddFriend[index].idfriend, Action.Accept);
+                              },
+                              backgroundColor: Color(0xFF7BC043),
+                              foregroundColor: Colors.white,
+                              icon: Icons.add,
+                              label: 'Chấp nhận',
+                            ),
+                            SlidableAction(
+                              flex: 2,
+                              onPressed: (context) {
+                                setState(() {});
+
+                                refuseFriend(
+                                    lsAddFriend[index].idfriend, Action.Accept);
+                              },
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              icon: Icons.close,
+                              label: 'Từ chối',
+                            ),
+                          ],
+                        ),
+
+                        // The child of the Slidable is what the user sees when the
+                        // component is not dragged.
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage:
+                                NetworkImage('${lsAddFriend[index].pic}'),
+                          ),
+                          title: Text('${lsAddFriend[index].friendname}'),
+                          subtitle: Text('${lsAddFriend[index].email}'),
+                        ),
+                      )))),
+        ],
+      ),
+    );
   }
 
   @override
@@ -116,14 +284,14 @@ class _FriendScreenState extends State<FriendScreen> {
           height: size.height,
           width: size.width,
           decoration: BoxDecoration(gradient: background),
-          child: SizedBox(
+          child: Container(
             height: size.height,
             width: size.width,
             child: Column(
               children: [
                 UserHeader(height: size.height * .1, context: context),
                 SingleChildScrollView(
-                  child: SizedBox(
+                  child: Container(
                     height: size.height * .09,
                     child: Row(
                       children: List.generate(
@@ -175,10 +343,10 @@ class _FriendScreenState extends State<FriendScreen> {
                 ),
                 Expanded(
                   child: _index == StrFriend.friend[0]
-                      ? _itemFriend(size)
+                      ? _itemFriend(size, lsFriend)
                       : _index == StrFriend.friend[1]
                           ? _itemAddFriend(size)
-                          : _itemFriendRequest(size),
+                          : _itemFriendRequest(size, lsAddFriend),
                 )
               ],
             ),
@@ -188,5 +356,3 @@ class _FriendScreenState extends State<FriendScreen> {
     );
   }
 }
-
-void doNothing(BuildContext context) {}
