@@ -76,7 +76,7 @@ class QuizzHome extends StatelessWidget {
                       )
                     ],
                     options: CarouselOptions(
-                      //height: 150,
+                      height: 150,
                       aspectRatio: 16 / 9,
                       viewportFraction: 0.8,
                       initialPage: 0,

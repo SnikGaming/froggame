@@ -34,6 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   bool isVis = false;
+  bool isVisInfor = true;
   bool isVisT = false;
   DateTime _date = DateTime.now();
   String date = UserSimplePreferences.getNgaySinh() == ""
@@ -103,7 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     )),
                 //!: Name
                 Positioned(
-                    top: size.height * .26,
+                    top: size.height * .24,
                     child: AnimatedCusScal(
                         x: 130,
                         curve: Curves.elasticOut,
@@ -129,6 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       GestureDetector(
                                         onTapUp: ((details) {
                                           isVisT = !isVisT;
+
+                                          isVisInfor = !isVisT;
+
                                           setState(() {});
                                         }),
                                         child: Container(
@@ -172,7 +176,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ))),
                 //!: DATE TIME
                 Positioned(
-                    top: size.height * .4,
+                    top: size.height * .3,
 
                     //top: 370,
                     child: GestureDetector(
@@ -186,18 +190,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           y: -250,
                           curve: Curves.bounceInOut,
                           chil: Center(
-                              child: Text(date,
-                                  style: const TextStyle(
-                                      fontFamily: "DS-DIGITAL",
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 0, 251, 9)))),
+                              child: Visibility(
+                            visible: isVisInfor,
+                            child: Text(date,
+                                style: const TextStyle(
+                                    fontFamily: "DS-DIGITAL",
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.w600,
+                                    color: Color.fromARGB(255, 0, 251, 9))),
+                          )),
                         ),
                       ),
                     )),
                 //!: Email
                 Positioned(
-                    top: size.height * .45,
+                    top: size.height * .36,
 
                     //top: 370,
                     child: GestureDetector(
@@ -210,25 +217,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             context: context,
                             curve: Curves.elasticInOut,
                             s: 2000,
-                            chil: SelectableText.rich(
-                              TextSpan(children: [
-                                const TextSpan(
-                                  text: "Gmail: ",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 7, 7, 7),
+                            chil: Visibility(
+                              visible: isVisInfor,
+                              child: SelectableText.rich(
+                                TextSpan(children: [
+                                  const TextSpan(
+                                    text: "Gmail: ",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 7, 7, 7),
+                                    ),
                                   ),
-                                ),
-                                TextSpan(
-                                  text: UserSimplePreferences.getUserEmail(),
-                                  style: const TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Color.fromARGB(255, 251, 84, 0),
-                                  ),
-                                )
-                              ]),
+                                  TextSpan(
+                                    text: UserSimplePreferences.getUserEmail(),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 251, 84, 0),
+                                    ),
+                                  )
+                                ]),
+                              ),
                             ),
                           ),
                         ),
@@ -238,7 +248,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //!: Avatar
                 Positioned(
                   //top: 80,
-                  top: size.height * .1,
+                  top: size.height * .05,
                   child: AnimatedCus(
                       y: -140,
                       curve: Curves.slowMiddle,
@@ -248,7 +258,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onTapUp: ((details) {
                           isVis = !isVis;
                           isVisT = false;
-
+                          isVisInfor = true;
                           setState(() {});
                         }),
                         child: Column(
@@ -264,11 +274,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 borderRadius: BorderRadius.circular(50),
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(100),
+                                borderRadius: BorderRadius.circular(50),
                                 child: avatar != ""
                                     ? Image.asset(avatar)
-                                    : Image.network(
-                                        UserSimplePreferences.getUserPic()),
+                                    : Container(
+                                        height: 110,
+                                        width: 110,
+                                        decoration: BoxDecoration(
+                                          //color: Colors.green,
+                                          shape: BoxShape.circle,
+                                          image: DecorationImage(
+                                              image: NetworkImage(
+                                                UserSimplePreferences
+                                                    .getUserPic(),
+                                              ),
+                                              fit: BoxFit.cover),
+                                        ),
+                                      ),
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -340,10 +362,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                 //!: INFORMATION
                 Positioned(
-                  bottom: size.height * .1,
+                  bottom: 80,
                   //bottom: 80 + 20,
                   child: Container(
-                    height: size.height * .3,
+                    height: size.height * .4,
                     // height: 280,
                     width: size.width,
                     decoration: const BoxDecoration(),
