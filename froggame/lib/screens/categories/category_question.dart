@@ -23,12 +23,15 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
   String name = UserSimplePreferences.getName() == ""
       ? UserSimplePreferences.getUsername()
       : UserSimplePreferences.getName();
-  List<Category> lsCategory = FureStoreCategory.lsData;
+  List<Category> lsCategory = [];
   @override
   void initState() {
     // ignore: todo
     // TODO: implement initState
     super.initState();
+    FureStoreCategory.getAllData();
+    List<Category> lsCategory = FureStoreCategory.lsData;
+    setState(() {});
   }
 
   @override
@@ -211,9 +214,10 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                                       24)),
                                                           content: Text(
                                                               "$name đã hoàn thành lĩnh vực ${lsCategory[index].name} !!!\nHãy hoàn thành các thử thách khác.",
-                                                              style: const TextStyle(
-                                                                  color:
-                                                                      white)),
+                                                              style:
+                                                                  const TextStyle(
+                                                                      color:
+                                                                          white)),
                                                           actions: [
                                                             TextButton(
                                                                 onPressed: () {
