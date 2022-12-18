@@ -24,8 +24,8 @@ Future<void> main(List<String> args) async {
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
   FureStoreCategory.getAllData();
-  await FutureRank.getData();
-  //await FutureHistory.getData();
+  //await FutureRank.getData();
+  await FutureRank.getAllData(1);
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
   runApp(const MyApp());

@@ -25,8 +25,6 @@ class FutureHistory {
                     status: p.data()['tOrf'],
                   ),
                 ),
-                print(
-                    '================== status =======================>> ${lstPackage[0].status}'),
               },
           },
         );

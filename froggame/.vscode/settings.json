@@ -91,5 +91,6 @@
         "uiser",
         "Upate",
         "webp"
-    ]
+    ],
+    "cmake.sourceDirectory": "${workspaceFolder}/linux"
 }

@@ -14,6 +14,8 @@ import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
 import 'package:froggame/screens/support/support.dart';
+import 'package:froggame/view_data/firestore_history.dart';
+import 'package:froggame/view_data/firestore_rank.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
@@ -96,36 +98,37 @@ class QuizzHome extends StatelessWidget {
                   height: size.height * .02,
                 ),
                 AnimatedCus(
-                    context: context,
-                    y: 120,
-                    chil: Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              maximumSize: Size(size.width, 45),
-                              elevation: 9,
-                              shadowColor: Colors.orange,
-                              // ignore: deprecated_member_use
-                              primary: Colors.orange,
-                              minimumSize: const Size(240, 40),
-                              //  side: const BorderSide(width: 2, color: blue),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
+                  context: context,
+                  y: 120,
+                  chil: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            maximumSize: Size(size.width, 45),
+                            elevation: 9,
+                            shadowColor: Colors.orange,
+                            // ignore: deprecated_member_use
+                            primary: Colors.orange,
+                            minimumSize: const Size(240, 40),
+                            //  side: const BorderSide(width: 2, color: blue),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            onPressed: () {
-                              PackageMethod.InitPackage2();
-                              nextScreen(context, const TypeQuestionPage());
-                            },
-                            child: Text(
-                              StrOption.tieptuc,
-                              style: F_lobster.copyWith(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            )),
-                      ),
-                    )),
+                          ),
+                          onPressed: () {
+                            PackageMethod.InitPackage2();
+                            nextScreen(context, const TypeQuestionPage());
+                          },
+                          child: Text(
+                            StrOption.tieptuc,
+                            style: F_lobster.copyWith(
+                                fontSize: 20, fontWeight: FontWeight.w500),
+                          )),
+                    ),
+                  ),
+                ),
                 AnimatedCus(
                     context: context,
                     y: 120,
@@ -206,6 +209,8 @@ class QuizzHome extends StatelessWidget {
           StrOption.listView(
               str: StrOption.bxh,
               func: () {
+                FutureHistory.getAllDataPack(1);
+                FutureRank.getAllData(1);
                 nextScreen(ctx, const infomation_screen());
               },
               colorIcon: yellow,
