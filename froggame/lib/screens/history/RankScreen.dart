@@ -1,12 +1,14 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:froggame/const/colors.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/models/category_model.dart';
 import 'package:froggame/models/rank_model.dart';
+import 'package:froggame/models/visit_friend_model.dart';
 import 'package:froggame/screen_load/view.dart';
+import 'package:froggame/screens/profile/profileFriend_Screen.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -16,6 +18,18 @@ class RankScreen extends StatefulWidget {
 
   @override
   State<RankScreen> createState() => _RankScreenState();
+}
+
+class Located {
+  double? top;
+  double? left;
+  double? right;
+  double? bottom;
+  Located(
+      {required this.top,
+      required this.left,
+      required this.right,
+      required this.bottom});
 }
 
 class _RankScreenState extends State<RankScreen> {
@@ -29,6 +43,8 @@ class _RankScreenState extends State<RankScreen> {
   _loadData() async {
     await FutureRank.getAllData(selectedPack);
 
+    var _dataCat = await FureStoreCategory.lsData;
+
     var _data = await FureStoreCategory.lsData;
     var _dataRank = await FutureRank.lstRank;
     setState(() {});
@@ -39,6 +55,8 @@ class _RankScreenState extends State<RankScreen> {
     getForIdlv();
     lstRank = lstTemp;
     //listCut();
+
+    lstCat = _dataCat;
   }
 
   void getForIdlv() async {
@@ -47,15 +65,31 @@ class _RankScreenState extends State<RankScreen> {
     );
   }
 
+  List<Image> lstFrames = [
+    Image.asset('assets/frames/top1.png'),
+    Image.asset('assets/frames/top2.png'),
+    Image.asset('assets/frames/top3.png')
+  ];
+
+  List<Located> lstLocateTop3 = [
+    Located(top: 20, left: 0, right: 0, bottom: 0),
+    Located(top: 50, left: 0, right: 0, bottom: 0),
+    Located(top: 1000, left: 0, right: 0, bottom: 0)
+  ];
+
   List<rankModels> lstTemp = [];
 
   static List<Category> goi = [];
 
   static List<rankModels> lstRank = [];
 
+  static List<Category> lstCat = [];
+
   var selectedPack = 0;
 
   var indexRank;
+
+  List<FriendInfo> lstFr = [];
 
   List<rankModels> lstCut = [];
   @override
@@ -101,17 +135,28 @@ class _RankScreenState extends State<RankScreen> {
             ),
           ),
         ),
-        Container(
-          child: lstRank.length == 0
-              ? Center(
-                  child: Container(
-                  child: Text(
-                    'Chưa có người chơi',
-                    style: TextStyle(fontSize: 40, color: Colors.red),
-                  ),
-                ))
-              : _top3(context),
-        ),
+        lstRank.length == 0
+            ? Center(
+                child: Container(
+                child: Text(
+                  'Chưa có người chơi',
+                  style: TextStyle(fontSize: 40, color: Colors.red),
+                ),
+              ))
+            : Container(
+                height: 140,
+                width: size.width * 0.95,
+                child: ListView.builder(
+                  itemCount: 3,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Positioned(
+                        top: lstLocateTop3[index].top,
+                        right: lstLocateTop3[index].right,
+                        child: _lstTop3(context, index));
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
         Padding(
             padding: const EdgeInsets.only(top: 20),
             child: Container(
@@ -133,128 +178,128 @@ class _RankScreenState extends State<RankScreen> {
 
   var indexTemp = 3;
   @override
-  Widget _top3(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Container(
-                          height: 70,
-                          width: 70,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage(lstRank[1].avatar))),
-                          // height: 50,
-                          // width: 50,
-                        ),
-                      ),
-                      Container(
-                        height: 90,
-                        width: 90,
-                        child: Image.asset('assets/frames/top2.png'),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Text(
-                    '${lstRank[1].score}',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        Container(
-          child: Column(
-            children: [
-              Container(
-                child: Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(25),
-                      child: Container(
-                        height: 70,
-                        width: 70,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                                image: NetworkImage(lstRank[0].avatar))),
-                        // height: 50,
-                        // width: 50,
-                      ),
-                    ),
-                    Container(
-                      height: 120,
-                      width: 120,
-                      child: Image.asset('assets/frames/top1.png'),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Text('${lstRank[0].score}',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: Container(
-            child: Column(
-              children: [
-                Container(
-                  child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8),
-                        child: Container(
-                          height: 70,
-                          width: 70,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: NetworkImage(lstRank[2].avatar))),
-                          // height: 50,
-                          // width: 50,
-                        ),
-                      ),
-                      Container(
-                        height: 80,
-                        width: 80,
-                        child: Image.asset('assets/frames/top3.png'),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  child: Text('${lstRank[3].score}',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                )
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // _top3(BuildContext context) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.only(top: 40),
+  //         child: Container(
+  //           child: Column(
+  //             children: [
+  //               Container(
+  //                 child: Stack(
+  //                   children: [
+  //                     Padding(
+  //                       padding: const EdgeInsets.all(12),
+  //                       child: Container(
+  //                         height: 70,
+  //                         width: 70,
+  //                         decoration: BoxDecoration(
+  //                             shape: BoxShape.circle,
+  //                             image: DecorationImage(
+  //                                 image: NetworkImage(lstRank[1].avatar))),
+  //                         // height: 50,
+  //                         // width: 50,
+  //                       ),
+  //                     ),
+  //                     Container(
+  //                       height: 90,
+  //                       width: 90,
+  //                       child: Image.asset('assets/frames/top2.png'),
+  //                     )
+  //                   ],
+  //                 ),
+  //               ),
+  //               Container(
+  //                 child: Text(
+  //                   '${lstRank[1].score}',
+  //                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  //                 ),
+  //               )
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //       Container(
+  //         child: Column(
+  //           children: [
+  //             Container(
+  //               child: Stack(
+  //                 children: [
+  //                   Padding(
+  //                     padding: const EdgeInsets.all(25),
+  //                     child: Container(
+  //                       height: 70,
+  //                       width: 70,
+  //                       decoration: BoxDecoration(
+  //                           shape: BoxShape.circle,
+  //                           image: DecorationImage(
+  //                               image: NetworkImage(lstRank[0].avatar))),
+  //                       // height: 50,
+  //                       // width: 50,
+  //                     ),
+  //                   ),
+  //                   Container(
+  //                     height: 120,
+  //                     width: 120,
+  //                     child: Image.asset('assets/frames/top1.png'),
+  //                   )
+  //                 ],
+  //               ),
+  //             ),
+  //             Container(
+  //               child: Text('${lstRank[0].score}',
+  //                   style:
+  //                       TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //       Padding(
+  //         padding: const EdgeInsets.only(top: 40),
+  //         child: Container(
+  //           child: Column(
+  //             children: [
+  //               Container(
+  //                 child: Stack(
+  //                   children: [
+  //                     Padding(
+  //                       padding: const EdgeInsets.all(8),
+  //                       child: Container(
+  //                         height: 70,
+  //                         width: 70,
+  //                         decoration: BoxDecoration(
+  //                             shape: BoxShape.circle,
+  //                             image: DecorationImage(
+  //                                 image: NetworkImage(lstRank[2].avatar))),
+  //                         // height: 50,
+  //                         // width: 50,
+  //                       ),
+  //                     ),
+  //                     Container(
+  //                       height: 80,
+  //                       width: 80,
+  //                       child: Image.asset('assets/frames/top3.png'),
+  //                     )
+  //                   ],
+  //                 ),
+  //               ),
+  //               Container(
+  //                 child: Text('${lstRank[3].score}',
+  //                     style:
+  //                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+  //               )
+  //             ],
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   @override
-  Widget _top10(BuildContext context, int indexTemp) {
+  _top10(BuildContext context, int indexTemp) {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(top: 10),
@@ -329,7 +374,7 @@ class _RankScreenState extends State<RankScreen> {
                                 children: [
                                   TextSpan(
                                       text: lstRank[indexRank].NamePlayer,
-                                      style: TextStyle(
+                                      style: F_pacifico.copyWith(
                                           fontSize: 24,
                                           color: Colors.black,
                                           fontFamily: 'quick',
@@ -344,7 +389,26 @@ class _RankScreenState extends State<RankScreen> {
                                   },
                                   child: Text('Cancel')),
                               ElevatedButton(
-                                  onPressed: () {}, child: Text('Ok')),
+                                onPressed: () async {
+                                  setState(
+                                    () {
+                                      lstFr.add(FriendInfo(
+                                          avatar: lstRank[indexTemp].avatar,
+                                          name: lstRank[indexTemp].NamePlayer,
+                                          iduser: lstRank[indexTemp].iduser,
+                                          lstCat: lstCat,
+                                          score: lstRank[indexTemp].score));
+                                    },
+                                  );
+                                  nextScreen(
+                                    context,
+                                    ProfileFriendScreen(
+                                      lstProfile: lstFr,
+                                    ),
+                                  );
+                                },
+                                child: Text('Ok'),
+                              ),
                             ],
                           ),
                         );
@@ -363,6 +427,112 @@ class _RankScreenState extends State<RankScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  @override
+  _NextScreenTop3(BuildContext context, int index) {
+    return GestureDetector(
+      onTap: () {
+        onPressed:
+        () {
+          setState(() {
+            // indexRank = indexTemp;
+          });
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              backgroundColor: Colors.purple.shade100,
+              title: RichText(
+                text: TextSpan(
+                  text: 'Xem thông tin \n',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 75, 54, 159),
+                    fontSize: 20,
+                  ),
+                  children: [
+                    TextSpan(
+                        text: lstRank[index].NamePlayer,
+                        style: F_pacifico.copyWith(
+                            fontSize: 24,
+                            color: Colors.black,
+                            fontFamily: 'quick',
+                            fontWeight: FontWeight.w200)),
+                  ],
+                ),
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text('Cancel')),
+                ElevatedButton(
+                  onPressed: () async {
+                    setState(
+                      () {
+                        lstFr.add(FriendInfo(
+                            avatar: lstRank[index].avatar,
+                            name: lstRank[index].NamePlayer,
+                            iduser: lstRank[index].iduser,
+                            lstCat: lstCat,
+                            score: lstRank[index].score));
+                      },
+                    );
+                    nextScreen(
+                      context,
+                      ProfileFriendScreen(
+                        lstProfile: lstFr,
+                      ),
+                    );
+                  },
+                  child: Text('Ok'),
+                ),
+              ],
+            ),
+          );
+        };
+      },
+    );
+  }
+
+  @override
+  @override
+  _lstTop3(BuildContext context, int index) {
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12),
+            child: Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(lstRank[index].avatar))),
+              // height: 50,
+              // width: 50,
+            ),
+          ),
+          Container(
+            height: 90,
+            width: 90,
+            child: lstFrames[index],
+          ),
+          Positioned(
+            top: 100,
+            left: 40,
+            child: Container(
+              child: Text(
+                '${lstRank[index].score}',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

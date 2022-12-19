@@ -15,6 +15,7 @@ class FutureRank {
               {
                 lstRank.add(
                   rankModels(
+                    iduser: r.data()['idUser'],
                     avatar: r.data()['pic'],
                     idlv: r.data()['idlv'],
                     NamePlayer: r.data()['name'],

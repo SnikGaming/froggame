@@ -1,6 +1,6 @@
 class PackageQuestionModel {
-  String idUser, idgoi;
-  int idch, idlv, timer;
+  String? idUser, idgoi;
+  int? idch, idlv, timer;
 
   PackageQuestionModel(
       {required this.idUser,
