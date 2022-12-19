@@ -145,6 +145,7 @@ class _RankScreenState extends State<RankScreen> {
               ))
             : Container(
                 height: 140,
+                decoration: BoxDecoration(border: Border.all(width: 1)),
                 width: size.width * 0.95,
                 child: ListView.builder(
                   itemCount: 3,
@@ -502,6 +503,7 @@ class _RankScreenState extends State<RankScreen> {
   _lstTop3(BuildContext context, int index) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      decoration: BoxDecoration(border: Border.all(width: 1)),
       child: Stack(
         children: [
           Padding(
