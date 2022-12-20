@@ -13,6 +13,8 @@ import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
+import '../../models/scoreProfile.dart';
+
 class RankScreen extends StatefulWidget {
   const RankScreen({super.key});
 
@@ -41,9 +43,8 @@ class _RankScreenState extends State<RankScreen> {
   }
 
   _loadData() async {
-    await FutureRank.getAllData(selectedPack);
-
-    var _dataCat = await FureStoreCategory.lsData;
+    await FutureRank.getAllData(
+        selectedPack, UserSimplePreferences.getUserId());
 
     var _data = await FureStoreCategory.lsData;
     var _dataRank = await FutureRank.lstRank;
@@ -56,7 +57,11 @@ class _RankScreenState extends State<RankScreen> {
     lstRank = lstTemp;
     //listCut();
 
-    lstCat = _dataCat;
+    lstCat = _data;
+
+    idlv = 1;
+    iduser = UserSimplePreferences.getUserId();
+    lstScoreItem(idlv, iduser);
   }
 
   void getForIdlv() async {
@@ -65,6 +70,27 @@ class _RankScreenState extends State<RankScreen> {
     );
   }
 
+  //stare lstScore
+  lstScoreItem(idlv, iduser) async {
+    await FutureRank.getScore(iduser);
+    List<Score> _lstScore = await FutureRank.lstScore;
+
+    List<int> lstScore = [];
+    var index = 1;
+    for (var i in _lstScore) {
+      if (i.idlv == index) {
+        lstScore.add(i.score);
+      }
+      index++;
+    }
+    scoreItem = lstScore;
+  }
+
+  List<int> scoreItem = [];
+  var idlv;
+  var iduser;
+
+  //end lstScore
   List<Image> lstFrames = [
     Image.asset('assets/frames/top1.png'),
     Image.asset('assets/frames/top2.png'),
@@ -72,9 +98,9 @@ class _RankScreenState extends State<RankScreen> {
   ];
 
   List<Located> lstLocateTop3 = [
-    Located(top: 20, left: 0, right: 0, bottom: 0),
-    Located(top: 50, left: 0, right: 0, bottom: 0),
-    Located(top: 1000, left: 0, right: 0, bottom: 0)
+    Located(top: 0, left: 0, right: 0, bottom: 0),
+    Located(top: 0, left: 0, right: 0, bottom: 0),
+    Located(top: 0, left: 0, right: 0, bottom: 0)
   ];
 
   List<rankModels> lstTemp = [];
@@ -84,6 +110,8 @@ class _RankScreenState extends State<RankScreen> {
   static List<rankModels> lstRank = [];
 
   static List<Category> lstCat = [];
+
+  static List<int> lstScoreIndex = [];
 
   var selectedPack = 0;
 
@@ -105,7 +133,8 @@ class _RankScreenState extends State<RankScreen> {
             itemBuilder: (context, index) => GestureDetector(
               onTap: () async {
                 selectedPack = index;
-                await FutureRank.getAllData(selectedPack);
+                await FutureRank.getAllData(
+                    selectedPack, UserSimplePreferences.getUserId());
                 _loadData();
               },
               child: Container(
@@ -143,25 +172,65 @@ class _RankScreenState extends State<RankScreen> {
                   style: TextStyle(fontSize: 40, color: Colors.red),
                 ),
               ))
-            : Container(
-                height: 140,
-                decoration: BoxDecoration(border: Border.all(width: 1)),
-                width: size.width * 0.95,
-                child: ListView.builder(
-                  itemCount: 3,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Positioned(
-                        top: lstLocateTop3[index].top,
-                        right: lstLocateTop3[index].right,
-                        child: _lstTop3(context, index));
-                  },
-                  scrollDirection: Axis.horizontal,
-                ),
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () async {
+                      await _NextScreenTop(context, 1);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Top 2',
+                            style: F_lobster.copyWith(fontSize: 25),
+                          ),
+                          lstTop3(context, 1),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await _NextScreenTop(context, 0);
+                    },
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Top 1',
+                            style: F_lobster.copyWith(fontSize: 25),
+                          ),
+                          lstTop3(context, 0),
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await _NextScreenTop(context, 2);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 25),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Top 3',
+                            style: F_lobster.copyWith(fontSize: 25),
+                          ),
+                          lstTop3(context, 2),
+                        ],
+                      ),
+                    ),
+                  )
+                ],
               ),
         Padding(
-            padding: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.only(top: 0),
             child: Container(
-              height: size.height * 0.4,
+              height: size.height * 0.35,
               width: size.width * 0.95,
               child: SingleChildScrollView(
                 child: Column(
@@ -178,126 +247,6 @@ class _RankScreenState extends State<RankScreen> {
   }
 
   var indexTemp = 3;
-  @override
-  // _top3(BuildContext context) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: [
-  //       Padding(
-  //         padding: const EdgeInsets.only(top: 40),
-  //         child: Container(
-  //           child: Column(
-  //             children: [
-  //               Container(
-  //                 child: Stack(
-  //                   children: [
-  //                     Padding(
-  //                       padding: const EdgeInsets.all(12),
-  //                       child: Container(
-  //                         height: 70,
-  //                         width: 70,
-  //                         decoration: BoxDecoration(
-  //                             shape: BoxShape.circle,
-  //                             image: DecorationImage(
-  //                                 image: NetworkImage(lstRank[1].avatar))),
-  //                         // height: 50,
-  //                         // width: 50,
-  //                       ),
-  //                     ),
-  //                     Container(
-  //                       height: 90,
-  //                       width: 90,
-  //                       child: Image.asset('assets/frames/top2.png'),
-  //                     )
-  //                   ],
-  //                 ),
-  //               ),
-  //               Container(
-  //                 child: Text(
-  //                   '${lstRank[1].score}',
-  //                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         child: Column(
-  //           children: [
-  //             Container(
-  //               child: Stack(
-  //                 children: [
-  //                   Padding(
-  //                     padding: const EdgeInsets.all(25),
-  //                     child: Container(
-  //                       height: 70,
-  //                       width: 70,
-  //                       decoration: BoxDecoration(
-  //                           shape: BoxShape.circle,
-  //                           image: DecorationImage(
-  //                               image: NetworkImage(lstRank[0].avatar))),
-  //                       // height: 50,
-  //                       // width: 50,
-  //                     ),
-  //                   ),
-  //                   Container(
-  //                     height: 120,
-  //                     width: 120,
-  //                     child: Image.asset('assets/frames/top1.png'),
-  //                   )
-  //                 ],
-  //               ),
-  //             ),
-  //             Container(
-  //               child: Text('${lstRank[0].score}',
-  //                   style:
-  //                       TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //       Padding(
-  //         padding: const EdgeInsets.only(top: 40),
-  //         child: Container(
-  //           child: Column(
-  //             children: [
-  //               Container(
-  //                 child: Stack(
-  //                   children: [
-  //                     Padding(
-  //                       padding: const EdgeInsets.all(8),
-  //                       child: Container(
-  //                         height: 70,
-  //                         width: 70,
-  //                         decoration: BoxDecoration(
-  //                             shape: BoxShape.circle,
-  //                             image: DecorationImage(
-  //                                 image: NetworkImage(lstRank[2].avatar))),
-  //                         // height: 50,
-  //                         // width: 50,
-  //                       ),
-  //                     ),
-  //                     Container(
-  //                       height: 80,
-  //                       width: 80,
-  //                       child: Image.asset('assets/frames/top3.png'),
-  //                     )
-  //                   ],
-  //                 ),
-  //               ),
-  //               Container(
-  //                 child: Text('${lstRank[3].score}',
-  //                     style:
-  //                         TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-  //               )
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ],
-  //   );
-  // }
 
   @override
   _top10(BuildContext context, int indexTemp) {
@@ -391,22 +340,28 @@ class _RankScreenState extends State<RankScreen> {
                                   child: Text('Cancel')),
                               ElevatedButton(
                                 onPressed: () async {
-                                  setState(
-                                    () {
-                                      lstFr.add(FriendInfo(
+                                  Future.delayed(const Duration(seconds: 3),
+                                      () async {
+                                    idlv = lstRank[indexTemp].idlv;
+                                    iduser = lstRank[indexTemp].iduser;
+
+                                    await FutureRank.getScore(iduser);
+                                    await lstScoreItem(idlv, iduser);
+                                    lstFr.add(
+                                      FriendInfo(
                                           avatar: lstRank[indexTemp].avatar,
                                           name: lstRank[indexTemp].NamePlayer,
                                           iduser: lstRank[indexTemp].iduser,
                                           lstCat: lstCat,
-                                          score: lstRank[indexTemp].score));
-                                    },
-                                  );
-                                  nextScreen(
-                                    context,
-                                    ProfileFriendScreen(
-                                      lstProfile: lstFr,
-                                    ),
-                                  );
+                                          score: scoreItem),
+                                    );
+                                    nextScreen(
+                                      context,
+                                      ProfileFriendScreen(
+                                        lstProfile: lstFr,
+                                      ),
+                                    );
+                                  });
                                 },
                                 child: Text('Ok'),
                               ),
@@ -433,95 +388,96 @@ class _RankScreenState extends State<RankScreen> {
   }
 
   @override
-  _NextScreenTop3(BuildContext context, int index) {
-    return GestureDetector(
-      onTap: () {
-        onPressed:
-        () {
-          setState(() {
-            // indexRank = indexTemp;
-          });
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              backgroundColor: Colors.purple.shade100,
-              title: RichText(
-                text: TextSpan(
-                  text: 'Xem thông tin \n',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 75, 54, 159),
-                    fontSize: 20,
-                  ),
-                  children: [
-                    TextSpan(
-                        text: lstRank[index].NamePlayer,
-                        style: F_pacifico.copyWith(
-                            fontSize: 24,
-                            color: Colors.black,
-                            fontFamily: 'quick',
-                            fontWeight: FontWeight.w200)),
-                  ],
-                ),
-              ),
-              actions: [
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text('Cancel')),
-                ElevatedButton(
-                  onPressed: () async {
-                    setState(
-                      () {
-                        lstFr.add(FriendInfo(
-                            avatar: lstRank[index].avatar,
-                            name: lstRank[index].NamePlayer,
-                            iduser: lstRank[index].iduser,
-                            lstCat: lstCat,
-                            score: lstRank[index].score));
-                      },
-                    );
-                    nextScreen(
-                      context,
-                      ProfileFriendScreen(
-                        lstProfile: lstFr,
-                      ),
-                    );
-                  },
-                  child: Text('Ok'),
-                ),
-              ],
+  _NextScreenTop(BuildContext context, int index) {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: Colors.purple.shade100,
+        title: RichText(
+          text: TextSpan(
+            text: 'Xem thông tin \n',
+            style: TextStyle(
+              color: Color.fromARGB(255, 75, 54, 159),
+              fontSize: 20,
             ),
-          );
-        };
-      },
+            children: [
+              TextSpan(
+                  text: lstRank[index].NamePlayer,
+                  style: F_pacifico.copyWith(
+                      fontSize: 24,
+                      color: Colors.black,
+                      fontFamily: 'quick',
+                      fontWeight: FontWeight.w200)),
+            ],
+          ),
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Cancel')),
+          ElevatedButton(
+            onPressed: () async {
+              Future.delayed(
+                const Duration(seconds: 2),
+                () async {
+                  idlv = lstRank[index].idlv;
+                  iduser = lstRank[index].iduser;
+                  await FutureRank.getScore(iduser);
+
+                  await lstScoreItem(idlv, iduser);
+                  lstFr.add(
+                    FriendInfo(
+                        avatar: lstRank[index].avatar,
+                        name: lstRank[index].NamePlayer,
+                        iduser: lstRank[index].iduser,
+                        lstCat: lstCat,
+                        score: scoreItem),
+                  );
+                  nextScreen(
+                    context,
+                    ProfileFriendScreen(
+                      lstProfile: lstFr,
+                    ),
+                  );
+                },
+              );
+            },
+            child: Text('Ok'),
+          ),
+        ],
+      ),
     );
   }
 
   @override
   @override
-  _lstTop3(BuildContext context, int index) {
+  Widget lstTop3(BuildContext context, int index) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(border: Border.all(width: 1)),
+      height: 150,
       child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Container(
-              height: 70,
-              width: 70,
-              decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                      image: NetworkImage(lstRank[index].avatar))),
-              // height: 50,
-              // width: 50,
+          Container(
+            margin: EdgeInsets.only(top: 15, left: 15),
+            height: 65,
+            width: 65,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: NetworkImage(lstRank[index].avatar),
+              ),
             ),
+            // height: 50,
+            // width: 50,
           ),
           Container(
-            height: 90,
-            width: 90,
+            margin: index != 0
+                ? EdgeInsets.only(top: 10, left: 10)
+                : EdgeInsets.only(top: 0, left: 0),
+            height: index != 0 ? 75 : 95,
+            width: index != 0 ? 75 : 95,
             child: lstFrames[index],
           ),
           Positioned(

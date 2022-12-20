@@ -25,7 +25,7 @@ Future<void> main(List<String> args) async {
   await FureStoreCategory.GetData();
   FureStoreCategory.getAllData();
   //await FutureRank.getData();
-  await FutureRank.getAllData(1);
+  await FutureRank.getAllData(1, UserSimplePreferences.getUserId());
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
   runApp(const MyApp());

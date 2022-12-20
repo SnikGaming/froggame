@@ -6,7 +6,7 @@ class FriendInfo {
   final String name;
   final String iduser;
   final List<Category> lstCat;
-  final int score;
+  final List<int> score;
 
   FriendInfo(
       {required this.avatar,

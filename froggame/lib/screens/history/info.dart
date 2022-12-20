@@ -57,7 +57,7 @@ class _infomation_screenState extends State<infomation_screen> {
     // TODO: implement initState
     super.initState();
     FutureHistory.getAllDataPack(1);
-    FutureRank.getAllData(1);
+    FutureRank.getAllData(1, UserSimplePreferences.getUserId());
     // FutureHistory.getListHistory();
     // lsHs = FutureHistory.lsHistory;
     //lstId();
@@ -145,7 +145,8 @@ class _infomation_screenState extends State<infomation_screen> {
                           onTap: () {
                             setState(() {
                               selected = index;
-                              FutureRank.getAllData(1);
+                              FutureRank.getAllData(
+                                  1, UserSimplePreferences.getUserId());
 
                               //History
                             });

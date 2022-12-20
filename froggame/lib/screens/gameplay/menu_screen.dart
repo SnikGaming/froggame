@@ -210,7 +210,7 @@ class QuizzHome extends StatelessWidget {
               str: StrOption.bxh,
               func: () {
                 FutureHistory.getAllDataPack(1);
-                FutureRank.getAllData(1);
+                FutureRank.getAllData(1, UserSimplePreferences.getUserId());
                 nextScreen(ctx, const infomation_screen());
               },
               colorIcon: yellow,

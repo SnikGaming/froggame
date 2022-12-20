@@ -43,8 +43,21 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
   }
 
   List<FriendInfo> lstVisitFriend = [];
+
   @override
   Widget build(BuildContext context) {
+    return lstVisitFriend != null
+        ? Profile(context)
+        : Center(
+            child: Text(
+              'Thông tin người chơi chưa cập nhật',
+              style: F_lobster.copyWith(fontSize: 40, color: Colors.blue),
+            ),
+          );
+  }
+
+  @override
+  Widget Profile(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -142,12 +155,13 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
               left: size.height * 0.009,
               child: Container(
                 width: size.width * 0.95,
+                margin: EdgeInsets.only(top: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      height: 70,
-                      width: 70,
+                      height: 100,
+                      width: 100,
                       decoration: BoxDecoration(
                         border: Border.all(width: 2),
                         shape: BoxShape.circle,
@@ -164,29 +178,29 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
                             fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(border: Border.all(width: 1)),
-                      child: RichText(
-                        text: TextSpan(
-                          text: 'ID: ',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 75, 54, 159),
-                            fontSize: 20,
-                          ),
-                          children: [
-                            TextSpan(
-                                text: lstVisitFriend[0].iduser,
-                                style: F_pacifico.copyWith(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontFamily: 'quick',
-                                    fontWeight: FontWeight.w500)),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(top: 10),
+                    //   padding: EdgeInsets.all(10),
+                    //   decoration: BoxDecoration(border: Border.all(width: 1)),
+                    //   child: RichText(
+                    //     text: TextSpan(
+                    //       text: 'ID: ',
+                    //       style: TextStyle(
+                    //         color: Color.fromARGB(255, 75, 54, 159),
+                    //         fontSize: 20,
+                    //       ),
+                    //       children: [
+                    //         TextSpan(
+                    //             text: lstVisitFriend[0].iduser,
+                    //             style: F_pacifico.copyWith(
+                    //                 fontSize: 15,
+                    //                 color: Colors.black,
+                    //                 fontFamily: 'quick',
+                    //                 fontWeight: FontWeight.w500)),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
@@ -215,16 +229,19 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
                                     lstVisitFriend[0].lstCat[index].img),
                               ),
                               Container(
-                                child: Text(
-                                  lstVisitFriend[0].lstCat[index].name,
-                                  style: F_lobster.copyWith(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold),
+                                width: 100,
+                                child: Center(
+                                  child: Text(
+                                    lstVisitFriend[0].lstCat[index].name,
+                                    style: F_lobster.copyWith(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                               Container(
                                 child: Text(
-                                  lstVisitFriend[0].score.toString(),
+                                  lstVisitFriend[0].score[index].toString(),
                                   style: F_pacifico.copyWith(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold),
@@ -246,6 +263,7 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
         ),
       ),
     );
+    ;
   }
 
   _toggleFriend(int index) {
