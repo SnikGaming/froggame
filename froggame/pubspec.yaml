@@ -93,6 +93,7 @@ flutter:
     - assets/button/
     - assets/frames/
     - assets/button/btn_1/
+    - assets/frames/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

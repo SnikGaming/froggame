@@ -107,13 +107,13 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
   // ignore: non_constant_identifier_names
 
   // ignore: non_constant_identifier_names
-  UpdateHeart() {
-    if (heart > -1 && isGameOver == false) {
-      FureStoreUser.addDataUser(heart: heart, score: score);
+  // UpdateHeart() {
+  //   if (heart > -1 && isGameOver == false) {
+  //     FureStoreUser.addDataUser(heart: heart, score: score);
 
-      setState(() {});
-    }
-  }
+  //     setState(() {});
+  //   }
+  // }
 
   startTimer() {
     sec = defTimer;
@@ -124,7 +124,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
             sec--;
             if (sec < 0) {
               heart--;
-              UpdateHeart();
+              //UpdateHeart();
               if (heart < 1) {
                 timer.cancel();
                 showDialog(
@@ -287,7 +287,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                             timer!.cancel();
                             currenIndex++;
                             heart--;
-                            UpdateHeart();
+                            //UpdateHeart();
                             isGameOver = true;
                             Navigator.of(context).pop(true);
                           },
@@ -336,7 +336,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                             timer!.cancel();
                             currenIndex++;
                             heart--;
-                            UpdateHeart();
+                            //UpdateHeart();
                             isGameOver = true;
                             Navigator.pushNamedAndRemoveUntil(
                                 context, 'welcome2', (route) => false);
@@ -474,11 +474,11 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                 tOrf = "sai";
 
                                                 heart--;
-                                                UpdateHeart();
+                                                //UpdateHeart();
                                               }
                                               UserSimplePreferences.setSLCD(
                                                   CauDung: Ctrl);
-                                              UpdateHeart();
+                                              //UpdateHeart();
 
                                               setState(() {});
                                               if (currenIndex < number) {
