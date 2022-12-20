@@ -19,16 +19,18 @@ import 'package:froggame/view_data/user_pre.dart';
 import 'package:http/http.dart' as http;
 
 class BattleScreen extends StatefulWidget {
-  String idLobby;
-  BattleScreen({super.key, required this.idLobby});
+  String idLobby, idUser1;
+  BattleScreen({super.key, required this.idLobby, required this.idUser1});
 
   @override
-  State<BattleScreen> createState() => _BattleScreenState(idLobby: idLobby);
+  State<BattleScreen> createState() =>
+      _BattleScreenState(idLobby: idLobby, idUser1: idUser1);
 }
 
 class _BattleScreenState extends State<BattleScreen> {
   String idLobby;
-  _BattleScreenState({required this.idLobby});
+  String idUser1;
+  _BattleScreenState({required this.idLobby, required this.idUser1});
 
   String idPhong =
       "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${Random().nextInt(1000)}";
@@ -54,6 +56,11 @@ class _BattleScreenState extends State<BattleScreen> {
       await DataPackageBattle.CreateQuestion();
       await DataPackageBattle.CreateDataQuestionBattle(
           id: idPhong, idUser: UserSimplePreferences.getUserId());
+      for (int i = 0; i < lsFriend.length; i++) {
+        if (lsFriend[i].idfriend == idUser1) {
+          avatar = lsFriend[i].pic;
+        }
+      }
     }
     await DataPackageBattle.loadDataUser2(id: idLobby);
     var data1 = AddFriend.lsFriend;

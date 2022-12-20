@@ -154,12 +154,19 @@ class QuizzHome extends StatelessWidget {
                                   i < DataPackageBattle.lsLobby.length;
                                   i++) {
                                 if (DataPackageBattle.lsLobby[i].user2 ==
-                                    UserSimplePreferences.getUserId()) {
+                                            UserSimplePreferences.getUserId() &&
+                                        DataPackageBattle
+                                                .lsLobby[i].user1status ==
+                                            null ||
+                                    DataPackageBattle.lsLobby[i].user2status ==
+                                        null) {
                                   nextScreen(
                                       context,
                                       BattleScreen(
                                         idLobby:
                                             DataPackageBattle.lsLobby[i].id,
+                                        idUser1:
+                                            DataPackageBattle.lsLobby[i].user1,
                                       ));
                                 }
                               }
@@ -167,6 +174,7 @@ class QuizzHome extends StatelessWidget {
                                   context,
                                   BattleScreen(
                                     idLobby: "0",
+                                    idUser1: "",
                                   ));
                             },
                             child: Text(
