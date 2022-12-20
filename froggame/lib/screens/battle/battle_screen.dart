@@ -52,7 +52,7 @@ class _BattleScreenState extends State<BattleScreen> {
   loadData() async {
     await AddFriend.getFriend(UserSimplePreferences.getUserId());
     // ignore: unrelated_type_equality_checks
-    if (idLobby == '0') {
+    if (idLobby == "") {
       await DataPackageBattle.CreateQuestion();
       await DataPackageBattle.CreateDataQuestionBattle(
           id: idPhong, idUser: UserSimplePreferences.getUserId());
@@ -61,8 +61,10 @@ class _BattleScreenState extends State<BattleScreen> {
           avatar = lsFriend[i].pic;
         }
       }
+    } else {
+      await DataPackageBattle.loadDataUser2(id: idLobby);
     }
-    await DataPackageBattle.loadDataUser2(id: idLobby);
+    
     var data1 = AddFriend.lsFriend;
     var data2 = DataPackageBattle.getAllQuestionBattle(id: idPhong);
     setState(() {});

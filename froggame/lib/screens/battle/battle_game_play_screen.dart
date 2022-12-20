@@ -460,7 +460,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                             if (!isGameOver) {
                                               timer!.cancel();
                                               if (lsAnswer[index].toString() ==
-                                                  data[currenIndex]['a']) {
+                                                  data[currenIndex].a) {
                                                 lsColors[index] = Colors.green;
                                                 // ignore: avoid_print
                                                 // print("dung");
@@ -546,7 +546,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                                   children: [
                                                                     TextSpan(
                                                                         text:
-                                                                            "\nĐáp án là : ${data[currenIndex]['a']}",
+                                                                            "\nĐáp án là : ${data[currenIndex].a}",
                                                                         style: const TextStyle(
                                                                             color:
                                                                                 Colors.white))
