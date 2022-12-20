@@ -21,9 +21,12 @@ class FutureHistory {
                     status: p.data()['tOrf'],
                   ),
                 ),
+<<<<<<< HEAD
                 // ignore: avoid_print
                 print(
                     '================== status =======================>> ${lstPackage[0].status}'),
+=======
+>>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
               },
           },
         );

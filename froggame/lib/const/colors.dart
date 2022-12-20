@@ -19,6 +19,10 @@ var lsColor = [
   Colors.yellowAccent,
   Colors.green.shade300,
   Colors.pink.shade300,
+  Colors.blueAccent.shade200,
+  Colors.grey.shade300,
+  Color.fromARGB(255, 218, 41, 41),
+  Color.fromARGB(255, 102, 230, 115)
 ];
 const List<Color> list2 = [
   Color.fromARGB(255, 232, 162, 154),
