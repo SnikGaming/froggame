@@ -54,12 +54,13 @@ class _FriendScreenState extends State<FriendScreen> {
   }
 
   void addFriend(String idFriend, String nameFriend, String emailFriend,
-      String picFriend, Action action) {
+      String picFriend, String tokenMessage, Action action) {
     AddFriend.Save(
         idfriend: idFriend,
         friendname: nameFriend,
         emailfriend: emailFriend,
-        picfriend: picFriend);
+        picfriend: picFriend,
+        tokenmessage: tokenMessage);
   }
 
   void acceptFriend(String idFiend, Action action) {
@@ -181,6 +182,7 @@ class _FriendScreenState extends State<FriendScreen> {
                                   lsData[index].name,
                                   lsData[index].email,
                                   lsData[index].pic,
+                                  lsData[index].tokenMessage,
                                   Action.Add),
                               backgroundColor: const Color(0xFF7BC043),
                               foregroundColor: Colors.white,

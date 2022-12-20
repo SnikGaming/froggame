@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +7,7 @@ import 'package:froggame/screens/gameplay/menu_screen.dart';
 import 'package:froggame/screens/gameplay/game_play_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:froggame/view_data/firesore_questions.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
@@ -15,6 +15,22 @@ import 'package:froggame/view_data/firestore_user.dart';
 import 'package:froggame/view_data/mp3SimplePre.dart';
 import 'package:froggame/view_data/setting_pref.dart';
 import 'package:froggame/view_data/user_pre.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    //'This channel is used for important notifications.', // description
+    importance: Importance.high,
+    playSound: true);
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('A bg message just showed up :  ${message.messageId}');
+}
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,20 +46,15 @@ Future<void> main(List<String> args) async {
   //await FutureHistory.getData();
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
-  AwesomeNotifications().initialize(null, [
-    NotificationChannel(
-      channelKey: "basic_channel",
-      channelName: "BasicChannel",
-      channelDescription: "Notification for test channel",
-      defaultColor: Colors.red,
-      importance: NotificationImportance.High,
-      channelShowBadge: true,
-      ledColor: Colors.white,
-    ),
-  ], channelGroups: [
-    NotificationChannelGroup(
-        channelGroupKey: "basic_channel", channelGroupName: 'basic group')
-  ]);
+  await DataPackageBattle.listLobby();
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()
+      ?.createNotificationChannel(channel);
+
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
     badge: true,
@@ -55,6 +66,22 @@ Future<void> main(List<String> args) async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  static const MaterialColor blue2 = MaterialColor(
+    0xFF509A77,
+    <int, Color>{
+      50: Color(0xFFE1FCEF),
+      100: Color(0xFFBCFDDF),
+      200: Color(0xFF8EFAC7),
+      300: Color(0xFF63F6B1),
+      400: Color(0xFF42F5A0),
+      500: Color(0xFF509A77),
+      600: Color(0xFF1DE586),
+      700: Color(0xFF18D079),
+      800: Color(0xFF14BD6D),
+      900: Color(0xFF0CA05A),
+    },
+  );
 
   @override
   Widget build(BuildContext context) {

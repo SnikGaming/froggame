@@ -17,6 +17,7 @@ class UserSimplePreferences {
   static const _keyAvatar = "avatar";
   static const _name = "name";
   static const _ngaysinh = "ngaysinh";
+  static const _tokenMessage = "tokenMessage";
 
   static const _keySLQues = "SL";
 
@@ -24,6 +25,12 @@ class UserSimplePreferences {
   static Future init() async =>
       preferences = await SharedPreferences.getInstance();
 
+  // //! Login tokenMessage
+  static Future setTokenMessage({required String tokenMessage}) async =>
+      await preferences!.setString(_tokenMessage, tokenMessage);
+  static getTokenMessage() => preferences!.getString(_tokenMessage);
+  static Future removeTokenMessage() async =>
+      await preferences!.remove(_tokenMessage);
   // //! Login ngaysinh
   static Future setNgaySinh({required String age}) async =>
       await preferences!.setString(_ngaysinh, age);
@@ -114,5 +121,6 @@ class UserSimplePreferences {
     await removeName();
     await removeName();
     await removeAvatar();
+    await removeTokenMessage();
   }
 }
