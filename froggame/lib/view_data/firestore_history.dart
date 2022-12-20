@@ -6,14 +6,18 @@ import 'package:froggame/view_data/user_pre.dart';
 class FutureHistory {
   static List<PackDetail> lstPackage = [];
 
-  static Future getAllDataPack(int idlv) async {
+  static Future getAllDataPack(int idlv, String iduser) async {
     lstPackage = [];
     int score = 0;
     var package = FirebaseFirestore.instance.collection('detailpack');
 
     List<String> lstAvatar = [];
 
-    await package.where('idlv', isEqualTo: idlv + 1).get().then(
+    await package
+        .where('idlv', isEqualTo: idlv + 1)
+        .where('idUser', isEqualTo: iduser)
+        .get()
+        .then(
           (value) => {
             for (var p in value.docs)
               {

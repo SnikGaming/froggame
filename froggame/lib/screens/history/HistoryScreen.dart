@@ -6,6 +6,7 @@ import 'package:froggame/models/category_model.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
 import 'package:froggame/view_data/firestore_history.dart';
+import 'package:froggame/view_data/user_pre.dart';
 
 import '../../const/colors.dart';
 import '../../models/pack_detail_model.dart';
@@ -27,7 +28,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   _loadData() async {
-    await FutureHistory.getAllDataPack(selectedPack);
+    await FutureHistory.getAllDataPack(
+        selectedPack, UserSimplePreferences.getUserId());
     var _data = await FureStoreCategory.lsData;
     var _lstHistory = await FutureHistory.lstPackage;
     setState(() {});
@@ -53,7 +55,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
             itemBuilder: (context, index) => GestureDetector(
               onTap: () async {
                 selectedPack = index;
-                await FutureHistory.getAllDataPack(selectedPack);
+                await FutureHistory.getAllDataPack(
+                    selectedPack, UserSimplePreferences.getUserId());
                 _loadData();
               },
               child: Container(

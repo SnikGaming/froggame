@@ -24,11 +24,7 @@ class FutureRank {
     var rankValue = FirebaseFirestore.instance.collection('packageQuestions');
 
     lstRank = [];
-    await rankValue
-        .where('idlv', isEqualTo: idlv + 1)
-        .where('idUser', isEqualTo: idUser)
-        .get()
-        .then(
+    await rankValue.where('idlv', isEqualTo: idlv + 1).get().then(
           (value) => {
             lstRank = [],
             for (var r in value.docs)

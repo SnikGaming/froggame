@@ -56,7 +56,7 @@ class _infomation_screenState extends State<infomation_screen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    FutureHistory.getAllDataPack(1);
+    FutureHistory.getAllDataPack(1, UserSimplePreferences.getUserId());
     FutureRank.getAllData(1, UserSimplePreferences.getUserId());
     // FutureHistory.getListHistory();
     // lsHs = FutureHistory.lsHistory;

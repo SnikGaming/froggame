@@ -209,7 +209,8 @@ class QuizzHome extends StatelessWidget {
           StrOption.listView(
               str: StrOption.bxh,
               func: () {
-                FutureHistory.getAllDataPack(1);
+                FutureHistory.getAllDataPack(
+                    1, UserSimplePreferences.getUserId());
                 FutureRank.getAllData(1, UserSimplePreferences.getUserId());
                 nextScreen(ctx, const infomation_screen());
               },

@@ -17,20 +17,14 @@ class ProfileFriendScreen extends StatefulWidget {
 
 class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
   List<Widget> lstIconAdd_Remove = [
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Icon(Icons.person_add_outlined),
-      ],
+    Icon(Icons.person_add_outlined),
+    Icon(
+      Icons.send_sharp,
+      color: Colors.red,
     ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Icon(
-          Icons.person_remove_outlined,
-          color: Colors.blue,
-        ),
-      ],
+    Icon(
+      Icons.person_remove_outlined,
+      color: Colors.blue,
     ),
   ];
   bool chkToggle = false;
@@ -84,6 +78,7 @@ class _ProfileFriendScreenState extends State<ProfileFriendScreen> {
         decoration: BoxDecoration(gradient: background),
         child: Stack(
           children: [
+            //Chưa có dữ liệu bạn bè
             Positioned(
               top: 40,
               right: size.width * 0.3 - 100,
