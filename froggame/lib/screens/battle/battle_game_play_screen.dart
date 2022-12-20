@@ -8,6 +8,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/models/questions_model.dart';
 // ignore: unused_import
 import 'package:froggame/screen_load/view.dart';
 // ignore: unused_import
@@ -22,21 +23,24 @@ import '../../view_data/user_pre.dart';
 
 // ignore: must_be_immutable
 class BattleQuizzGameScreen extends StatefulWidget {
-  BattleQuizzGameScreen({super.key});
+  Future<List<QuestionModel>> lsQuestions;
+  BattleQuizzGameScreen({super.key, required this.lsQuestions});
 
   @override
   // ignore: no_logic_in_create_state
-  State<BattleQuizzGameScreen> createState() => _BattleQuizzGameScreenState();
+  State<BattleQuizzGameScreen> createState() =>
+      _BattleQuizzGameScreenState(lsQuestions: lsQuestions);
 }
 
 class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
+  Future<List<QuestionModel>> lsQuestions;
   String name = UserSimplePreferences.getName() == ""
       ? UserSimplePreferences.getUsername()
       : UserSimplePreferences.getName();
   String tOrf = "";
   late Future questions;
   static int defTimer = 30;
-
+  _BattleQuizzGameScreenState({required this.lsQuestions});
   // ignore: todo
   //TODO: Data
   @override
@@ -44,10 +48,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
-    questions = FirebaseFirestore.instance
-        .collection("questions")
-        //   .orderBy('id', descending: true)
-        .get();
+    questions = lsQuestions;
     startTimer();
   }
 
@@ -230,10 +231,10 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
   addAnswe(data) {
     if (currenIndex < number) {
       if (isLoadAnswer == false) {
-        lsAnswer.add(data[currenIndex]['a']);
-        lsAnswer.add(data[currenIndex]['b']);
-        lsAnswer.add(data[currenIndex]['c']);
-        lsAnswer.add(data[currenIndex]['d']);
+        lsAnswer.add(data[currenIndex].a);
+        lsAnswer.add(data[currenIndex].b);
+        lsAnswer.add(data[currenIndex].c);
+        lsAnswer.add(data[currenIndex].d);
 
         lsAnswer.shuffle();
         isLoadAnswer = true;
@@ -397,7 +398,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                       future: questions,
                       builder: ((context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
-                          var data = snapshot.data.docs;
+                          var data = snapshot.data;
 
                           number = data.length;
                           addAnswe(data);
@@ -434,7 +435,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                   child: Align(
                                     alignment: Alignment.center,
                                     child: Text(
-                                      "${data[currenIndex]['name']}",
+                                      "${data[currenIndex].cauhoi}",
                                       style: F_pacifico.copyWith(
                                           color: white,
                                           fontWeight: FontWeight.bold,

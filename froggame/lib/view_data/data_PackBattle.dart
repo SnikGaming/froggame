@@ -27,7 +27,7 @@ class DataPackageBattle {
         .collection("lobby")
         .doc(id)
         .set({'id': id, 'idUser': idUser, 'idFriend': idFriend});
-    for (int i = 0; i < lsQuestion.length; i++) {
+    for (int i = 0; i < 30; i++) {
       FirebaseFirestore.instance
           .collection("battleQuestion")
           .doc("${id}${i + 1}")
@@ -47,17 +47,17 @@ class DataPackageBattle {
       {required String id}) async {
     List<QuestionModel> result = [];
     await FirebaseFirestore.instance
-        .collection("")
-        .where('id', isEqualTo: id)
+        .collection("battleQuestion")
+        .where('idphong', isEqualTo: id)
         .get()
         .then((value) {
       for (var a in value.docs) {
-        lsQuestion.add(QuestionModel(
-            cauhoi: a.data()[''],
-            a: a.data()[''],
-            b: a.data()[''],
-            c: a.data()[''],
-            d: a.data()['']));
+        result.add(QuestionModel(
+            cauhoi: a.data()['question'],
+            a: a.data()['a'],
+            b: a.data()['b'],
+            c: a.data()['c'],
+            d: a.data()['d']));
       }
     });
     return result;
