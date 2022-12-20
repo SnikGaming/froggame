@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:froggame/models/lobby_model.dart';
 import 'package:froggame/models/questions_model.dart';
@@ -35,7 +37,7 @@ class DataPackageBattle {
     for (int i = 0; i < 30; i++) {
       FirebaseFirestore.instance
           .collection("battleQuestion")
-          .doc("${id}${i + 1}")
+          .doc("$id${i + 1}")
           .set({
         'idphong': id,
         'question': lsQuestion[i].cauhoi,

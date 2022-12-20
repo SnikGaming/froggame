@@ -5,7 +5,6 @@ import 'dart:async';
 // ignore: unused_import
 import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/models/questions_model.dart';
@@ -13,11 +12,9 @@ import 'package:froggame/models/questions_model.dart';
 import 'package:froggame/screen_load/view.dart';
 // ignore: unused_import
 import 'package:froggame/screens/winner/winner_screen.dart';
-import 'package:froggame/view_data/battle_package_method.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../const/colors.dart';
-import '../../view_data/firesore_detailpack.dart';
 import '../../view_data/firestore_user.dart';
 import '../../view_data/user_pre.dart';
 
@@ -92,17 +89,6 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
 
 //Timestamp
   // ignore: non_constant_identifier_names
-  void _HoiKhanGia() {
-//${lsGoiY[new Random().nextInt(4)]}
-
-    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-    //     content: Text("${lsGoiY[new Random().nextInt(lsGoiY.length)]}")));
-    QuickAlert.show(
-      context: context,
-      type: QuickAlertType.info,
-      text: "${lsGoiY[Random().nextInt(lsGoiY.length)]}",
-    );
-  }
 
   // ignore: non_constant_identifier_names
 

@@ -220,6 +220,9 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 });
               } else {
                 currenIndex++;
+                lsAnswer = [];
+                isLoadAnswer = false;
+
                 PackageMethod.UpatePackage(
                     currentIndex: currenIndex, index: idlv, Ctrl: Ctrl);
               }
@@ -364,7 +367,6 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                             UpdateHeart();
                             isGameOver = true;
                             Navigator.of(context).pop(true);
-                            
                           },
                           child: const Text("Thoát",
                               style: TextStyle(color: Colors.white))),
