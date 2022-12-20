@@ -1,4 +1,6 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:froggame/screens/categories/category_question.dart';
@@ -28,6 +30,26 @@ Future<void> main(List<String> args) async {
   //await FutureHistory.getData();
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
+  AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+      channelKey: "basic_channel",
+      channelName: "BasicChannel",
+      channelDescription: "Notification for test channel",
+      defaultColor: Colors.red,
+      importance: NotificationImportance.High,
+      channelShowBadge: true,
+      ledColor: Colors.white,
+    ),
+  ], channelGroups: [
+    NotificationChannelGroup(
+        channelGroupKey: "basic_channel", channelGroupName: 'basic group')
+  ]);
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
+
   runApp(const MyApp());
 }
 

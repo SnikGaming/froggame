@@ -1,10 +1,16 @@
 import 'dart:math';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/next_screen.dart';
+import 'package:froggame/models/friend_model.dart';
+import 'package:froggame/models/questions_model.dart';
+import 'package:froggame/screens/battle/battle_game_play_screen.dart';
 import 'package:froggame/screens/battle/battle_vs_screen.dart';
+import 'package:froggame/view_data/data_PackBattle.dart';
+import 'package:froggame/view_data/firesore_addfriend.dart';
 import 'package:froggame/view_data/user_pre.dart';
 
 class BattleScreen extends StatefulWidget {
@@ -15,6 +21,31 @@ class BattleScreen extends StatefulWidget {
 }
 
 class _BattleScreenState extends State<BattleScreen> {
+  String avatar = "";
+  int pic = 0;
+  List<FriendModel> lsFriend = [];
+  late Future<List<QuestionModel>> lsQuestions;
+
+  loadData() async {
+    await AddFriend.getFriend(UserSimplePreferences.getUserId());
+    await DataPackageBattle.CreateQuestion();
+    await DataPackageBattle.CreateDataQuestionBattle(
+        id: idPhong, idUser: UserSimplePreferences.getUserId());
+    var data1 = AddFriend.lsFriend;
+    var data2 = DataPackageBattle.getAllQuestionBattle(id: idPhong);
+    setState(() {});
+    lsFriend = data1;
+    lsQuestions = data2;
+  }
+
+  @override
+  void initState() {
+    // ignore: todo
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
   bool isStart = false;
   bool isLsbanbe = false;
   String idPhong =
@@ -72,7 +103,11 @@ class _BattleScreenState extends State<BattleScreen> {
                         setState(() {});
                         Future.delayed(const Duration(milliseconds: 900), () {
                           if (isStart) {
-                            nextScreen(context, const BattleVsScreen());
+                            nextScreen(
+                                context,
+                                BattleQuizzGameScreen(
+                                  lsQuestions: lsQuestions,
+                                ));
                           }
                         });
                       },
@@ -191,17 +226,15 @@ class _BattleScreenState extends State<BattleScreen> {
                                   width: 110,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    image: UserSimplePreferences.getAvatar() ==
-                                            ""
+                                    image: avatar == ""
                                         ? DecorationImage(
-                                            image: NetworkImage(
-                                              UserSimplePreferences
-                                                  .getUserPic(),
+                                            image: AssetImage(
+                                              "assets/images/add.png",
                                             ),
                                           )
                                         : DecorationImage(
-                                            image: AssetImage(
-                                              UserSimplePreferences.getAvatar(),
+                                            image: NetworkImage(
+                                              avatar,
                                             ),
                                           ),
                                   ),
@@ -214,12 +247,37 @@ class _BattleScreenState extends State<BattleScreen> {
                           Visibility(
                             visible: isLsbanbe,
                             child: Container(
-                              width: 300,
-                              height: 150,
+                              height: 160,
+                              padding: const EdgeInsets.all(10),
+                              width: size.width - 40,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
+                                  color: Colors.purpleAccent,
+                                  borderRadius: BorderRadius.circular(16)),
+                              child: GridView.builder(
+                                  itemCount: lsFriend.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisSpacing: 5,
+                                          mainAxisSpacing: 5,
+                                          crossAxisCount: 4),
+                                  itemBuilder: ((context, index) => Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                            color: Colors.purple,
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: GestureDetector(
+                                          onTapUp: ((details) {
+                                            avatar = lsFriend[index].pic;
+                                            pic = index;
+                                            setState(() {});
+                                          }),
+                                          child: Image.network(
+                                            lsFriend[index].pic,
+                                          ),
+                                        ),
+                                      ))),
                             ),
                           )
                         ],
