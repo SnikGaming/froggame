@@ -1,5 +1,5 @@
 class UserModel {
-  String userId, email, name, pic;
+  String userId, email, name, pic, tokenMessage;
   String? nameIg, avatar;
   int? score, heart;
   String? age;
@@ -8,6 +8,7 @@ class UserModel {
       required this.email,
       required this.name,
       required this.pic,
+      required this.tokenMessage,
       this.heart,
       this.score,
       this.nameIg,
@@ -23,7 +24,8 @@ class UserModel {
       'score': score,
       'nameIg': nameIg,
       'avatar': avatar,
-      'age': age
+      'age': age,
+      'tokenMessage': tokenMessage
     };
   }
 

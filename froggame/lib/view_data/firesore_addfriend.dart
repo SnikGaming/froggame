@@ -27,7 +27,8 @@ class AddFriend {
       {required String idfriend,
       required String friendname,
       required String emailfriend,
-      required String picfriend}) async {
+      required String picfriend,
+      required String tokenmessage}) async {
     final addfriend1 = FirebaseFirestore.instance
         .collection("friends")
         .doc(UserSimplePreferences.getUserId());
@@ -41,6 +42,7 @@ class AddFriend {
       "idfriend": UserSimplePreferences.getUserId(),
       "friendname": UserSimplePreferences.getUsername(),
       "status": 0,
+      "tokenMessage": UserSimplePreferences.getTokenMessage()
     });
 
     final addfriend2 =
@@ -55,6 +57,7 @@ class AddFriend {
       "idfriend": idfriend,
       "friendname": friendname,
       "status": 0,
+      "tokenMessage": tokenmessage
     });
   }
 
@@ -74,7 +77,8 @@ class AddFriend {
             pic: val.data()["pic"],
             idfriend: val.data()["idfriend"],
             friendname: val.data()["friendname"],
-            status: val.data()["status"]));
+            status: val.data()["status"],
+            tokenMessage: val.data()["tokenMessage"]));
       }
     });
   }
@@ -95,7 +99,8 @@ class AddFriend {
             pic: val.data()["pic"],
             idfriend: val.data()["idfriend"],
             friendname: val.data()["friendname"],
-            status: val.data()["status"]));
+            status: val.data()["status"],
+            tokenMessage: val.data()["tokenMessage"]));
       }
     });
   }

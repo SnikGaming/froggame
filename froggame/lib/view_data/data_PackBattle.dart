@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:froggame/models/lobby_model.dart';
 import 'package:froggame/models/questions_model.dart';
 
 class DataPackageBattle {
   static List<QuestionModel> lsQuestion = [];
+  static List<LobbyModel> lsLobby = [];
   static CreateQuestion() async {
     lsQuestion = [];
     await FirebaseFirestore.instance
@@ -26,7 +28,43 @@ class DataPackageBattle {
     FirebaseFirestore.instance
         .collection("lobby")
         .doc(id)
-        .set({'id': id, 'idUser': idUser, 'idFriend': idFriend});
+        .set({'id': id, 'User1': idUser, 'User2': idFriend});
+    for (int i = 0; i < 30; i++) {
+      FirebaseFirestore.instance
+          .collection("battleQuestion")
+          .doc("${id}${i + 1}")
+          .set({
+        'idphong': id,
+        'question': lsQuestion[i].cauhoi,
+        'a': lsQuestion[i].a,
+        'b': lsQuestion[i].b,
+        'c': lsQuestion[i].c,
+        'd': lsQuestion[i].d,
+        'idCau': i + 1,
+      });
+    }
+  }
+
+  static listLobby() {
+    lsLobby = [];
+    FirebaseFirestore.instance.collection("lobby").get().then((value) {
+      for (var val in value.docs) {
+        lsLobby.add(LobbyModel(
+            id: val.data()['id'],
+            user1: val.data()['User1'],
+            user2: val.data()['User2']));
+      }
+    });
+  }
+
+  static user2Join(String id, String iduser) {
+    FirebaseFirestore.instance
+        .collection("lobby")
+        .doc(id)
+        .update({"User2": iduser});
+  }
+
+  static loadDataUser2({required id}) {
     for (int i = 0; i < 30; i++) {
       FirebaseFirestore.instance
           .collection("battleQuestion")

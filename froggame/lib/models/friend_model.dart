@@ -1,5 +1,5 @@
 class FriendModel {
-  String userId, email, name, pic, idfriend, friendname;
+  String userId, email, name, pic, idfriend, friendname, tokenMessage;
   int status;
   FriendModel({
     required this.userId,
@@ -9,6 +9,7 @@ class FriendModel {
     required this.idfriend,
     required this.friendname,
     required this.status,
+    required this.tokenMessage,
   });
   toJson() {
     return {
@@ -18,7 +19,8 @@ class FriendModel {
       'pic': pic,
       'idfriend': idfriend,
       'friendname': friendname,
-      'status': status
+      'status': status,
+      'tokenMessage': tokenMessage
     };
   }
 

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 // ignore: unused_import
 import 'package:flutter/cupertino.dart';
 import 'package:froggame/const/next_screen.dart';
@@ -50,6 +51,10 @@ class AuthMethod {
         .then((value) => pushNamedRemove(context, 'welcome2'));
   }
 
+  Future<String> getTokenMessage() async {
+    return await FirebaseMessaging.instance.getToken() ?? "";
+  }
+
   static googleSignOutMethod(context) async {
     await googleSignIn.signOut().then((value) {
       //nextScreen(context, const SiginPage());
@@ -69,6 +74,8 @@ class AuthMethod {
     String avatar = "";
     String age = "";
     bool isId = false;
+    String tokenMessage = await getTokenMessage();
+
     // ignore: todo
     //TODO: Thực hiện truy vấn lấy User theo uiser ID = UID
     await user_firebase
@@ -84,6 +91,7 @@ class AuthMethod {
         avatar = element.data()['avatar'];
         nameIg = element.data()['nameIg'];
         age = element.data()['age'];
+        tokenMessage = element.data()['tokenMessage'];
 
         UserSimplePreferences.setUserId(id: element.data()['userId']);
         //!: Tồn tại trả về true
@@ -102,7 +110,8 @@ class AuthMethod {
         score: score,
         nameIg: nameIg,
         avatar: avatar,
-        age: age));
+        age: age,
+        tokenMessage: tokenMessage));
     //!: S
     if (!isId) {
       UserSimplePreferences.setUserId(id: user.user!.uid);
@@ -113,5 +122,6 @@ class AuthMethod {
     UserSimplePreferences.setAvatar(avatar: avatar);
     UserSimplePreferences.setName(name: nameIg);
     UserSimplePreferences.setNgaySinh(age: age);
+    UserSimplePreferences.setTokenMessage(tokenMessage: tokenMessage);
   }
 }

@@ -1,26 +1,47 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/next_screen.dart';
+import 'package:froggame/main.dart';
 import 'package:froggame/models/friend_model.dart';
 import 'package:froggame/models/questions_model.dart';
 import 'package:froggame/screens/battle/battle_game_play_screen.dart';
 import 'package:froggame/screens/battle/battle_vs_screen.dart';
+import 'package:froggame/view_data/battle_package_method.dart';
 import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:froggame/view_data/firesore_addfriend.dart';
 import 'package:froggame/view_data/user_pre.dart';
+import 'package:http/http.dart' as http;
 
 class BattleScreen extends StatefulWidget {
-  const BattleScreen({super.key});
+  String idLobby;
+  BattleScreen({super.key, required this.idLobby});
 
   @override
-  State<BattleScreen> createState() => _BattleScreenState();
+  State<BattleScreen> createState() => _BattleScreenState(idLobby: idLobby);
 }
 
 class _BattleScreenState extends State<BattleScreen> {
+  String idLobby;
+  _BattleScreenState({required this.idLobby});
+
+  String idPhong =
+      "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${Random().nextInt(1000)}";
+  int _counter = 0;
+  late String _textTitle = " đang muốn bạn solo kìa !!!";
+  // ignore: prefer_interpolation_to_compose_strings
+  late String _textBody = 'Phòng ';
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   String avatar = "";
   int pic = 0;
   List<FriendModel> lsFriend = [];
@@ -28,9 +49,13 @@ class _BattleScreenState extends State<BattleScreen> {
 
   loadData() async {
     await AddFriend.getFriend(UserSimplePreferences.getUserId());
-    await DataPackageBattle.CreateQuestion();
-    await DataPackageBattle.CreateDataQuestionBattle(
-        id: idPhong, idUser: UserSimplePreferences.getUserId());
+    // ignore: unrelated_type_equality_checks
+    if (idLobby == '0') {
+      await DataPackageBattle.CreateQuestion();
+      await DataPackageBattle.CreateDataQuestionBattle(
+          id: idPhong, idUser: UserSimplePreferences.getUserId());
+    }
+    await DataPackageBattle.loadDataUser2(id: idLobby);
     var data1 = AddFriend.lsFriend;
     var data2 = DataPackageBattle.getAllQuestionBattle(id: idPhong);
     setState(() {});
@@ -43,13 +68,33 @@ class _BattleScreenState extends State<BattleScreen> {
     // ignore: todo
     // TODO: implement initState
     super.initState();
+
+    _textBody = 'Phòng $idPhong';
+    _textTitle =
+        UserSimplePreferences.getUsername() + " đang muốn bạn solo kìa !!!";
     loadData();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (android != null) {
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification!.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(channel.id, channel.name,
+                  color: Colors.blue,
+                  playSound: true,
+                  icon: '@mipmap/ic_launcher'),
+            ));
+      }
+    });
   }
 
   bool isStart = false;
   bool isLsbanbe = false;
-  String idPhong =
-      "${DateTime.now().year}${DateTime.now().month}${DateTime.now().day}${Random().nextInt(1000)}";
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -211,6 +256,7 @@ class _BattleScreenState extends State<BattleScreen> {
                             child: GestureDetector(
                               onTap: () {
                                 isLsbanbe = !isLsbanbe;
+
                                 setState(() {});
                               },
                               child: Container(
@@ -271,6 +317,19 @@ class _BattleScreenState extends State<BattleScreen> {
                                           onTapUp: ((details) {
                                             avatar = lsFriend[index].pic;
                                             pic = index;
+                                            DataPackageBattle.user2Join(idPhong,
+                                                lsFriend[index].idfriend);
+                                            if (lsFriend[index]
+                                                    .tokenMessage
+                                                    .isNotEmpty &&
+                                                check()) {
+                                              pushNotificationsSpecificDevice(
+                                                title: _textTitle,
+                                                body: _textBody,
+                                                token: lsFriend[index]
+                                                    .tokenMessage,
+                                              );
+                                            }
                                             setState(() {});
                                           }),
                                           child: Image.network(
@@ -289,5 +348,52 @@ class _BattleScreenState extends State<BattleScreen> {
         ),
       ),
     );
+  }
+
+  Future<bool> pushNotificationsSpecificDevice({
+    required String token,
+    required String title,
+    required String body,
+  }) async {
+    String dataNotifications = '{ "to" : "$token",'
+        ' "notification" : {'
+        ' "title":"$title",'
+        '"body":"$body"'
+        ' }'
+        ' }';
+
+    await http.post(
+      Uri.parse('https://fcm.googleapis.com/fcm/send'),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+        'Authorization':
+            'key= AAAAHKTkq-0:APA91bH0ubOIG85Ofw-mLm1u0aXk9R8YSD8G7O7VcyrbJ9j9QDeWSaU2K11i1mCjURqDglKaNZJ4WcoKXz0w5mbGnJePtKAvIV8AnkZEunBMt4-y4eCQBzNpr6YnU-Lg8jZch6YDAz0D',
+      },
+      body: dataNotifications,
+    );
+    return true;
+  }
+
+  void showNotification() {
+    setState(() {
+      _counter++;
+    });
+    flutterLocalNotificationsPlugin.show(
+        0,
+        "Testing $_counter",
+        "How you doin ?",
+        NotificationDetails(
+            android: AndroidNotificationDetails(channel.id, channel.name,
+                importance: Importance.high,
+                color: Colors.blue,
+                playSound: true,
+                icon: '@mipmap/ic_launcher')));
+  }
+
+  bool check() {
+    if (UserSimplePreferences.getTokenMessage().isNotEmpty) {
+      return true;
+    }
+    return false;
   }
 }
