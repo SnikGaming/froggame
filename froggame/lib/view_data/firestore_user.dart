@@ -27,7 +27,8 @@ class FureStoreUser {
       "score": UserSimplePreferences.getScore(),
       'nameIg': UserSimplePreferences.getName(),
       'avatar': UserSimplePreferences.getAvatar(),
-      'age': UserSimplePreferences.getNgaySinh()
+      'age': UserSimplePreferences.getNgaySinh(),
+      'tokenMessage': UserSimplePreferences.getTokenMessage()
     });
   }
 
@@ -41,13 +42,15 @@ class FureStoreUser {
   }
 
   static getUserAll() async {
+    lsUserAll = [];
     await FirebaseFirestore.instance.collection("users").get().then((value) {
       for (var val in value.docs) {
         lsUserAll.add(UserModel(
             userId: val.data()["userId"],
             email: val.data()["email"],
             name: val.data()["name"],
-            pic: val.data()["pic"]));
+            pic: val.data()["pic"],
+            tokenMessage: val.data()["tokenMessage"]));
       }
     });
   }

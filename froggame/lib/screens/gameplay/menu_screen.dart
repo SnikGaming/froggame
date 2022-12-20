@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/str_option.dart';
+import 'package:froggame/models/questions_model.dart';
 import 'package:froggame/screens/battle/battle_screen.dart';
 import 'package:froggame/screens/friends/friend_screen.dart';
 import 'package:froggame/screens/history/info.dart';
@@ -14,6 +15,7 @@ import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
 import 'package:froggame/screens/support/support.dart';
+import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:froggame/view_data/login_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
@@ -148,7 +150,32 @@ class QuizzHome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              nextScreen(context, const BattleScreen());
+                              for (int i = 0;
+                                  i < DataPackageBattle.lsLobby.length;
+                                  i++) {
+                                if (DataPackageBattle.lsLobby[i].user2 ==
+                                            UserSimplePreferences.getUserId() &&
+                                        DataPackageBattle
+                                                .lsLobby[i].user1status ==
+                                            null ||
+                                    DataPackageBattle.lsLobby[i].user2status ==
+                                        null) {
+                                  nextScreen(
+                                      context,
+                                      BattleScreen(
+                                        idLobby:
+                                            DataPackageBattle.lsLobby[i].id,
+                                        idUser1:
+                                            DataPackageBattle.lsLobby[i].user1,
+                                      ));
+                                }
+                              }
+                              nextScreen(
+                                  context,
+                                  BattleScreen(
+                                    idLobby: "",
+                                    idUser1: "",
+                                  ));
                             },
                             child: Text(
                               StrOption.doikhang,
