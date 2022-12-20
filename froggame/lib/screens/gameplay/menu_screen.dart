@@ -173,7 +173,7 @@ class QuizzHome extends StatelessWidget {
                               nextScreen(
                                   context,
                                   BattleScreen(
-                                    idLobby: "0",
+                                    idLobby: "",
                                     idUser1: "",
                                   ));
                             },
