@@ -1,6 +1,7 @@
+// ignore_for_file: no_logic_in_create_state, must_be_immutable
+
 import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -11,8 +12,6 @@ import 'package:froggame/main.dart';
 import 'package:froggame/models/friend_model.dart';
 import 'package:froggame/models/questions_model.dart';
 import 'package:froggame/screens/battle/battle_game_play_screen.dart';
-import 'package:froggame/screens/battle/battle_vs_screen.dart';
-import 'package:froggame/view_data/battle_package_method.dart';
 import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:froggame/view_data/firesore_addfriend.dart';
 import 'package:froggame/view_data/user_pre.dart';
@@ -282,7 +281,7 @@ class _BattleScreenState extends State<BattleScreen> {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     image: avatar == ""
-                                        ? DecorationImage(
+                                        ? const DecorationImage(
                                             image: AssetImage(
                                               "assets/images/add.png",
                                             ),
