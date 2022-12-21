@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:froggame/animation/animatedCus.dart';
 import 'package:froggame/const/font_app.dart';
+import 'package:froggame/screens/profile/profile_screen_data.dart';
 
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:quickalert/quickalert.dart';
@@ -383,22 +386,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           size: size,
                           img1: TypeModel.listType[0].image,
                           img2: TypeModel.listType[1].image,
-                          txt1: UserSimplePreferences.getHeart().toString(),
-                          txt2: UserSimplePreferences.getScore().toString(),
+                          txt1: profileData.data[0].toString(),
+                          txt2: profileData.data[1].toString(),
                         ),
                         itemUser(
                           size: size,
                           img1: TypeModel.listType[2].image,
                           img2: TypeModel.listType[3].image,
-                          txt1: UserSimplePreferences.getHeart().toString(),
-                          txt2: UserSimplePreferences.getScore().toString(),
+                          txt1: profileData.data[2].toString(),
+                          txt2: profileData.data[3].toString(),
                         ),
                         itemUser(
                           size: size,
                           img1: TypeModel.listType[4].image,
                           img2: "assets/button/energy.png",
-                          txt1: UserSimplePreferences.getHeart().toString(),
-                          txt2: UserSimplePreferences.getScore().toString(),
+                          txt1: profileData.data[4].toString(),
+                          txt2: "${Random().nextInt(100)}%",
                         ),
                       ],
                     ),

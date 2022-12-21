@@ -7,6 +7,7 @@ import 'package:froggame/screens/gameplay/menu_screen.dart';
 import 'package:froggame/screens/gameplay/game_play_screen.dart';
 import 'package:froggame/screens/gameplay/quizz_screen.dart';
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/screens/profile/profile_screen_data.dart';
 import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:froggame/view_data/firesore_questions.dart';
 import 'package:froggame/view_data/firestore_categories.dart';
@@ -41,9 +42,11 @@ Future<void> main(List<String> args) async {
   await UserSimplePreferences.init();
   await Mp3Simple.init();
   await FureStoreCategory.GetData();
+
+
   FureStoreCategory.getAllData();
   //await FutureRank.getData();
-  await FutureRank.getAllData(1, UserSimplePreferences.getUserId());
+  //await FutureRank.getAllData(1, UserSimplePreferences.getUserId());
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
   DataPackageBattle.listLobby();
