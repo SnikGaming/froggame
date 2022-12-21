@@ -178,6 +178,15 @@ class QuizzHome extends StatelessWidget {
                                         idUser1: lsLobby[i].user1,
                                       ));
                                 }
+                                if (lsLobby[i].user2 !=
+                                    UserSimplePreferences.getUserId()) {
+                                  nextScreen(
+                                      context,
+                                      BattleScreen(
+                                        idLobby: "",
+                                        idUser1: "",
+                                      ));
+                                }
                               }
                             },
                             child: Text(

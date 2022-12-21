@@ -12,6 +12,7 @@ import 'package:froggame/models/questions_model.dart';
 import 'package:froggame/screen_load/view.dart';
 // ignore: unused_import
 import 'package:froggame/screens/winner/winner_screen.dart';
+import 'package:froggame/view_data/data_PackBattle.dart';
 import 'package:quickalert/quickalert.dart';
 
 import '../../const/colors.dart';
@@ -21,23 +22,34 @@ import '../../view_data/user_pre.dart';
 // ignore: must_be_immutable
 class BattleQuizzGameScreen extends StatefulWidget {
   Future<List<QuestionModel>> lsQuestions;
-  BattleQuizzGameScreen({super.key, required this.lsQuestions});
+  String idLobby;
+  String idPhong;
+  BattleQuizzGameScreen(
+      {super.key,
+      required this.lsQuestions,
+      required this.idLobby,
+      required this.idPhong});
 
   @override
   // ignore: no_logic_in_create_state
-  State<BattleQuizzGameScreen> createState() =>
-      _BattleQuizzGameScreenState(lsQuestions: lsQuestions);
+  State<BattleQuizzGameScreen> createState() => _BattleQuizzGameScreenState(
+      lsQuestions: lsQuestions, idLobby: idLobby, idPhong: idPhong);
 }
 
 class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
   Future<List<QuestionModel>> lsQuestions;
+  String idLobby;
+  String idPhong;
   String name = UserSimplePreferences.getName() == ""
       ? UserSimplePreferences.getUsername()
       : UserSimplePreferences.getName();
   String tOrf = "";
   late Future questions;
   static int defTimer = 30;
-  _BattleQuizzGameScreenState({required this.lsQuestions});
+  _BattleQuizzGameScreenState(
+      {required this.lsQuestions,
+      required this.idLobby,
+      required this.idPhong});
   // ignore: todo
   //TODO: Data
   @override
@@ -74,7 +86,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
 // ignore: todo
 //TODO: Heart
   int heart = UserSimplePreferences.getHeart();
-  int score = UserSimplePreferences.getScore();
+  //int score = UserSimplePreferences.getScore();
   var img = UserSimplePreferences.getUserPic();
 // ignore: todo
 //TODO: Question
@@ -82,6 +94,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
   int Ctrl = UserSimplePreferences.getSLCD() ?? 0;
   int number = 0;
   int val = -1;
+  int score = 0;
 
 // ignore: todo
 //TODO: Functions
@@ -109,36 +122,9 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
           setState(() {
             sec--;
             if (sec < 0) {
-              heart--;
               //UpdateHeart();
-              if (heart < 1) {
-                timer.cancel();
-                showDialog(
-                    barrierDismissible: false,
-                    context: context,
-                    builder: ((context) => AlertDialog(
-                          backgroundColor:
-                              const Color.fromARGB(255, 167, 79, 225),
-                          title: const Text("Thông báo"),
-                          content: Text(
-                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
-                          actions: [
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.pushNamedAndRemoveUntil(
-                                      context, 'welcome2', (route) => false);
-                                },
-                                child: const Text("Ok",
-                                    style: TextStyle(color: Colors.white)))
-                          ],
-                        )));
-                Future.delayed(const Duration(seconds: 2), () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, 'welcome2', (route) => false);
-                });
-              } else {
-                currenIndex++;
-              }
+
+              currenIndex++;
 
               if (currenIndex >= 30) {
                 timer.cancel();
@@ -155,8 +141,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                 color: white,
                                 fontSize: 24),
                           ),
-                          content: Text(
-                              "Chúc mừng $name đã hoàn thành lĩnh vực này !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                          content: Text("Chúc mừng $name bạn được $score điểm"),
                           actions: [
                             TextButton(
                                 onPressed: () {
@@ -182,31 +167,6 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
         } else {
           timer.cancel();
         }
-      });
-    } else {
-      timer!.cancel();
-
-      showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: ((context) => AlertDialog(
-                backgroundColor: const Color.fromARGB(255, 167, 79, 225),
-                title: const Text("Thông báo"),
-                content: Text(
-                    "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
-                actions: [
-                  TextButton(
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, 'welcome2', (route) => false);
-                      },
-                      child: const Text("Ok",
-                          style: TextStyle(color: Colors.white)))
-                ],
-              )));
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.pushNamedAndRemoveUntil(
-            context, 'welcome2', (route) => false);
       });
     }
   }
@@ -275,6 +235,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                             //heart--;
                             //UpdateHeart();
                             isGameOver = true;
+
                             Navigator.of(context).pop(true);
                           },
                           child: const Text("Thoát",
@@ -361,16 +322,6 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                       fontSize: 20))),
                         ),
                         //!: Score and heart
-                        SizedBox(
-                          width: 130,
-                          child: Text(
-                            "${score} 🪙\t\t${heart} ❤️",
-                            style: F_pacifico.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -451,6 +402,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                 // ignore: avoid_print
                                                 // print("dung");
                                                 tOrf = "đúng";
+                                                score++;
                                                 //score++;
                                                 Ctrl++;
                                               } else {
@@ -510,10 +462,16 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                                               AlertDialog(
                                                                                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                                                                                 title: const Text("Thông báo", style: TextStyle(color: Colors.white)),
-                                                                                content: Text("Chúc mừng $name đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
+                                                                                content: Text("Chúc mừng $name bạn được $score điểm", style: const TextStyle(color: Colors.white)),
                                                                                 actions: [
                                                                                   TextButton(
                                                                                       onPressed: () {
+                                                                                        if (idLobby == "") {
+                                                                                          DataPackageBattle.updateUser1Score(idPhong, score);
+                                                                                        }
+                                                                                        if (idLobby != "") {
+                                                                                          DataPackageBattle.updateUser2Score(idLobby, score);
+                                                                                        }
                                                                                         Navigator.pushNamedAndRemoveUntil(context, 'welcome2', (route) => false);
                                                                                       },
                                                                                       child: const Text("Ok", style: TextStyle(color: Colors.white)))
@@ -556,41 +514,6 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                 //         builder: (_) =>
                                                 //             WinScreen()));
 
-                                                showDialog(
-                                                    barrierDismissible: false,
-                                                    context: context,
-                                                    builder: ((context) =>
-                                                        AlertDialog(
-                                                          backgroundColor:
-                                                              const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  167,
-                                                                  79,
-                                                                  225),
-                                                          title: const Text(
-                                                              "Thông báo"),
-                                                          content: Text(
-                                                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white)),
-                                                          actions: [
-                                                            TextButton(
-                                                                onPressed: () {
-                                                                  Navigator.pushNamedAndRemoveUntil(
-                                                                      context,
-                                                                      'welcome2',
-                                                                      (route) =>
-                                                                          false);
-                                                                },
-                                                                child: const Text(
-                                                                    "Ok",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white)))
-                                                          ],
-                                                        )));
                                                 Future.delayed(
                                                     const Duration(seconds: 2),
                                                     () {

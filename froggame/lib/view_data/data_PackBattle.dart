@@ -30,8 +30,8 @@ class DataPackageBattle {
       'id': id,
       'User1': idUser,
       'User2': idFriend,
-      'User1Status': null,
-      'User2Status': null
+      'User1Score': null,
+      'User2Score': null
     });
     for (int i = 0; i < 30; i++) {
       FirebaseFirestore.instance
@@ -57,8 +57,8 @@ class DataPackageBattle {
             id: val.data()['id'],
             user1: val.data()['User1'],
             user2: val.data()['User2'],
-            user1status: val.data()['User1Status'],
-            user2status: val.data()['User2Status']));
+            user1score: val.data()['User1Score'],
+            user2score: val.data()['User2Score']));
       }
     });
     return lsLobby;
@@ -71,11 +71,18 @@ class DataPackageBattle {
         .update({"User2": iduser});
   }
 
-  static updateStatusLobby(String id, String user1status, String user2status) {
+  static updateUser1Score(String id, int user1score) {
     FirebaseFirestore.instance
         .collection("lobby")
         .doc(id)
-        .update({"User1Status": user1status, "User2Status": user2status});
+        .update({"User1Score": user1score});
+  }
+
+  static updateUser2Score(String id, int user2score) {
+    FirebaseFirestore.instance
+        .collection("lobby")
+        .doc(id)
+        .update({"User2Score": user2score});
   }
 
   static loadDataUser2({required id}) {

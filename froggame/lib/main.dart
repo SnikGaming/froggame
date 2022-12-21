@@ -49,7 +49,6 @@ Future<void> main(List<String> args) async {
   //await FutureRank.getAllData(1, UserSimplePreferences.getUserId());
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
-  DataPackageBattle.listLobby();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 

@@ -163,6 +163,8 @@ class _BattleScreenState extends State<BattleScreen> {
                                 context,
                                 BattleQuizzGameScreen(
                                   lsQuestions: lsQuestions,
+                                  idLobby: idLobby,
+                                  idPhong: idPhong,
                                 ));
                           }
                         });
