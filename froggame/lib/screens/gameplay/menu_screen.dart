@@ -14,12 +14,9 @@ import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
 import 'package:froggame/screens/support/support.dart';
-<<<<<<< HEAD
 import 'package:froggame/view_data/data_PackBattle.dart';
-=======
 import 'package:froggame/view_data/firestore_history.dart';
 import 'package:froggame/view_data/firestore_rank.dart';
->>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
 import 'package:froggame/view_data/login_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import '../../const/colors.dart';
@@ -27,9 +24,14 @@ import '../../const/next_screen.dart';
 import '../../const/text_style.dart';
 import '../../const/values.dart';
 import '../../view_data/package_method.dart';
+import 'package:froggame/models/lobby_model.dart';
 
 class QuizzHome extends StatelessWidget {
-  const QuizzHome({super.key});
+  QuizzHome({super.key});
+
+  bool isBattle = true;
+  List<LobbyModel> lsLobby = DataPackageBattle.listLobby();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -120,23 +122,9 @@ class QuizzHome extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(16),
                             ),
-<<<<<<< HEAD
-                            onPressed: () async {
-                              await PackageMethod.InitPackage();
-                              // ignore: use_build_context_synchronously
-                              nextScreen(context, const TypeQuestionPage());
-                            },
-                            child: Text(
-                              StrOption.tieptuc,
-                              style: F_lobster.copyWith(
-                                  fontSize: 20, fontWeight: FontWeight.w500),
-                            )),
-                      ),
-                    )),
-=======
                           ),
                           onPressed: () {
-                            PackageMethod.InitPackage2();
+                            PackageMethod.InitPackage();
                             nextScreen(context, const TypeQuestionPage());
                           },
                           child: Text(
@@ -147,7 +135,6 @@ class QuizzHome extends StatelessWidget {
                     ),
                   ),
                 ),
->>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
                 AnimatedCus(
                     context: context,
                     y: 120,
@@ -169,32 +156,25 @@ class QuizzHome extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {
-                              for (int i = 0;
-                                  i < DataPackageBattle.lsLobby.length;
-                                  i++) {
-                                if (DataPackageBattle.lsLobby[i].user2 ==
-                                            UserSimplePreferences.getUserId() &&
-                                        DataPackageBattle
-                                                .lsLobby[i].user1status ==
-                                            null ||
-                                    DataPackageBattle.lsLobby[i].user2status ==
-                                        null) {
+                              if (lsLobby.length == 0) {
+                                nextScreen(
+                                    context,
+                                    BattleScreen(
+                                      idLobby: "",
+                                      idUser1: "",
+                                    ));
+                              }
+                              for (int i = 0; i < lsLobby.length; i++) {
+                                if (lsLobby[i].user2 ==
+                                    UserSimplePreferences.getUserId()) {
                                   nextScreen(
                                       context,
                                       BattleScreen(
-                                        idLobby:
-                                            DataPackageBattle.lsLobby[i].id,
-                                        idUser1:
-                                            DataPackageBattle.lsLobby[i].user1,
+                                        idLobby: lsLobby[i].id,
+                                        idUser1: lsLobby[i].user1,
                                       ));
                                 }
                               }
-                              nextScreen(
-                                  context,
-                                  BattleScreen(
-                                    idLobby: "",
-                                    idUser1: "",
-                                  ));
                             },
                             child: Text(
                               StrOption.doikhang,

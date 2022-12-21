@@ -1,13 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
-import 'package:froggame/const/font_app.dart';
 import 'package:froggame/const/text_style.dart';
-import 'package:froggame/models/rank_model.dart';
 import 'package:froggame/screens/history/BattleScreen.dart';
->>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
 import 'package:froggame/screens/history/HistoryScreen.dart';
 import 'package:froggame/screens/history/RankScreen.dart';
 import 'package:froggame/view_data/firestore_history.dart';

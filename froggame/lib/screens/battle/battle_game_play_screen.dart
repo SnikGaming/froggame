@@ -272,7 +272,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                           onPressed: () {
                             timer!.cancel();
                             currenIndex++;
-                            heart--;
+                            //heart--;
                             //UpdateHeart();
                             isGameOver = true;
                             Navigator.of(context).pop(true);
@@ -321,7 +321,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                           onTap: () {
                             timer!.cancel();
                             currenIndex++;
-                            heart--;
+                            //heart--;
                             //UpdateHeart();
                             isGameOver = true;
                             Navigator.pushNamedAndRemoveUntil(
@@ -451,7 +451,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                 // ignore: avoid_print
                                                 // print("dung");
                                                 tOrf = "đúng";
-                                                score++;
+                                                //score++;
                                                 Ctrl++;
                                               } else {
                                                 // ignore: avoid_print
@@ -459,7 +459,7 @@ class _BattleQuizzGameScreenState extends State<BattleQuizzGameScreen> {
                                                 lsColors[index] = Colors.red;
                                                 tOrf = "sai";
 
-                                                heart--;
+                                                //heart--;
                                                 //UpdateHeart();
                                               }
                                               UserSimplePreferences.setSLCD(

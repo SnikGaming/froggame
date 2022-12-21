@@ -50,25 +50,28 @@ class _BattleScreenState extends State<BattleScreen> {
 
   loadData() async {
     await AddFriend.getFriend(UserSimplePreferences.getUserId());
+    var data1 = AddFriend.lsFriend;
+    lsFriend = data1;
     // ignore: unrelated_type_equality_checks
     if (idLobby == "") {
       await DataPackageBattle.CreateQuestion();
       await DataPackageBattle.CreateDataQuestionBattle(
           id: idPhong, idUser: UserSimplePreferences.getUserId());
+
+      var data2 = DataPackageBattle.getAllQuestionBattle(id: idPhong);
+      lsQuestions = data2;
+    } else {
       for (int i = 0; i < lsFriend.length; i++) {
         if (lsFriend[i].idfriend == idUser1) {
           avatar = lsFriend[i].pic;
         }
       }
-    } else {
-      await DataPackageBattle.loadDataUser2(id: idLobby);
+      //await DataPackageBattle.loadDataUser2(id: idLobby);
+      var data2 = DataPackageBattle.getAllQuestionBattle(id: idLobby);
+      lsQuestions = data2;
     }
-    
-    var data1 = AddFriend.lsFriend;
-    var data2 = DataPackageBattle.getAllQuestionBattle(id: idPhong);
+
     setState(() {});
-    lsFriend = data1;
-    lsQuestions = data2;
   }
 
   @override
@@ -233,7 +236,7 @@ class _BattleScreenState extends State<BattleScreen> {
                       borderRadius: BorderRadius.circular(30),
                     ),
                     child: Text(
-                      idPhong,
+                      idLobby == "" ? idPhong : idLobby,
                       style: F_pacifico.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,

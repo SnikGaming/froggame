@@ -85,73 +85,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
         ),
         const Padding(padding: EdgeInsets.only(bottom: 10)),
-<<<<<<< HEAD
-        SizedBox(
-          height: size.height * 0.631,
-          child: SingleChildScrollView(
-            child: Column(
-              children: List.generate(
-                lstHistory.length,
-                (index) => ExpandableNotifier(
-                    child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: ScrollOnExpand(
-                    child: Card(
-                      clipBehavior: Clip.antiAlias,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 4,
-                                color: lstHistory[index].status == 'đúng'
-                                    ? Colors.green
-                                    : Colors.red)),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Expandable(
-                                collapsed: _addHeader(
-                                    context, false, lstHistory, index),
-                                expanded:
-                                    _addHeader(context, true, lstHistory, index)
-                                //_addHeader(context, false),
-                                ),
-                            const Divider(
-                              height: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Builder(
-                                  builder: (context) {
-                                    var controller = ExpandableController.of(
-                                        context,
-                                        required: true)!;
-                                    return Padding(
-                                      padding: const EdgeInsets.only(left: 230),
-                                      child: ElevatedButton(
-                                        child: Container(
-                                          padding: const EdgeInsets.all(10),
-                                          width: size.width * 0.2,
-                                          child: Center(
-                                            child: Text(
-                                              controller.expanded
-                                                  ? "Đóng"
-                                                  : "Chi tiết",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .button!
-                                                  .copyWith(
-                                                      color:
-                                                          const Color.fromARGB(
-                                                              255,
-                                                              243,
-                                                              243,
-                                                              245),
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-=======
         AnimatedCus(
           context: context,
           y: 120,
@@ -217,7 +150,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                                         fontWeight:
                                                             FontWeight.w500),
                                               ),
->>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
                                             ),
                                           ),
                                           onPressed: () {
@@ -314,7 +246,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   _addFooter(List<PackDetail> lst, int index) {
-<<<<<<< HEAD
     return ListTile(
       title: RichText(
         text: TextSpan(
@@ -322,26 +253,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
           style: F_pacifico.copyWith(
             color: const Color.fromARGB(255, 6, 6, 230),
             fontSize: 30,
-=======
-    return Container(
-      child: ListTile(
-        title: RichText(
-          text: TextSpan(
-            text: 'Câu hỏi: ',
-            style: F_pacifico.copyWith(
-              color: Color.fromARGB(255, 6, 6, 230),
-              fontSize: 30,
-            ),
-            children: [
-              TextSpan(
-                  text: '${lst[index].question} ',
-                  style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontFamily: 'quick',
-                      fontWeight: FontWeight.w200)),
-            ],
->>>>>>> 9b3af3070ccaaf1076dd342e0336e7042e7d753a
           ),
           children: [
             TextSpan(

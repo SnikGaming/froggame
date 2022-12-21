@@ -46,7 +46,7 @@ Future<void> main(List<String> args) async {
   await FutureRank.getAllData(1, UserSimplePreferences.getUserId());
   await FureStoreQuestions.getLenght();
   await FureStoreUser.getUserAll();
-  await DataPackageBattle.listLobby();
+  DataPackageBattle.listLobby();
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
@@ -89,7 +89,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         'welcome': (_) => const SiginPage(),
-        'welcome2': (_) => const QuizzHome(),
+        'welcome2': (_) => QuizzHome(),
         'gameplay': (_) => const QuizzScreen(),
         'quizz_screen': ((context) => QuizzGameScreen(idlv: 1)),
         'categories': ((context) => const TypeQuestionPage())

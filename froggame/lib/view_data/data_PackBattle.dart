@@ -6,7 +6,6 @@ import 'package:froggame/models/questions_model.dart';
 
 class DataPackageBattle {
   static List<QuestionModel> lsQuestion = [];
-  static List<LobbyModel> lsLobby = [];
   static CreateQuestion() async {
     lsQuestion = [];
     await FirebaseFirestore.instance
@@ -50,8 +49,8 @@ class DataPackageBattle {
     }
   }
 
-  static listLobby() {
-    lsLobby = [];
+  static List<LobbyModel> listLobby() {
+    List<LobbyModel> lsLobby = [];
     FirebaseFirestore.instance.collection("lobby").get().then((value) {
       for (var val in value.docs) {
         lsLobby.add(LobbyModel(
@@ -62,6 +61,7 @@ class DataPackageBattle {
             user2status: val.data()['User2Status']));
       }
     });
+    return lsLobby;
   }
 
   static user2Join(String id, String iduser) {
