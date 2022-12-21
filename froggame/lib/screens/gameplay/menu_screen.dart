@@ -10,6 +10,7 @@ import 'package:froggame/screens/friends/friend_screen.dart';
 import 'package:froggame/screens/history/info.dart';
 import 'package:froggame/screen_load/view.dart';
 import 'package:froggame/screens/profile/profile_screen.dart';
+import 'package:froggame/screens/profile/profile_screen_data.dart';
 import 'package:froggame/screens/settings/setting_screen.dart';
 import 'package:froggame/screens/shop/shop_screen.dart';
 import 'package:froggame/screens/categories/category_question.dart';
@@ -125,6 +126,9 @@ class QuizzHome extends StatelessWidget {
                           ),
                           onPressed: () {
                             PackageMethod.InitPackage();
+
+                            profileData.getAllData();
+
                             nextScreen(context, const TypeQuestionPage());
                           },
                           child: Text(
@@ -197,9 +201,13 @@ class QuizzHome extends StatelessWidget {
           DrawerHeader(
             child: GestureDetector(
               onTap: () {
+                profileData.getAllData();
+
+                Future.delayed(Duration(seconds: 3), () {
+                  Navigator.of(ctx).push(
+                      MaterialPageRoute(builder: (_) => const ProfileScreen()));
+                });
                 //Profile
-                Navigator.of(ctx).push(
-                    MaterialPageRoute(builder: (_) => const ProfileScreen()));
               },
               child: AnimatedCusScal(
                   context: ctx,

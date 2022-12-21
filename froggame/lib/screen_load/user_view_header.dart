@@ -77,15 +77,23 @@ UserHeader({required double height, required BuildContext context}) {
               children: [
                 //?SCORE
                 Text(
-                  "${UserSimplePreferences.getScore()} 🪙",
+                  "${UserSimplePreferences.getScore()}",
                   style: F_lobster.copyWith(fontSize: 20, color: white),
                 ),
-
+                Image.asset(
+                  "assets/button/coin.png",
+                  height: 16,
+                ),
                 //?HEART
                 Text(
-                  "${UserSimplePreferences.getHeart()} ❤️",
+                  " ${UserSimplePreferences.getHeart()}",
                   style: F_lobster.copyWith(fontSize: 20, color: white),
                 ),
+                Image.asset(
+                  "assets/button/heart.png",
+                  height: 16,
+                ),
+
                 const SizedBox(
                   width: 20,
                 ),

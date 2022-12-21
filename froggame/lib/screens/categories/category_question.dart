@@ -139,7 +139,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                       context: context,
                                       title: "THÔNG BÁO",
                                       desc:
-                                          "BẠN ĐÃ HẾT HEART VUI LÒNG NẠP THÊM TIỀN ĐỂ TIẾP TỤC TRÒ CHƠI...",
+                                          "BẠN ĐÃ HẾT LƯỢT VUI LÒNG NẠP THÊM TIỀN ĐỂ TIẾP TỤC TRÒ CHƠI...",
                                       image: Image.asset("assets/234.webp"),
                                     ).show();
                                   } else {
@@ -150,47 +150,7 @@ class _TypeQuestionPageState extends State<TypeQuestionPage> {
                                                   FureStoreQuestions
                                                       .count[index])
                                                 {
-                                                  // timerSnackbar(
-                                                  //   context: context,
-                                                  //   contentText:
-                                                  //       "Vui lòng đợi... thời gian có thể lâu hơn mong đợi ❤️",
-                                                  //   buttonPrefixWidget:
-                                                  //       Image.asset(
-                                                  //     'assets/images/frogkimono.webp',
-                                                  //     width: 17.0,
-                                                  //     height: 15.0,
-                                                  //     alignment: Alignment
-                                                  //         .topCenter,
-                                                  //     color: const Color
-                                                  //             .fromARGB(
-                                                  //         255,
-                                                  //         144,
-                                                  //         11,
-                                                  //         239),
-                                                  //   ),
-                                                  //   afterTimeExecute: () {
-                                                  //     if (PackageMethod
-                                                  //             .idch <
-                                                  //         30) {
-                                                  //       PackageMethod
-                                                  //               .isLoad
-                                                  //           ? PackageMethod
-                                                  //                   .idch =
-                                                  //               PackageMethod
-                                                  //                   .idch
-                                                  //           : PackageMethod
-                                                  //               .idch = 0;
-
-                                                  //       Navigator.of(
-                                                  //               context)
-                                                  //           .push(MaterialPageRoute(
-                                                  //               builder: (_) =>
-                                                  //                   QuizzGameScreen(
-                                                  //                       idlv: index + 1)));
-                                                  //     }
-                                                  //   },
-                                                  //   second: 3,
-                                                  // ),
+                                                  
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
                                                           builder: (_) =>

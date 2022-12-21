@@ -8,6 +8,7 @@ import 'package:froggame/const/next_screen.dart';
 import 'package:froggame/screens/gameplay/menu_screen.dart';
 // ignore: unused_import
 import 'package:froggame/screens/login/login_page.dart';
+import 'package:froggame/screens/profile/profile_screen_data.dart';
 import 'package:froggame/view_data/package_method.dart';
 import 'package:froggame/view_data/user_pre.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -60,6 +61,9 @@ class AuthMethod {
       //nextScreen(context, const SiginPage());
       UserSimplePreferences.removeUserId();
       UserSimplePreferences.removeAll();
+
+      profileData.getAllData();
+
       pushNamedRemove(context, "welcome");
     });
   }

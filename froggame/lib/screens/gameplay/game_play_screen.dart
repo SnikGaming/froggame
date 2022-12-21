@@ -449,12 +449,31 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                         //!: Score and heart
                         SizedBox(
                           width: 130,
-                          child: Text(
-                            "${score} 🪙\t\t${heart} ❤️",
-                            style: F_pacifico.copyWith(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
+                          child: Row(
+                            children: [
+                              Text(
+                                "${score}",
+                                style: F_pacifico.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                              Image.asset(
+                                "assets/button/coin.png",
+                                height: 16,
+                              ),
+                              Text(
+                                "\t${heart}",
+                                style: F_pacifico.copyWith(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              ),
+                              Image.asset(
+                                "assets/button/heart.png",
+                                height: 16,
+                              )
+                            ],
                           ),
                         ),
                       ],
