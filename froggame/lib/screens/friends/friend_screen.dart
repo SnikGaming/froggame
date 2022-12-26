@@ -23,13 +23,9 @@ class FriendScreen extends StatefulWidget {
 
 class _FriendScreenState extends State<FriendScreen> {
   loadData() async {
-    await AddFriend.getAddFriend(UserSimplePreferences.getUserId());
-    await AddFriend.getFriend(UserSimplePreferences.getUserId());
-    var data1 = AddFriend.lsFriend;
-    var data2 = AddFriend.lsAddFriend;
     setState(() {});
-    lsFriend = data1;
-    lsAddFriend = data2;
+    lsFriend = AddFriend.getFriend(UserSimplePreferences.getUserId());
+    lsAddFriend = AddFriend.getAddFriend(UserSimplePreferences.getUserId());
   }
 
   @override
@@ -65,10 +61,12 @@ class _FriendScreenState extends State<FriendScreen> {
 
   void acceptFriend(String idFiend, Action action) {
     AddFriend.acceptFriend(idFiend);
+    loadData();
   }
 
   void refuseFriend(String idFiend, Action action) {
     AddFriend.refuseFriend(idFiend);
+    loadData();
   }
 
   viewUser(BuildContext context) {}
@@ -94,25 +92,14 @@ class _FriendScreenState extends State<FriendScreen> {
                           motion: const ScrollMotion(),
                           children: [
                             SlidableAction(
-                              // An action can be bigger than the others.
                               flex: 2,
                               onPressed: (context) {
-                                setState(() {});
-                                return acceptFriend(
-                                    lsAddFriend[index].idfriend, Action.Accept);
-                              },
-                              backgroundColor: const Color(0xFF7BC043),
-                              foregroundColor: Colors.white,
-                              icon: Icons.add,
-                              label: 'Thông tin',
-                            ),
-                            SlidableAction(
-                              flex: 2,
-                              onPressed: (context) {
-                                setState(() {});
+                                setState(() {
+                                  return refuseFriend(
+                                      lsFriend[index].idfriend, Action.Refuse);
+                                });
 
-                                refuseFriend(
-                                    lsAddFriend[index].idfriend, Action.Accept);
+                                loadData();
                               },
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,
@@ -189,14 +176,6 @@ class _FriendScreenState extends State<FriendScreen> {
                               icon: Icons.add,
                               label: 'Kết bạn',
                             ),
-                            SlidableAction(
-                              flex: 2,
-                              onPressed: viewUser,
-                              backgroundColor: const Color(0xFF0392CF),
-                              foregroundColor: Colors.white,
-                              icon: Icons.info,
-                              label: 'Thông tin',
-                            ),
                           ],
                         ),
 
@@ -238,9 +217,12 @@ class _FriendScreenState extends State<FriendScreen> {
                               // An action can be bigger than the others.
                               flex: 2,
                               onPressed: (context) {
-                                setState(() {});
-                                return acceptFriend(
-                                    lsAddFriend[index].idfriend, Action.Accept);
+                                setState(() {
+                                  return acceptFriend(
+                                      lsAddFriend[index].idfriend,
+                                      Action.Accept);
+                                });
+                                loadData();
                               },
                               backgroundColor: const Color(0xFF7BC043),
                               foregroundColor: Colors.white,
@@ -250,10 +232,12 @@ class _FriendScreenState extends State<FriendScreen> {
                             SlidableAction(
                               flex: 2,
                               onPressed: (context) {
-                                setState(() {});
-
-                                refuseFriend(
-                                    lsAddFriend[index].idfriend, Action.Accept);
+                                setState(() {
+                                  return refuseFriend(
+                                      lsAddFriend[index].idfriend,
+                                      Action.Accept);
+                                });
+                                loadData();
                               },
                               backgroundColor: Colors.red,
                               foregroundColor: Colors.white,

@@ -49,9 +49,7 @@ class _BattleScreenState extends State<BattleScreen> {
   late Future<List<QuestionModel>> lsQuestions;
 
   loadData() async {
-    await AddFriend.getFriend(UserSimplePreferences.getUserId());
-    var data1 = AddFriend.lsFriend;
-    lsFriend = data1;
+    lsFriend = AddFriend.getFriend(UserSimplePreferences.getUserId());
     // ignore: unrelated_type_equality_checks
     if (idLobby == "") {
       await DataPackageBattle.CreateQuestion();

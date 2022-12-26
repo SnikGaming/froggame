@@ -61,16 +61,16 @@ class AddFriend {
     });
   }
 
-  static getAddFriend(String iduser) async {
-    lsAddFriend = [];
-    await friend
+  static List<FriendModel> getAddFriend(String iduser) {
+    List<FriendModel> listAddFriend = [];
+    friend
         .where("iduser", isEqualTo: iduser)
         .where("status", isEqualTo: 0)
         .get()
         .then((value) {
       // ignore: unused_local_variable
       for (var val in value.docs) {
-        lsAddFriend.add(FriendModel(
+        listAddFriend.add(FriendModel(
             userId: val.data()["iduser"],
             email: val.data()["emailfriend"],
             name: val.data()["name"],
@@ -81,18 +81,19 @@ class AddFriend {
             tokenMessage: val.data()["tokenMessage"]));
       }
     });
+    return listAddFriend;
   }
 
-  static getFriend(String iduser) async {
-    lsFriend = [];
-    await friend
+  static List<FriendModel> getFriend(String iduser) {
+    List<FriendModel> listFriend = [];
+    friend
         .where("iduser", isEqualTo: iduser)
         .where("status", isEqualTo: 1)
         .get()
         .then((value) {
       // ignore: unused_local_variable
       for (var val in value.docs) {
-        lsFriend.add(FriendModel(
+        listFriend.add(FriendModel(
             userId: val.data()["iduser"],
             email: val.data()["emailfriend"],
             name: val.data()["name"],
@@ -103,6 +104,7 @@ class AddFriend {
             tokenMessage: val.data()["tokenMessage"]));
       }
     });
+    return listFriend;
   }
 
   static acceptFriend(String idfriend) async {
