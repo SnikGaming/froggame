@@ -39,6 +39,21 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
   int idlv;
   late Future questions;
   static int defTimer = 30;
+  late int valueCauDung;
+
+  CauDung() async {
+    await FirebaseFirestore.instance
+        .collection("packageQuestions")
+        .where('idgoi',
+            isEqualTo: "${UserSimplePreferences.getUserId()}${idlv}")
+        .get()
+        .then((value) {
+      for (var a in value.docs) {
+        valueCauDung = a.data()['cautldung'];
+      }
+    });
+  }
+
   _QuizzGameScreenState({required this.idlv});
 
   // ignore: todo
@@ -54,6 +69,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
         //   .orderBy('id', descending: true)
         .get();
     startTimer();
+    CauDung();
   }
 
 // ignore: todo
@@ -142,7 +158,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                   backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                   title: const Text("Thông báo"),
                   content: Text(
-                      "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
+                      "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number}\nSố câu đúng là ${valueCauDung} !!!\nNhấn Ok để hoàn thành các thử thách khác."),
                   actions: [
                     TextButton(
                         onPressed: () {
@@ -203,7 +219,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                               const Color.fromARGB(255, 167, 79, 225),
                           title: const Text("Thông báo"),
                           content: Text(
-                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\nSố câu đúng là ${valueCauDung} ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
                           actions: [
                             TextButton(
                                 onPressed: () {
@@ -280,7 +296,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                 backgroundColor: const Color.fromARGB(255, 167, 79, 225),
                 title: const Text("Thông báo"),
                 content: Text(
-                    "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
+                    "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/$number !!!\nSố câu đúng là ${valueCauDung} ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}"),
                 actions: [
                   TextButton(
                       onPressed: () {
@@ -557,6 +573,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                 // print("dung");
                                                 tOrf = "đúng";
                                                 score++;
+                                                valueCauDung++;
                                                 Ctrl++;
                                               } else {
                                                 // ignore: avoid_print
@@ -634,7 +651,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                                             title:
                                                                                 const Text("Thông báo", style: TextStyle(color: Colors.white)),
                                                                             content:
-                                                                                Text("Chúc mừng $name đã hoàn thành ${currenIndex}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
+                                                                                Text("Chúc mừng $name đã hoàn thành ${currenIndex}/${number} !!!\nSố câu đúng là ${valueCauDung} ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}", style: const TextStyle(color: Colors.white)),
                                                                             actions: [
                                                                               TextButton(
                                                                                   onPressed: () {
@@ -695,7 +712,7 @@ class _QuizzGameScreenState extends State<QuizzGameScreen> {
                                                           title: const Text(
                                                               "Thông báo"),
                                                           content: Text(
-                                                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\n ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
+                                                              "Chúc mừng $name đã hoàn thành ${currenIndex + 1}/${number} !!!\nSố câu đúng là ${valueCauDung} ${heart > 0 ? 'Nhấn Ok để hoàn thành các thử thách khác.' : 'Vui lòng mua lượt để được tiếp tục.'}",
                                                               style: const TextStyle(
                                                                   color: Colors
                                                                       .white)),
